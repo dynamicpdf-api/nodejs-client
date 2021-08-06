@@ -1,0 +1,34 @@
+{
+  "name": "@dynamicpdf/dynamicpdf.api.v1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orgs/dynamicpdf-api/repositories"
+  },
+  "keywords": [
+    "DynamicPdf",
+    "Cloud",
+    "REST"
+  ],
+  "author": "DynamicPDF <author@dynamicpdf.com>",
+  "license": "SEE LICENSE IN License.txt",
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "uuid": "^8.3.2"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "mocha":{
+    "exclude": "test/debug.js"
+  },
+  "devDependencies": {
+    "mocha": "^9.0.3"
+  }
+}
