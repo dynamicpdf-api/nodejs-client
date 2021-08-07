@@ -1,9 +1,26 @@
-const cApiKey = "[YOUR API KEY GOES HERE]";
-const cBaseUrl = "https://api.dynamicpdf.com/v1.0/pdf";
-const cLogging = false;
+import fs from 'fs';
+
+const testConfigFile = './test-config.json';
 
 export class TestParams {
-    static get ApiKey() { return cApiKey; }
-    static get BaseUrl() { return cBaseUrl; }
-    static get Logging() { return cLogging; }
+    #params = null;
+    #defaults = {
+        ApiKey: "[YOUR API KEY GOES HERE]",
+        BaseUrl: "https://api.dynamicpdf.com/v1.0/pdf",
+        Logging: false
+    };
+
+    constructor() {
+        if (this.#params == null) {
+            try {
+                this.#params = JSON.parse(fs.readFileSync(testConfigFile, 'utf8'));
+            } catch {
+                this.#params = this.#defaults;
+            }
+        }
+    }
+
+    get ApiKey() { return this.#params.ApiKey; }
+    get BaseUrl() { return this.#params.BaseUrl; }
+    get Logging() { return this.#params.Logging; }
 };

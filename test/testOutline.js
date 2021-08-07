@@ -14,12 +14,12 @@ import { MergeOptions } from "../lib/MergeOptions.js";
 import { PageZoom } from "../lib/PageZoom.js"
 import { TestParams } from './init.js';
 import { RgbColor } from '../lib/RgbColor.js';
-function getEndPoint() {
+function getEndpoint(testParams) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     var pdfEndpoint = new Pdf();
-    pdfEndpoint.loggingEnabled = TestParams.Logging;
-    pdfEndpoint.BaseUrl = TestParams.BaseUrl;
-    pdfEndpoint.ApiKey = TestParams.ApiKey;
+    pdfEndpoint.loggingEnabled = testParams.Logging;
+    pdfEndpoint.BaseUrl = testParams.BaseUrl;
+    pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
     return pdfEndpoint;
@@ -27,8 +27,9 @@ function getEndPoint() {
 
 describe('Outline', function () {
     this.timeout(0);
+    var testParams = new TestParams();
     it('simple outline PDFs', async function () {
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         var resource = new PdfResource("./Resources/Emptypages.pdf");
         var input = new PdfInput(resource);
         input.Id = "2";
@@ -39,20 +40,21 @@ describe('Outline', function () {
         outline.Expanded = true;
         pdfEndpoint.Outlines.push(outline);
         var res = await pdfEndpoint.Process();
-        if (TestParams.Logging) {
+        if (testParams.Logging) {
             console.log("Result: " + res.IsSuccessfull);
-        }
-        if (res.IsSuccessfull) {
-            var outStream = fs.createWriteStream("./output/oultine.pdf");
-            outStream.write(res.SetPdfContent);
-            outStream.close();
+
+            if (res.IsSuccessfull) {
+                var outStream = fs.createWriteStream("./output/oultine.pdf");
+                outStream.write(res.SetPdfContent);
+                outStream.close();
 
 
+            }
         }
         assert.strictEqual(res.IsSuccessfull, true);
     });
     it('With Goto Action', async function () {
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         var resource = new PdfResource("./Resources/Invoice.pdf");
         var input = new PdfInput(resource);
         input.Id = "invoice";
@@ -90,20 +92,21 @@ describe('Outline', function () {
         outline2.Children.push(outline1);
         pdfEndpoint.Outlines.push(outline2);
         var res = await pdfEndpoint.Process();
-        if (TestParams.Logging) {
+        if (testParams.Logging) {
             console.log("Result: " + res.IsSuccessfull);
-        }
-        if (res.IsSuccessfull) {
-            var outStream = fs.createWriteStream("./output/oultine1.pdf");
-            outStream.write(res.SetPdfContent);
-            outStream.close();
+
+            if (res.IsSuccessfull) {
+                var outStream = fs.createWriteStream("./output/oultine1.pdf");
+                outStream.write(res.SetPdfContent);
+                outStream.close();
 
 
+            }
         }
         assert.strictEqual(res.IsSuccessfull, true);
     });
     it('URL Action', async function () {
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/Org.pdf");
         var input1 = new PdfInput(resource1);
         input1.Id = "document1";
@@ -147,15 +150,16 @@ describe('Outline', function () {
         outline.Action = urlAction;
         pdfEndpoint.Outlines.push(outline);
         var res = await pdfEndpoint.Process();
-        if (TestParams.Logging) {
+        if (testParams.Logging) {
             console.log("Result: " + res.IsSuccessfull);
-        }
-        if (res.IsSuccessfull) {
-            var outStream = fs.createWriteStream("./output/oultine2.pdf");
-            outStream.write(res.SetPdfContent);
-            outStream.close();
+
+            if (res.IsSuccessfull) {
+                var outStream = fs.createWriteStream("./output/oultine2.pdf");
+                outStream.write(res.SetPdfContent);
+                outStream.close();
 
 
+            }
         }
         assert.strictEqual(res.IsSuccessfull, true);
     });

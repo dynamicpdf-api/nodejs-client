@@ -17,18 +17,19 @@ import { CmykColor } from '../lib/CmykColor.js';
 import { RgbColor } from '../lib/RgbColor.js';
 import { Grayscale } from '../lib/Grayscale.js';
 import { MergeOptions } from '../lib/MergeOptions.js';
-function getEndPoint() {
+function getEndpoint(testParams) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     var pdfEndpoint = new Pdf();
-    pdfEndpoint.loggingEnabled = TestParams.Logging;
-    pdfEndpoint.BaseUrl = TestParams.BaseUrl;
-    pdfEndpoint.ApiKey = TestParams.ApiKey;
+    pdfEndpoint.loggingEnabled = testParams.Logging;
+    pdfEndpoint.BaseUrl = testParams.BaseUrl;
+    pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
     return pdfEndpoint;
 }
 describe('PdfEndpoint', function () {
     this.timeout(0);
+    var testParams = new TestParams();
     describe('Merge of two PDFs', function () {
 
         it('Merge', async function () {
@@ -38,23 +39,24 @@ describe('PdfEndpoint', function () {
             var input1 = new PdfInput(resource1);
 
             var input2 = new PdfInput(resource2);
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.Inputs.push(input1);
             pdfEndpoint.Inputs.push(input2);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/Merge.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/Merge.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Merge Options', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var template = new Template("temp1");
             var element = new TextElement("Merger with Template(even pages", ElementPlacement.TopCenter);
             element.EvenPages = true;
@@ -88,13 +90,14 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input2);
 
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/MergeWithOptions.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/MergeWithOptions.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
             assert.strictEqual(res.IsSuccessfull, true);
@@ -103,7 +106,7 @@ describe('PdfEndpoint', function () {
     describe('Add page and pdf input', function () {
 
         it('Add page and pdf input', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var input1 = new PdfInput(resource1);
             pdfEndpoint.Inputs.push(input1);
@@ -113,19 +116,20 @@ describe('PdfEndpoint', function () {
             input2.Elements.push(element);
 
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/pageAndPdf.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/pageAndPdf.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Add page and pdf input with Properties', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var input1 = new PdfInput(resource1);
             pdfEndpoint.Inputs.push(input1);
@@ -135,19 +139,20 @@ describe('PdfEndpoint', function () {
             input2.Elements.push(element);
 
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Add page and pdf input with Properties', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var element = new TextElement("test", ElementPlacement.TopCenter);
             input1.Elements.push(element);
@@ -159,13 +164,14 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input1);
 
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
             assert.strictEqual(res.IsSuccessfull, true);
@@ -176,7 +182,7 @@ describe('PdfEndpoint', function () {
         it('Fill text', async function () {
             var resource = new PdfResource("./Resources/fw9AcroForm_14.pdf", "fw9AcroForm_14.pdf");
             var input = new PdfInput(resource);
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.Inputs.push(input);
             var field = new FormField("topmostSubform[0].Page1[0].f1_1[0]", "Any Company, Inc.");
             pdfEndpoint.FormFields.push(field);
@@ -197,22 +203,23 @@ describe('PdfEndpoint', function () {
             var field8 = new FormField("topmostSubform[0].Page1[0].EmployerID[0].f1_15[0]", "1234567");
             pdfEndpoint.FormFields.push(field8);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/formField.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/formField.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Fill text Form Flatten Remove', async function () {
             var resource = new PdfResource("./Resources/fw9AcroForm_14.pdf", "fw9AcroForm_14.pdf");
             var input = new PdfInput(resource);
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.Inputs.push(input);
             var field = new FormField("topmostSubform[0].Page1[0].f1_1[0]", "Any Company, Inc.");
             field.Remove = true;
@@ -236,22 +243,23 @@ describe('PdfEndpoint', function () {
             var field8 = new FormField("topmostSubform[0].Page1[0].EmployerID[0].f1_15[0]", "1234567");
             pdfEndpoint.FormFields.push(field8);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/formFieldFlattenRemove.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/formFieldFlattenRemove.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Fill text Form Flatten', async function () {
             var resource = new PdfResource("./Resources/fw9AcroForm_14.pdf", "fw9AcroForm_14.pdf");
             var input = new PdfInput(resource);
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.Inputs.push(input);
             var field = new FormField("topmostSubform[0].Page1[0].f1_1[0]", "Any Company, Inc.");
             field.Flatten = true;
@@ -275,75 +283,79 @@ describe('PdfEndpoint', function () {
             var field8 = new FormField("topmostSubform[0].Page1[0].EmployerID[0].f1_15[0]", "1234567");
             pdfEndpoint.FormFields.push(field8);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/formFieldFlatten.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/formFieldFlatten.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('FilePathRetainSignature', async function () {
             var resource = new PdfResource("./Resources/Org.pdf", "Org.pdf");
             var input = new PdfInput(resource);
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.Inputs.push(input);
             pdfEndpoint.FlattenAllFormFields = true;
             pdfEndpoint.RetainSignatureFormFields = true;
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/FilePathRetainSignature.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/FilePathRetainSignature.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Radio Button', async function () {
             var resource = new PdfResource("./Resources/AllPageElements.pdf", "AllPageElements.pdf");
             var input = new PdfInput(resource);
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.Inputs.push(input);
             var field = new FormField("rbname", "Radio2");
             pdfEndpoint.FormFields.push(field);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/radioButton.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/radioButton.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('List box', async function () {
             var resource = new PdfResource("./Resources/AllPageElements.pdf", "AllPageElements.pdf");
             var input = new PdfInput(resource);
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.Inputs.push(input);
             var field = new FormField("lbname", "Item 4");
             pdfEndpoint.FormFields.push(field);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/listBox.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/listBox.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
@@ -351,7 +363,7 @@ describe('PdfEndpoint', function () {
     describe('Test Image', function () {
 
         it('Test Image input Gif', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif");
             var input = new ImageInput(resource);
             input.ScaleX = 4;
@@ -360,20 +372,21 @@ describe('PdfEndpoint', function () {
             input.PageHeight = 400;
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/imageGif.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/imageGif.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Test Image input Jpeg', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/Image1.jpg", "Image1.jpg");
             var input = new ImageInput(resource);
             input.ScaleX = 4;
@@ -382,20 +395,21 @@ describe('PdfEndpoint', function () {
             input.PageHeight = 500;
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/imageJPG.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/imageJPG.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Test Image input Tiff', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/CCITT_1.tif", "CCITT_1.tif");
             var input = new ImageInput(resource);
             input.ScaleX = 4;
@@ -404,20 +418,21 @@ describe('PdfEndpoint', function () {
             input.PageHeight = 400;
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/imagetif.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/imagetif.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Test Image input MultiPageTiff', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/PalaisDuLouvre.tif", "PalaisDuLouvre.tif");
             var input = new ImageInput(resource);
             input.RightMargin = 50;
@@ -426,40 +441,42 @@ describe('PdfEndpoint', function () {
             input.LeftMargin = 50;
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/imageMultiPageTiff.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/imageMultiPageTiff.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Test Image input Png', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/170x220_T.png", "170x220_T.png");
             var input = new ImageInput(resource);
             input.PageWidth = 500;
             input.PageHeight = 500;
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/imagePng.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/imagePng.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Test Image Scale', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/DocumentA100.pdf");
             var input = new PdfInput(resource);
             var template = new Template("Temp1");
@@ -471,20 +488,21 @@ describe('PdfEndpoint', function () {
             input.Template = template;
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/imageScale.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/imageScale.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Test Image XYWithTemplate', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/DocumentA100.pdf");
             var input = new PdfInput(resource);
             var template = new Template("Temp1");
@@ -496,15 +514,16 @@ describe('PdfEndpoint', function () {
             input.Template = template;
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/imageXYTemple.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/imageXYTemple.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
@@ -567,23 +586,24 @@ describe('PdfEndpoint', function () {
             element.Font = Font.TimesRoman;
             element.FontSize = 50;
             input.Elements.push(element);
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/Font.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/Font.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Font otf ', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var font = Font.FromFile("./Resources/Calibri.otf", "Calibri.otf");
             var element = new TextElement("Hello", ElementPlacement.TopCenter);
@@ -591,20 +611,21 @@ describe('PdfEndpoint', function () {
             input1.Elements.push(element);
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/fontOtf.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/fontOtf.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Font otf Embeded ', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var font = Font.FromFile("./Resources/Calibri.otf", "Calibri.otf");
             font.Embed = true;
@@ -613,20 +634,21 @@ describe('PdfEndpoint', function () {
             input1.Elements.push(element);
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/fontOtfEmbeded.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/fontOtfEmbeded.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Font otf Subset ', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var font = Font.FromFile("./Resources/Calibri.otf", "Calibri.otf");
             font.Subset = true;
@@ -635,20 +657,21 @@ describe('PdfEndpoint', function () {
             input1.Elements.push(element);
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/fontOtfSubset.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/fontOtfSubset.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Font ttf ', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var font = Font.FromFile("./Resources/verdanab.ttf", "verdanab.ttf");
             var element = new TextElement("Hello", ElementPlacement.TopCenter);
@@ -656,20 +679,21 @@ describe('PdfEndpoint', function () {
             input1.Elements.push(element);
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/fontTtf.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/fontTtf.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Font ttf Embeded ', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var font = Font.FromFile("./Resources/verdanab.ttf", "verdanab.ttf");
             font.Embed = false;
@@ -678,20 +702,21 @@ describe('PdfEndpoint', function () {
             input1.Elements.push(element);
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/fontTtfEmbeded.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/fontTtfEmbeded.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Font ttf Subset ', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var font = Font.FromFile("./Resources/verdanab.ttf", "verdanab.ttf");
             font.Subset = false;
@@ -700,15 +725,16 @@ describe('PdfEndpoint', function () {
             input1.Elements.push(element);
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/fontttfSubset.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/fontttfSubset.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
@@ -716,98 +742,103 @@ describe('PdfEndpoint', function () {
     describe('Color Pattern', function () {
         it('CMYKColor', async function () {
             var input = new PageInput();
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var textElement = new TextElement("Hello World", ElementPlacement.TopCenter);
             textElement.Color = new CmykColor(1, 1, 0, 0);
             input.Elements.push(textElement);
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/cmykColorPattern.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/cmykColorPattern.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('RGB Color', async function () {
             var input = new PageInput();
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var textElement = new TextElement("Hello World", ElementPlacement.TopCenter);
             textElement.Color = new RgbColor(1, 1, 0);
             input.Elements.push(textElement);
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/rgbColor.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/rgbColor.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('RGB Color Named color sample', async function () {
             var input = new PageInput();
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var textElement = new TextElement("Hello World", ElementPlacement.TopCenter);
             textElement.Color = RgbColor.SeaGreen;
             input.Elements.push(textElement);
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/rgb_NamedColorPattern.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/rgb_NamedColorPattern.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
 
 
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('GrayScale', async function () {
             var input = new PageInput();
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var textElement = new TextElement("Hello World", ElementPlacement.TopCenter);
             textElement.Color = new Grayscale(0.8);
             input.Elements.push(textElement);
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/grayColorPattern.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/grayColorPattern.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Invalid color', async function () {
             var input = new PageInput();
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var textElement = new TextElement("Hello World", ElementPlacement.TopCenter);
             textElement.Color = "invalid";
             input.Elements.push(textElement);
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/invalidColorPatter.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/invalidColorPatter.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 

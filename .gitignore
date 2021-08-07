@@ -1,3 +1,5 @@
+node_modules/
 output/
 test/debug.js
 test/out.pdf
+test-config.json

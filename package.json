@@ -1,33 +1,36 @@
 {
-  "name": "@dynamicpdf/dynamicpdf.api.v1",
+  "name": "@dynamicpdf/dynamicpdf.api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Node.js client library for the DynamicPDF Cloud API.",
   "main": "index.js",
   "type": "module",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
   "scripts": {
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/orgs/dynamicpdf-api/repositories"
+    "url": "git+https://github.com/dynamicpdf-api/nodejs-client.git"
   },
   "keywords": [
-    "DynamicPdf",
+    "DynamicPDF",
     "Cloud",
+    "API",
     "REST"
   ],
-  "author": "DynamicPDF <author@dynamicpdf.com>",
-  "license": "SEE LICENSE IN License.txt",
+  "author": "DynamicPDF <sales@dynamicpdf.com>",
+  "license": "MIT",
   "dependencies": {
     "form-data": "^4.0.0",
     "uuid": "^8.3.2"
   },
-  "directories": {
-    "test": "test"
+  "bugs": {
+    "url": "https://github.com/dynamicpdf-api/nodejs-client/issues"
   },
-  "mocha":{
-    "exclude": "test/debug.js"
-  },
+  "homepage": "https://github.com/dynamicpdf-api/nodejs-client#readme",
   "devDependencies": {
     "mocha": "^9.0.3"
   }

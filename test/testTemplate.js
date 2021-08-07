@@ -32,12 +32,12 @@ import { Font } from '../lib/Font.js';
 import { RgbColor } from '../lib/RgbColor.js';
 import { LineStyle } from '../lib/LineStyle.js';
 import { Color } from '../lib/Color.js';
-function getEndPoint() {
+function getEndpoint(testParams) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     var pdfEndpoint = new Pdf();
-    pdfEndpoint.loggingEnabled = TestParams.Logging;
-    pdfEndpoint.BaseUrl = TestParams.BaseUrl;
-    pdfEndpoint.ApiKey = TestParams.ApiKey;
+    pdfEndpoint.loggingEnabled = testParams.Logging;
+    pdfEndpoint.BaseUrl = testParams.BaseUrl;
+    pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
     return pdfEndpoint;
@@ -45,27 +45,29 @@ function getEndPoint() {
 
 describe('PdfEndpoint', function () {
     this.timeout(0);
+    var testParams = new TestParams();
     describe('LineElement', function () {
 
         it('Line Element wihout properties', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var lineElement = new LineElement(ElementPlacement.TopCenter, 200, 200);
             input1.Elements.push(lineElement);
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/LineElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/LineElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Line Element wih properties', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var lineElement = new LineElement(ElementPlacement.TopCenter, 200, 200);
             lineElement.X1Offset = 100;
@@ -75,13 +77,14 @@ describe('PdfEndpoint', function () {
             input1.Elements.push(lineElement);
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/LineElementWithPropeties.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/LineElementWithPropeties.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
             assert.strictEqual(res.IsSuccessfull, true);
         });
@@ -89,67 +92,70 @@ describe('PdfEndpoint', function () {
     describe('RectangleElement', function () {
 
         it('Simple Rectangle', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var rectangleElement = new RectangleElement(ElementPlacement.TopCenter, 100, 50);
             rectangleElement.FillColor = RgbColor.HotPink;
             input1.Elements.push(rectangleElement);
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/RectangleElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/RectangleElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('RectangleElement with Corner', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var rectangleElement = new RectangleElement(ElementPlacement.TopCenter, 100, 50);
             rectangleElement.CornerRadius = 20;
             input1.Elements.push(rectangleElement);
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/RectangleElementwithCorner.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/RectangleElementwithCorner.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('RectangleElement with border style', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var rectangleElement = new RectangleElement(ElementPlacement.TopCenter, 100, 50);
             rectangleElement.BorderStyle = LineStyle.Dots;
             input1.Elements.push(rectangleElement);
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/RectangleElementwithBorderStyle.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/RectangleElementwithBorderStyle.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('RectangleElement with border style Array', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var rectangleElement = new RectangleElement(ElementPlacement.TopCenter, 100, 50);
             var styleArray = [2, 1, 4, 2];
@@ -157,13 +163,14 @@ describe('PdfEndpoint', function () {
             input1.Elements.push(rectangleElement);
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/RectangleElementwithBorderStyleArray.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/RectangleElementwithBorderStyleArray.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -173,7 +180,7 @@ describe('PdfEndpoint', function () {
     describe('pageNumberingElement', function () {
 
         it('Page number', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/Invoice.pdf", "Invoice.pdf");
             var input1 = new PdfInput(resource);
             pdfEndpoint.Inputs.push(input1);
@@ -184,20 +191,21 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
 
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/pageNumberingElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/pageNumberingElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
             assert.strictEqual(res.IsSuccessfull, true);
         });
         it('Page number', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/Invoice.pdf", "Invoice.pdf");
             var input1 = new PdfInput(resource);
             pdfEndpoint.Inputs.push(input1);
@@ -230,13 +238,14 @@ describe('PdfEndpoint', function () {
             templateA.Elements.push(bottomRightElement);
 
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/pageNumberingElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/pageNumberingElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -246,7 +255,7 @@ describe('PdfEndpoint', function () {
     describe('ImageElement', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var input1 = new PdfInput(resource);
 
@@ -257,13 +266,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/ImageElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/ImageElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -275,7 +285,7 @@ describe('PdfEndpoint', function () {
     describe('AztecBarcodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
             var barcodeElement = new AztecBarcodeElement("Hello World", ElementPlacement.TopCenter, 50);
@@ -292,13 +302,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/AztecBarcode.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/AztecBarcode.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -308,7 +319,7 @@ describe('PdfEndpoint', function () {
     describe('Code11BarcodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
             var barcodeElement = new Code11BarcodeElement("12345678", ElementPlacement.TopCenter, 50);
@@ -316,13 +327,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/Code11Barcode.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/Code11Barcode.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -332,7 +344,7 @@ describe('PdfEndpoint', function () {
     describe('Code25BarcodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
             var barcodeElement = new Code25BarcodeElement("12345678", ElementPlacement.TopCenter, 150);
@@ -340,13 +352,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/Code25Barcode.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/Code25Barcode.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -356,7 +369,7 @@ describe('PdfEndpoint', function () {
     describe('Code39BarcodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
@@ -365,13 +378,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/Code39Barcode.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/Code39Barcode.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -381,7 +395,7 @@ describe('PdfEndpoint', function () {
     describe('Code93BarcodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
@@ -390,13 +404,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/Code93Barcode.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/Code93Barcode.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -406,7 +421,7 @@ describe('PdfEndpoint', function () {
     describe('Code128BarcodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
             var barcodeElement = new Code128BarcodeElement("CODE 128", ElementPlacement.TopCenter, 150);
@@ -416,13 +431,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/Code128Barcode.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/Code128Barcode.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -432,7 +448,7 @@ describe('PdfEndpoint', function () {
     describe('Pdf417BarcodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
@@ -451,13 +467,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/Pdf417BarcodeElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/Pdf417BarcodeElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -467,7 +484,7 @@ describe('PdfEndpoint', function () {
     describe('MsiBarcodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
             var barcodeElement = new MsiBarcodeElement("1234567890", ElementPlacement.TopCenter, 150);
@@ -475,13 +492,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/MsiBarcodeElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/MsiBarcodeElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -491,7 +509,7 @@ describe('PdfEndpoint', function () {
     describe('QrCodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
@@ -503,13 +521,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/QrCodeElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/QrCodeElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -519,7 +538,7 @@ describe('PdfEndpoint', function () {
     describe('StackedGs1DataBarBarcodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
             var barcodeElement = new StackedGs1DataBarBarcodeElement("1234567890", ElementPlacement.TopCenter, 150);
@@ -527,13 +546,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/StackedGs1DataBarBarcodeElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/StackedGs1DataBarBarcodeElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -543,7 +563,7 @@ describe('PdfEndpoint', function () {
     describe('DataMatrixBarcodeElement barcode', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
             var barcodeElement = new DataMatrixBarcodeElement("Hello World", ElementPlacement.TopCenter, 0);
@@ -557,13 +577,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/DataMatrixBarcodeElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/DataMatrixBarcodeElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 
@@ -573,7 +594,7 @@ describe('PdfEndpoint', function () {
     describe('TextElement', function () {
 
         it('Should return res.IsSuccessfull==true', async function () {
-            var pdfEndpoint = getEndPoint();
+            var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
             var textElement = new TextElement("Hello World", ElementPlacement.TopCenter);
@@ -582,13 +603,14 @@ describe('PdfEndpoint', function () {
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
-            if (TestParams.Logging) {
+            if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessfull);
-            }
-            if (res.IsSuccessfull) {
-                var outStream = fs.createWriteStream("./output/Dim2BarcodeElement.pdf");
-                outStream.write(res.SetPdfContent);
-                outStream.close();
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/Dim2BarcodeElement.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
             }
 
 

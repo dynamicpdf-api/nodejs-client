@@ -8,44 +8,46 @@ import { Aes128Security } from '../lib/Aes128Security.js';
 import { RC4128Security } from '../lib/RC4128Security.js';
 import { TestParams } from '../test/init.js';
 import { EncryptDocumentComponents } from "../lib/EncryptDocumentComponents.js";
-function getEndPoint() {
+function getEndpoint(testParams) {
     process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     var pdfEndpoint = new Pdf();
-    pdfEndpoint.loggingEnabled = TestParams.Logging;
-    pdfEndpoint.BaseUrl = TestParams.BaseUrl;
-    pdfEndpoint.ApiKey = TestParams.ApiKey;
+    pdfEndpoint.loggingEnabled = testParams.Logging;
+    pdfEndpoint.BaseUrl = testParams.BaseUrl;
+    pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
     return pdfEndpoint;
 }
 describe('PDF Security', function () {
     this.timeout(0);
+    var testParams = new TestParams();
     it('Aes128Security', async function () {
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
         var input1 = new PdfInput(resource1);
 
         var security = new Aes128Security("user", "owner");
         pdfEndpoint.Security = security;
 
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
-        if (TestParams.Logging) {
+        if (testParams.Logging) {
             console.log("Result: " + res.IsSuccessfull);
-        }
-        if (res.IsSuccessfull) {
-            var outStream = fs.createWriteStream("./output/Aes128Security.pdf");
-            outStream.write(res.SetPdfContent);
-            outStream.close();
+
+            if (res.IsSuccessfull) {
+                var outStream = fs.createWriteStream("./output/Aes128Security.pdf");
+                outStream.write(res.SetPdfContent);
+                outStream.close();
+            }
         }
         console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });
     it('Aes128Security EncryptDocumentComponents', async function () {
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
         var input1 = new PdfInput(resource1);
 
@@ -53,48 +55,50 @@ describe('PDF Security', function () {
         security.DocumentComponents = EncryptDocumentComponents.All;
         pdfEndpoint.Security = security;
 
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
-        if (TestParams.Logging) {
+        if (testParams.Logging) {
             console.log("Result: " + res.IsSuccessfull);
-        }
-        if (res.IsSuccessfull) {
-            var outStream = fs.createWriteStream("./output/Aes128Security_EncryptDocumentComponents.pdf");
-            outStream.write(res.SetPdfContent);
-            outStream.close();
+
+            if (res.IsSuccessfull) {
+                var outStream = fs.createWriteStream("./output/Aes128Security_EncryptDocumentComponents.pdf");
+                outStream.write(res.SetPdfContent);
+                outStream.close();
+            }
         }
         console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });
     it('Aes256Security', async function () {
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
         var input1 = new PdfInput(resource1);
 
         var security = new Aes256Security("", "owner");
         pdfEndpoint.Security = security;
 
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
-        if (TestParams.Logging) {
+        if (testParams.Logging) {
             console.log("Result: " + res.IsSuccessfull);
-        }
-        if (res.IsSuccessfull) {
-            var outStream = fs.createWriteStream("./output/Aes256Security.pdf");
-            outStream.write(res.SetPdfContent);
-            outStream.close();
+
+            if (res.IsSuccessfull) {
+                var outStream = fs.createWriteStream("./output/Aes256Security.pdf");
+                outStream.write(res.SetPdfContent);
+                outStream.close();
+            }
         }
         console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });
     it('Aes256Security EncryptDocumentComponents', async function () {
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
         var input1 = new PdfInput(resource1);
 
@@ -102,48 +106,50 @@ describe('PDF Security', function () {
         security.DocumentComponents = EncryptDocumentComponents.AllExceptMetadata;
         pdfEndpoint.Security = security;
 
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
-        if (TestParams.Logging) {
+        if (testParams.Logging) {
             console.log("Result: " + res.IsSuccessfull);
-        }
-        if (res.IsSuccessfull) {
-            var outStream = fs.createWriteStream("./output/Aes256Security_EncryptDocumentComponents.pdf");
-            outStream.write(res.SetPdfContent);
-            outStream.close();
+
+            if (res.IsSuccessfull) {
+                var outStream = fs.createWriteStream("./output/Aes256Security_EncryptDocumentComponents.pdf");
+                outStream.write(res.SetPdfContent);
+                outStream.close();
+            }
         }
         console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });
     it('RC4128Security', async function () {
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
         var input1 = new PdfInput(resource1);
 
         var security = new RC4128Security("user", "owner");
         pdfEndpoint.Security = security;
 
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
-        if (TestParams.Logging) {
+        if (testParams.Logging) {
             console.log("Result: " + res.IsSuccessfull);
-        }
-        if (res.IsSuccessfull) {
-            var outStream = fs.createWriteStream("./output/RC4128Security.pdf");
-            outStream.write(res.SetPdfContent);
-            outStream.close();
+
+            if (res.IsSuccessfull) {
+                var outStream = fs.createWriteStream("./output/RC4128Security.pdf");
+                outStream.write(res.SetPdfContent);
+                outStream.close();
+            }
         }
         console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });
     it('RC4128Security', async function () {
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
         var input1 = new PdfInput(resource1);
 
@@ -151,17 +157,18 @@ describe('PDF Security', function () {
         security.EncryptMetadata = true;
         pdfEndpoint.Security = security;
 
-        var pdfEndpoint = getEndPoint();
+        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
-        if (TestParams.Logging) {
+        if (testParams.Logging) {
             console.log("Result: " + res.IsSuccessfull);
-        }
-        if (res.IsSuccessfull) {
-            var outStream = fs.createWriteStream("./output/RC4128Security_EncryptMetadata.pdf");
-            outStream.write(res.SetPdfContent);
-            outStream.close();
+
+            if (res.IsSuccessfull) {
+                var outStream = fs.createWriteStream("./output/RC4128Security_EncryptMetadata.pdf");
+                outStream.write(res.SetPdfContent);
+                outStream.close();
+            }
         }
         console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
