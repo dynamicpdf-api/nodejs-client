@@ -9,7 +9,9 @@ import { RC4128Security } from '../lib/RC4128Security.js';
 import { TestParams } from '../test/init.js';
 import { EncryptDocumentComponents } from "../lib/EncryptDocumentComponents.js";
 function getEndpoint(testParams) {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+    if (testParams.AuthTLS == false) {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+    }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
     pdfEndpoint.BaseUrl = testParams.BaseUrl;

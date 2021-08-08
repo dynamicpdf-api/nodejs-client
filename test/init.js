@@ -7,6 +7,7 @@ export class TestParams {
     #defaults = {
         ApiKey: "[YOUR API KEY GOES HERE]",
         BaseUrl: "https://api.dynamicpdf.com/v1.0/pdf",
+        AuthTLS: true,
         Logging: false
     };
 
@@ -22,5 +23,6 @@ export class TestParams {
 
     get ApiKey() { return this.#params.ApiKey; }
     get BaseUrl() { return this.#params.BaseUrl; }
+    get AuthTLS() { return this.#params.AuthTLS; }
     get Logging() { return this.#params.Logging; }
 };

@@ -18,7 +18,9 @@ import { RgbColor } from '../lib/RgbColor.js';
 import { Grayscale } from '../lib/Grayscale.js';
 import { MergeOptions } from '../lib/MergeOptions.js';
 function getEndpoint(testParams) {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+    if (testParams.AuthTLS == false) {
+        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+    }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
     pdfEndpoint.BaseUrl = testParams.BaseUrl;
