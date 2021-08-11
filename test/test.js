@@ -23,7 +23,7 @@ function getEndpoint(testParams) {
     }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.BaseUrl = testParams.BaseUrl;
+    pdfEndpoint.BaseUrl = "https://localhost:44397/v1.0/pdf";
     pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
@@ -36,6 +36,29 @@ describe('PdfEndpoint', function () {
 
         it('Merge', async function () {
 
+            var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
+            var resource2 = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
+            var input1 = new PdfInput(resource1);
+
+            var input2 = new PdfInput(resource2);
+            var pdfEndpoint = getEndpoint(testParams);
+            pdfEndpoint.Inputs.push(input1);
+            pdfEndpoint.Inputs.push(input2);
+            var res = await pdfEndpoint.Process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.IsSuccessfull);
+
+                if (res.IsSuccessfull) {
+                    var outStream = fs.createWriteStream("./output/Merge.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.IsSuccessfull, true);
+        });
+        it('Merge using byteArray as input', async function () {
+            
             var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var resource2 = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
             var input1 = new PdfInput(resource1);
@@ -153,7 +176,7 @@ describe('PdfEndpoint', function () {
 
             assert.strictEqual(res.IsSuccessfull, true);
         });
-        it('Add page and pdf input with Properties', async function () {
+        it('Add page and templates', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var element = new TextElement("test", ElementPlacement.TopCenter);

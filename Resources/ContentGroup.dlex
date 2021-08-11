@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<document version="1.2" id="Document1" author="" keywords="" title="" subject="" xsi:schemaLocation="http://www.dynamicpdf.com http://www.dynamicpdf.com/schemas/DLEX12.xsd" xmlns="http://www.dynamicpdf.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<report dataName="details" id="Report1">
+		<template id="Template1"/>
+		<header height="5" id="Header1"/>
+		<detail height="93" id="Detail1">
+			<contentGroup id="ContentGroup1" x="-42" y="6" width="594" height="90">
+				<rectangle id="Rectangle1" x="6" y="6" width="120.5" height="72.5"/>
+				<rectangle id="Rectangle2" x="132" y="6" width="456" height="24"/>
+				<label font="Helvetica" fontSize="12" id="Label1" x="138" y="12" width="72" height="13" text="ID"/>
+				<label font="Helvetica" fontSize="12" id="Label2" x="222" y="12" width="126" height="13" text="Name"/>
+				<label font="Helvetica" fontSize="12" id="Label3" x="354" y="12" width="222" height="13" text="Address"/>
+				<rectangle id="Rectangle3" x="132" y="30" width="456" height="30"/>
+				<recordBox font="Helvetica" fontSize="12" id="RecordBox1" x="138" y="36" width="72" height="18" dataFormat="" dataName="ID"/>
+				<recordBox font="Helvetica" fontSize="12" id="RecordBox2" x="222" y="36" width="126" height="18" dataFormat="" dataName="Name"/>
+				<recordBox font="Helvetica" fontSize="12" id="RecordBox3" x="354" y="36" width="222" height="18" expandable="true" dataFormat="" dataName="Address"/>
+				<image id="Image1" x="12" y="12" width="109.5" height="60.5" path="image.jpg"/>
+				<recordBox font="Helvetica" fontSize="12" id="RecordBox4" x="138" y="66" width="67" height="17.5" dataFormat="" dataName="Count(ID)"/>
+			</contentGroup>
+		</detail>
+		<footer height="5" id="Footer1">
+			<pageNumberingLabel font="Helvetica" fontSize="12" id="PageNumberingLabel1" x="402" y="6" width="105" height="19.5" text="Page %%CP(i)%% of %%TP(i)%%"/>
+		</footer>
+	</report>
+</document>

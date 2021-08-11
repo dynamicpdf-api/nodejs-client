@@ -1,0 +1,658 @@
+{
+  "MarksSheet": [
+    {
+      "name": "Gurudatta",
+      "stdDetails": [
+        {
+          "s1e": 74,
+          "s1i": 15,
+          "s2e": 75,
+          "s2i": 16,
+          "s3e": 77,
+          "s3i": 17,
+          "s4e": 78,
+          "s4i": 19
+        }
+      ]
+    },
+    {
+      "name": "Rahul",
+      "stdDetails": [
+        {
+          "s1e": 51,
+          "s1i": 15,
+          "s2e": 35,
+          "s2i": 13,
+          "s3e": 77,
+          "s3i": 16,
+          "s4e": 58,
+          "s4i": 11
+        }
+      ]
+    },
+    {
+      "name": "Naveen",
+      "stdDetails":[{
+        "s1e": 75,
+        "s1i": 12,
+        "s2e": 59,
+        "s2i": 11,
+        "s3e": 78,
+        "s3i": 15,
+        "s4e": 67,
+        "s4i": 19
+      }]
+    },
+    {
+      "name": "Richard",
+      "stdDetails":[{
+        "s1e": 71,
+        "s1i": 14,
+        "s2e": 59,
+        "s2i": 11,
+        "s3e": 58,
+        "s3i": 14,
+        "s4e": 52,
+        "s4i": 11
+      }]
+    },
+    {
+      "name": "Bajaj",
+      "stdDetails":[{
+        "s1e": 51,
+        "s1i": 19,
+        "s2e": 62,
+        "s2i": 15,
+        "s3e": 51,
+        "s3i": 11,
+        "s4e": 72,
+        "s4i": 15
+      }]
+    },
+    {
+      "name": "Puneeth",
+      "stdDetails":[{
+        "s1e": 61,
+        "s1i": 11,
+        "s2e": 51,
+        "s2i": 19,
+        "s3e": 63,
+        "s3i": 17,
+        "s4e": 63,
+        "s4i": 19
+      }]
+    },
+    {
+      "name": "Raghu",
+      "stdDetails":[{
+        "s1e": 66,
+        "s1i": 16,
+        "s2e": 62,
+        "s2i": 18,
+        "s3e": 75,
+        "s3i": 19,
+        "s4e": 70,
+        "s4i": 19
+      }]
+    },
+    {
+      "name": "Ranga",
+      "stdDetails":[{
+        "s1e": 54,
+        "s1i": 10,
+        "s2e": 60,
+        "s2i": 13,
+        "s3e": 53,
+        "s3i": 19,
+        "s4e": 56,
+        "s4i": 14
+      }]
+    },
+    {
+      "name": "Gaurav",
+      "stdDetails":[{
+        "s1e": 73,
+        "s1i": 20,
+        "s2e": 70,
+        "s2i": 16,
+        "s3e": 72,
+        "s3i": 10,
+        "s4e": 61,
+        "s4i": 10
+      }]
+    },
+    {
+      "name": "Rakesh",
+      "stdDetails":[{
+        "s1e": 74,
+        "s1i": 12,
+        "s2e": 62,
+        "s2i": 13,
+        "s3e": 80,
+        "s3i": 12,
+        "s4e": 63,
+        "s4i": 13
+      }]
+    },
+    {
+      "name": "Pooja",
+      "stdDetails":[{
+        "s1e": 58,
+        "s1i": 15,
+        "s2e": 64,
+        "s2i": 15,
+        "s3e": 54,
+        "s3i": 16,
+        "s4e": 51,
+        "s4i": 14
+      }]
+    },
+    {
+      "name": "Shilpa",
+      "stdDetails":[{
+        "s1e": 78,
+        "s1i": 15,
+        "s2e": 69,
+        "s2i": 20,
+        "s3e": 77,
+        "s3i": 13,
+        "s4e": 53,
+        "s4i": 17
+      }]
+    },
+    {
+      "name": "Hitesh",
+      "stdDetails":[{
+        "s1e": 53,
+        "s1i": 15,
+        "s2e": 56,
+        "s2i": 10,
+        "s3e": 74,
+        "s3i": 11,
+        "s4e": 70,
+        "s4i": 13
+      }]
+    },
+    {
+      "name": "Ramya",
+      "stdDetails":[{
+        "s1e": 79,
+        "s1i": 15,
+        "s2e": 62,
+        "s2i": 10,
+        "s3e": 51,
+        "s3i": 18,
+        "s4e": 52,
+        "s4i": 13
+      }]
+    },
+    {
+      "name": "Rashmi",
+      "stdDetails":[{
+        "s1e": 58,
+        "s1i": 10,
+        "s2e": 58,
+        "s2i": 20,
+        "s3e": 77,
+        "s3i": 20,
+        "s4e": 51,
+        "s4i": 12
+      }]
+    },
+    {
+      "name": "Rakshitha",
+      "stdDetails":[{
+        "s1e": 75,
+        "s1i": 13,
+        "s2e": 55,
+        "s2i": 19,
+        "s3e": 70,
+        "s3i": 20,
+        "s4e": 58,
+        "s4i": 11
+      }]
+    },
+    {
+      "name": "Deepthi",
+      "stdDetails":[{
+        "s1e": 69,
+        "s1i": 14,
+        "s2e": 55,
+        "s2i": 19,
+        "s3e": 63,
+        "s3i": 15,
+        "s4e": 58,
+        "s4i": 12
+      }]
+    },
+    {
+      "name": "Chandhan",
+      "stdDetails":[{
+        "s1e": 73,
+        "s1i": 20,
+        "s2e": 74,
+        "s2i": 13,
+        "s3e": 78,
+        "s3i": 14,
+        "s4e": 53,
+        "s4i": 14
+      }]
+    },
+    {
+      "name": "Harshith",
+      "stdDetails":[{
+        "s1e": 74,
+        "s1i": 15,
+        "s2e": 77,
+        "s2i": 10,
+        "s3e": 63,
+        "s3i": 10,
+        "s4e": 65,
+        "s4i": 13
+      }]
+    },
+    {
+      "name": "Kumar",
+      "stdDetails":[{
+        "s1e": 54,
+        "s1i": 14,
+        "s2e": 79,
+        "s2i": 12,
+        "s3e": 57,
+        "s3i": 13,
+        "s4e": 52,
+        "s4i": 16
+      }]
+    },
+    {
+      "name": "Edward",
+      "stdDetails":[{
+        "s1e": 72,
+        "s1i": 13,
+        "s2e": 62,
+        "s2i": 10,
+        "s3e": 71,
+        "s3i": 18,
+        "s4e": 70,
+        "s4i": 19
+      }]
+    },
+    {
+      "name": "Kashinath",
+      "stdDetails":[{
+        "s1e": 51,
+        "s1i": 18,
+        "s2e": 53,
+        "s2i": 10,
+        "s3e": 64,
+        "s3i": 16,
+        "s4e": 55,
+        "s4i": 17
+      }]
+    },
+    {
+      "name": "Siddiq",
+      "stdDetails":[{
+        "s1e": 75,
+        "s1i": 15,
+        "s2e": 67,
+        "s2i": 16,
+        "s3e": 56,
+        "s3i": 20,
+        "s4e": 70,
+        "s4i": 15
+      }]
+    },
+    {
+      "name": "Sushanth",
+      "stdDetails":[{
+        "s1e": 57,
+        "s1i": 15,
+        "s2e": 70,
+        "s2i": 11,
+        "s3e": 54,
+        "s3i": 12,
+        "s4e": 67,
+        "s4i": 11
+      }]
+    },
+    {
+      "name": "Alia",
+      "stdDetails":[{
+        "s1e": 55,
+        "s1i": 12,
+        "s2e": 79,
+        "s2i": 10,
+        "s3e": 68,
+        "s3i": 17,
+        "s4e": 58,
+        "s4i": 19
+      }]
+    },
+    {
+      "name": "Keerthi",
+      "stdDetails":[{
+        "s1e": 59,
+        "s1i": 16,
+        "s2e": 76,
+        "s2i": 18,
+        "s3e": 51,
+        "s3i": 11,
+        "s4e": 73,
+        "s4i": 11
+      }]
+    },
+    {
+      "name": "Keerthana",
+      "stdDetails":[{
+        "s1e": 57,
+        "s1i": 15,
+        "s2e": 75,
+        "s2i": 18,
+        "s3e": 55,
+        "s3i": 11,
+        "s4e": 72,
+        "s4i": 15
+      }]
+    },
+    {
+      "name": "Namratha",
+      "stdDetails":[{
+        "s1e": 51,
+        "s1i": 17,
+        "s2e": 57,
+        "s2i": 12,
+        "s3e": 60,
+        "s3i": 20,
+        "s4e": 73,
+        "s4i": 16
+      }]
+    },
+    {
+      "name": "Roopa",
+      "stdDetails":[{
+        "s1e": 71,
+        "s1i": 18,
+        "s2e": 55,
+        "s2i": 15,
+        "s3e": 75,
+        "s3i": 10,
+        "s4e": 67,
+        "s4i": 15
+      }]
+    },
+    {
+      "name": "Bhumika",
+      "stdDetails":[{
+        "s1e": 80,
+        "s1i": 19,
+        "s2e": 59,
+        "s2i": 19,
+        "s3e": 55,
+        "s3i": 19,
+        "s4e": 59,
+        "s4i": 13
+      }]
+    },
+    {
+      "name": "Harshitha",
+      "stdDetails":[{
+        "s1e": 79,
+        "s1i": 16,
+        "s2e": 53,
+        "s2i": 18,
+        "s3e": 50,
+        "s3i": 16,
+        "s4e": 58,
+        "s4i": 12
+      }]
+    },
+    {
+      "name": "Latha",
+      "stdDetails":[{
+        "s1e": 69,
+        "s1i": 13,
+        "s2e": 60,
+        "s2i": 12,
+        "s3e": 78,
+        "s3i": 10,
+        "s4e": 79,
+        "s4i": 12
+      }]
+    },
+    {
+      "name": "Shivakumar",
+      "stdDetails":[{
+        "s1e": 78,
+        "s1i": 18,
+        "s2e": 55,
+        "s2i": 16,
+        "s3e": 57,
+        "s3i": 11,
+        "s4e": 70,
+        "s4i": 10
+      }]
+    },
+    {
+      "name": "Bruce Shields",
+      "stdDetails":[{
+        "s1e": 52,
+        "s1i": 14,
+        "s2e": 79,
+        "s2i": 12,
+        "s3e": 80,
+        "s3i": 17,
+        "s4e": 62,
+        "s4i": 14
+      }]
+    },
+    {
+      "name": "James",
+      "stdDetails":[{
+        "s1e": 57,
+        "s1i": 19,
+        "s2e": 57,
+        "s2i": 11,
+        "s3e": 75,
+        "s3i": 14,
+        "s4e": 75,
+        "s4i": 18
+      }]
+    },
+    {
+      "name": "Smith",
+      "stdDetails":[{
+        "s1e": 77,
+        "s1i": 16,
+        "s2e": 51,
+        "s2i": 19,
+        "s3e": 52,
+        "s3i": 10,
+        "s4e": 71,
+        "s4i": 18
+      }]
+    },
+    {
+      "name": "Ross",
+      "stdDetails":[{
+        "s1e": 72,
+        "s1i": 13,
+        "s2e": 70,
+        "s2i": 14,
+        "s3e": 64,
+        "s3i": 14,
+        "s4e": 67,
+        "s4i": 17
+      }]
+    },
+    {
+      "name": "Quill",
+      "stdDetails":[{
+        "s1e": 73,
+        "s1i": 16,
+        "s2e": 50,
+        "s2i": 10,
+        "s3e": 55,
+        "s3i": 13,
+        "s4e": 54,
+        "s4i": 11
+      }]
+    },
+    {
+      "name": "Tony",
+      "stdDetails":[{
+        "s1e": 77,
+        "s1i": 20,
+        "s2e": 67,
+        "s2i": 14,
+        "s3e": 76,
+        "s3i": 12,
+        "s4e": 55,
+        "s4i": 20
+      }]
+    },
+    {
+      "name": "Steve",
+      "stdDetails":[{
+        "s1e": 69,
+        "s1i": 17,
+        "s2e": 64,
+        "s2i": 17,
+        "s3e": 77,
+        "s3i": 11,
+        "s4e": 70,
+        "s4i": 19
+      }]
+    },
+    {
+      "name": "Wanda",
+      "stdDetails":[{
+        "s1e": 69,
+        "s1i": 15,
+        "s2e": 66,
+        "s2i": 15,
+        "s3e": 59,
+        "s3i": 19,
+        "s4e": 56,
+        "s4i": 11
+      }]
+    },
+    {
+      "name": "Natalia",
+      "stdDetails":[{
+        "s1e": 67,
+        "s1i": 17,
+        "s2e": 79,
+        "s2i": 17,
+        "s3e": 80,
+        "s3i": 18,
+        "s4e": 52,
+        "s4i": 18
+      }]
+    },
+    {
+      "name": "Yagur",
+      "stdDetails":[{
+        "s1e": 66,
+        "s1i": 14,
+        "s2e": 57,
+        "s2i": 14,
+        "s3e": 73,
+        "s3i": 13,
+        "s4e": 61,
+        "s4i": 20
+      }]
+    },
+    {
+      "name": "Rishith",
+      "stdDetails":[{
+        "s1e": 57,
+        "s1i": 14,
+        "s2e": 61,
+        "s2i": 10,
+        "s3e": 63,
+        "s3i": 15,
+        "s4e": 68,
+        "s4i": 17
+      }]
+    },
+    {
+      "name": "Likith",
+      "stdDetails":[{
+        "s1e": 77,
+        "s1i": 13,
+        "s2e": 78,
+        "s2i": 20,
+        "s3e": 69,
+        "s3i": 11,
+        "s4e": 57,
+        "s4i": 19
+      }]
+    },
+    {
+      "name": "Kavi",
+      "stdDetails":[{
+        "s1e": 52,
+        "s1i": 16,
+        "s2e": 53,
+        "s2i": 11,
+        "s3e": 53,
+        "s3i": 12,
+        "s4e": 79,
+        "s4i": 16
+      }]
+    },
+    {
+      "name": "Chandru",
+      "stdDetails":[{
+        "s1e": 59,
+        "s1i": 11,
+        "s2e": 69,
+        "s2i": 20,
+        "s3e": 75,
+        "s3i": 18,
+        "s4e": 57,
+        "s4i": 17
+      }]
+    },
+    {
+      "name": "Prakash",
+      "stdDetails":[{
+        "s1e": 72,
+        "s1i": 20,
+        "s2e": 62,
+        "s2i": 11,
+        "s3e": 61,
+        "s3i": 20,
+        "s4e": 62,
+        "s4i": 13
+      }]
+    },
+    {
+      "name": "Prashanti",
+      "stdDetails":[{
+        "s1e": 51,
+        "s1i": 15,
+        "s2e": 75,
+        "s2i": 16,
+        "s3e": 77,
+        "s3i": 17,
+        "s4e": 58,
+        "s4i": 11
+      }]
+    },
+    {
+      "name": "Shruthi",
+      "stdDetails":[{
+        "s1e": 63,
+        "s1i": 10,
+        "s2e": 55,
+        "s2i": 18,
+        "s3e": 61,
+        "s3i": 10,
+        "s4e": 75,
+        "s4i": 12
+      }]
+    }
+  ]
+}

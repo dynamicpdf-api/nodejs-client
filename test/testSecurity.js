@@ -14,7 +14,7 @@ function getEndpoint(testParams) {
     }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.BaseUrl = testParams.BaseUrl;
+    pdfEndpoint.BaseUrl = "https://localhost:44397/v1.0/pdf";
     pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
@@ -44,7 +44,6 @@ describe('PDF Security', function () {
                 outStream.close();
             }
         }
-        console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });
@@ -70,7 +69,6 @@ describe('PDF Security', function () {
                 outStream.close();
             }
         }
-        console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });
@@ -95,7 +93,6 @@ describe('PDF Security', function () {
                 outStream.close();
             }
         }
-        console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });
@@ -121,7 +118,6 @@ describe('PDF Security', function () {
                 outStream.close();
             }
         }
-        console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });
@@ -146,7 +142,6 @@ describe('PDF Security', function () {
                 outStream.close();
             }
         }
-        console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });
@@ -172,7 +167,6 @@ describe('PDF Security', function () {
                 outStream.close();
             }
         }
-        console.log("Asserting: " + res.IsSuccessfull);
         assert.strictEqual(res.IsSuccessfull, true);
 
     });

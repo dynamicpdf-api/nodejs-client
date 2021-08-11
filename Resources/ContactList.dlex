@@ -1,0 +1,39 @@
+<document version="1.2" id="ContactList" author="" keywords="" title="" subject="" xsi:schemaLocation="http://www.dynamicpdf.com http://www.dynamicpdf.com/schemas/DLEX12.xsd" xmlns="http://www.dynamicpdf.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<report dataName="ContactGroups" id="ContactListReport" bottomMargin="36" leftMargin="36" rightMargin="36" topMargin="36" pageOrientation="landscape">
+		<template id="Template1"/>
+		<header height="74" id="Header">
+			<rectangle id="Rectangle1" x="0" y="56" width="720" height="16" borderWidth="0" fillColor="#0000A0"/>
+			<label font="HelveticaBold" fontSize="18" id="Label1" x="0" y="0" width="720" height="18" align="center" text="Northwind Traders"/>
+			<label font="Helvetica" fontSize="12" id="Label2" x="0" y="21" width="720" height="12" align="center" text="Contact List"/>
+			<recordBox font="Helvetica" fontSize="12" id="DateRecordBox" x="0" y="36" width="720" height="12" align="center" dataFormat="d MMM yyyy h:mm:ss tt" dataName="CurrentDateTime()"/>
+			<label font="HelveticaBold" fontSize="12" id="Label4" x="2" y="57" width="58" height="12" textColor="white" text="Cust ID"/>
+			<label font="HelveticaBold" fontSize="12" id="Label5" x="62" y="57" width="156" height="12" textColor="white" text="Company"/>
+			<label font="HelveticaBold" fontSize="12" id="Label6" x="222" y="57" width="156" height="12" textColor="white" text="Contact"/>
+			<label font="HelveticaBold" fontSize="12" id="Label7" x="362" y="57" width="156" height="12" textColor="white" text="Title"/>
+			<label font="HelveticaBold" fontSize="12" id="Label8" x="522" y="57" width="86" height="12" textColor="white" text="Phone"/>
+			<label font="HelveticaBold" fontSize="12" id="Label9" x="622" y="57" width="86" height="12" textColor="white" text="Fax"/>
+		</header>
+		<detail height="42" id="Body" autoSplit="true">
+			<subReport dataName="Contacts" id="SubReport1" x="0" y="0" width="720">
+				<header height="25" id="Header1">
+					<recordArea font="HelveticaBold" fontSize="18" id="FirstLRecordArea" x="0" y="4" width="720" height="18" align="center">
+						<text>- #Letter# -</text>
+					</recordArea>
+				</header>
+				<detail height="18" id="Body1">
+					<rectangle id="Rectangle2" x="0" y="0" width="720" height="18" borderWidth="0" fillColor="#E0E0FF" showAlternateRow="odd"/>
+					<recordBox font="TimesRoman" fontSize="11" id="RecordBox7" x="2" y="2" width="56" height="11" dataFormat="" dataName="CustomerID"/>
+					<recordBox font="TimesRoman" fontSize="11" id="RecordBox8" x="62" y="2" width="156" height="11" expandable="true" dataFormat="" dataName="CompanyName"/>
+					<recordBox font="TimesRoman" fontSize="11" id="RecordBox9" x="222" y="2" width="136" height="11" dataFormat="" dataName="ContactName"/>
+					<recordBox font="TimesRoman" fontSize="11" id="RecordBox10" x="362" y="2" width="156" height="11" dataFormat="" dataName="ContactTitle"/>
+					<recordBox font="TimesRoman" fontSize="11" id="RecordBox11" x="522" y="2" width="96" height="11" dataFormat="" dataName="Phone"/>
+					<recordBox font="TimesRoman" fontSize="11" id="RecordBox12" x="622" y="2" width="96" height="11" dataFormat="" dataName="Fax"/>
+				</detail>
+				<footer id="Footer1"/>
+			</subReport>
+		</detail>
+		<footer height="14.5" id="Footer">
+			<pageNumberingLabel font="Helvetica" fontSize="10" id="PageNumberingLabel1" x="0" y="2" width="720" height="10" align="center" text="Page %%CP(i)%% of %%TP(i)%%"/>
+		</footer>
+	</report>
+</document>

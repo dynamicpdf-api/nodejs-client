@@ -38,7 +38,7 @@ function getEndpoint(testParams) {
     }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.BaseUrl = testParams.BaseUrl;
+    pdfEndpoint.BaseUrl = "https://localhost:44397/v1.0/pdf";
     pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
@@ -206,7 +206,7 @@ describe('PdfEndpoint', function () {
 
             assert.strictEqual(res.IsSuccessfull, true);
         });
-        it('Page number', async function () {
+        it('Page number with properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/Invoice.pdf", "Invoice.pdf");
             var input1 = new PdfInput(resource);
@@ -284,9 +284,8 @@ describe('PdfEndpoint', function () {
 
         });
     });
-    describe('AztecBarcodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+    describe('Barcode', function () {
+        it('AztecBarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
@@ -314,13 +313,9 @@ describe('PdfEndpoint', function () {
                 }
             }
 
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('Code11BarcodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('Code11BarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
@@ -339,13 +334,9 @@ describe('PdfEndpoint', function () {
                 }
             }
 
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('Code25BarcodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('Code25BarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
@@ -364,13 +355,9 @@ describe('PdfEndpoint', function () {
                 }
             }
 
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('Code39BarcodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('Code39BarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
@@ -390,13 +377,9 @@ describe('PdfEndpoint', function () {
                 }
             }
 
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('Code93BarcodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('Code93BarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
@@ -416,13 +399,9 @@ describe('PdfEndpoint', function () {
                 }
             }
 
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('Code128BarcodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('Code128BarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
@@ -442,14 +421,9 @@ describe('PdfEndpoint', function () {
                     outStream.close();
                 }
             }
-
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('Pdf417BarcodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('Pdf417BarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
@@ -478,14 +452,9 @@ describe('PdfEndpoint', function () {
                     outStream.close();
                 }
             }
-
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('MsiBarcodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('MsiBarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
@@ -503,14 +472,9 @@ describe('PdfEndpoint', function () {
                     outStream.close();
                 }
             }
-
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('QrCodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('QrCodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
@@ -532,14 +496,9 @@ describe('PdfEndpoint', function () {
                     outStream.close();
                 }
             }
-
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('StackedGs1DataBarBarcodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('StackedGs1DataBarBarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
@@ -557,14 +516,9 @@ describe('PdfEndpoint', function () {
                     outStream.close();
                 }
             }
-
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('DataMatrixBarcodeElement barcode', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('DataMatrixBarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
@@ -588,14 +542,9 @@ describe('PdfEndpoint', function () {
                     outStream.close();
                 }
             }
-
-
             assert.strictEqual(res.IsSuccessfull, true);
         });
-    });
-    describe('TextElement', function () {
-
-        it('Should return res.IsSuccessfull==true', async function () {
+        it('TextElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
@@ -614,7 +563,6 @@ describe('PdfEndpoint', function () {
                     outStream.close();
                 }
             }
-
 
             assert.strictEqual(res.IsSuccessfull, true);
         });

@@ -15,7 +15,7 @@ export class TestParams {
         if (this.#params == null) {
             try {
                 this.#params = JSON.parse(fs.readFileSync(testConfigFile, 'utf8'));
-            } catch {
+            } catch(error) {
                 this.#params = this.#defaults;
             }
         }

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<document version="1.2" xsi:schemaLocation="http://www.dynamicpdf.com http://www.dynamicpdf.com/schemas/DLEX12.xsd" xmlns="http://www.dynamicpdf.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Document1" author="" keywords="" title="" subject="">
+	<report dataName="MarksSheet" id="Report1" pageSize="a5" pageOrientation="landscape">
+		<template id="Template1"/>
+		<header id="Header1">
+			<image id="Image1" x="-66" y="-54" width="612" height="378" path="image.jpg"/>
+			<label font="Helvetica" fontSize="18" id="Label9" x="-42" y="-36" width="594" height="18" align="center" text="Marks Sheet"/>
+		</header>
+		<detail height="270.5" id="Detail1">
+			<contentGroup id="ContentGroup1" x="0" y="6" width="492" height="264">
+				<subReport dataName="stdDetails" id="SubReport1" x="0" y="48" width="492">
+					<header height="17.5" id="Header2">
+						<rectangle id="Rectangle1" x="0" y="0" width="492" height="18"/>
+						<label font="Helvetica" fontSize="12" id="Label2" x="12" y="2.5" width="91" height="12" text="Subject Name"/>
+						<label font="Helvetica" fontSize="12" id="Label3" x="108" y="2.5" width="91" height="12" text="Total Marks"/>
+						<label font="Helvetica" fontSize="12" id="Label4" x="204" y="2.5" width="91" height="12" text="External Marks"/>
+						<label font="Helvetica" fontSize="12" id="Label5" x="300" y="2.5" width="91" height="12" text="Internal Marks"/>
+						<label font="Helvetica" fontSize="12" id="Label10" x="396" y="2.5" width="91" height="12" text="Total Marks"/>
+					</header>
+					<detail height="156.5" id="Detail2">
+						<label font="Helvetica" fontSize="12" id="Label1" x="12" y="6" width="91" height="24" text="Electronics"/>
+						<label font="Helvetica" fontSize="12" id="Label6" x="108" y="6" width="91" height="18" text="80+20"/>
+						<recordBox font="Helvetica" fontSize="12" id="RecordBox1" x="204" y="6" width="91" height="18" dataFormat="" dataName="s1e"/>
+						<recordArea font="Helvetica" fontSize="12" id="RecordArea1" x="396" y="6" width="91" height="18">
+							<text>#s1e+s1i#</text>
+						</recordArea>
+						<label font="Helvetica" fontSize="12" id="Label7" x="12" y="42" width="91" height="29.1" text="Web&#xA;Development"/>
+						<label font="Helvetica" fontSize="12" id="Label8" x="108" y="48" width="91" height="18" text="80+20"/>
+						<recordBox font="Helvetica" fontSize="12" id="RecordBox2" x="204" y="48" width="91" height="18" dataFormat="" dataName="s2e"/>
+						<recordArea font="Helvetica" fontSize="12" id="RecordArea2" x="396" y="48" width="91" height="18">
+							<text>#s2e+s2i#</text>
+						</recordArea>
+						<label font="Helvetica" fontSize="12" id="Label11" x="12" y="84" width="91" height="24" text="DBMS"/>
+						<label font="Helvetica" fontSize="12" id="Label12" x="12" y="120" width="91" height="24" text="Data Structure"/>
+						<label font="Helvetica" fontSize="12" id="Label13" x="108" y="84" width="91" height="18" text="80+20"/>
+						<label font="Helvetica" fontSize="12" id="Label14" x="108" y="120" width="91" height="18" text="80+20"/>
+						<recordBox font="Helvetica" fontSize="12" id="RecordBox3" x="204" y="84" width="91" height="18" dataFormat="" dataName="s3e"/>
+						<recordBox font="Helvetica" fontSize="12" id="RecordBox4" x="204" y="120" width="91" height="18" dataFormat="" dataName="s4e"/>
+						<recordBox font="Helvetica" fontSize="12" id="RecordBox5" x="300" y="6" width="91" height="18" dataFormat="" dataName="s1i"/>
+						<recordBox font="Helvetica" fontSize="12" id="RecordBox6" x="300" y="84" width="91" height="18" dataFormat="" dataName="s3i"/>
+						<recordBox font="Helvetica" fontSize="12" id="RecordBox7" x="300" y="120" width="91" height="18" dataFormat="" dataName="s4i"/>
+						<recordBox font="Helvetica" fontSize="12" id="RecordBox8" x="300" y="48" width="91" height="18" dataFormat="" dataName="s2i"/>
+						<recordArea font="Helvetica" fontSize="12" id="RecordArea4" x="396" y="120" width="91" height="18">
+							<text>#s4e+s4i#</text>
+						</recordArea>
+						<recordArea font="Helvetica" fontSize="12" id="RecordArea5" x="396" y="84" width="91" height="18">
+							<text>#s3e+s3i#</text>
+						</recordArea>
+						<line id="Line1" x1="0" y1="36" x2="492" y2="36"/>
+						<line id="Line2" x1="0" y1="78" x2="492" y2="78"/>
+						<line id="Line3" x1="0" y1="114" x2="492" y2="114"/>
+						<line id="Line4" x1="0" y1="150" x2="492" y2="150"/>
+					</detail>
+					<footer height="43" id="Footer2">
+						<recordArea font="Helvetica" fontSize="14" id="RecordArea3" x="282" y="0" width="209.1" height="24">
+							<text>Total Percentage = #((s1e+s1i+s2e+s2i+s3e+s3i+s4e+s4i)/4)#%</text>
+						</recordArea>
+						<recordArea font="Helvetica" fontSize="14" id="RecordArea6" x="354" y="24" width="138" height="24">
+							<text>Pass : #((s1e+s1i+s2e+s2i+s3e+s3i+s4e+s4i)/4)&gt;=75#</text>
+						</recordArea>
+					</footer>
+				</subReport>
+				<formattedRecordArea id="FormattedRecordArea1" x="0" y="0" width="516" height="30" vAlign="center">
+					<initialStyle>
+						<font face="Helvetica" size="12"/>
+						<line/>
+						<paragraph/>
+					</initialStyle>
+					<text><![CDATA[<P>Dear <I>#name#</I></P><P>Here is your report card for the Current Semester</P>]]></text>
+				</formattedRecordArea>
+			</contentGroup>
+			<pageBreak id="PageBreak1" y="270"/>
+		</detail>
+		<footer id="Footer1">
+			<image id="Image2" x="-54" y="-42" width="604" height="119" path="image.jpg"/>
+			<pageNumberingLabel font="Helvetica" fontSize="12" id="PageNumberingLabel1" x="420" y="0" width="120" height="24" text="Student %%CP(1)%% of %%TP(1)%%"/>
+		</footer>
+	</report>
+</document>
