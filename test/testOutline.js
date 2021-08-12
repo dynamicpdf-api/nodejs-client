@@ -20,7 +20,7 @@ function getEndpoint(testParams) {
     }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.BaseUrl = "https://localhost:44397/v1.0/pdf";
+    pdfEndpoint.BaseUrl = testParams.BaseUrl+pdfEndpoint.EndpointName;;
     pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
@@ -43,9 +43,9 @@ describe('Outline', function () {
         pdfEndpoint.Outlines.push(outline);
         var res = await pdfEndpoint.Process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessfull);
+            console.log("Result: " + res.IsSuccessful);
 
-            if (res.IsSuccessfull) {
+            if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/oultine.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
@@ -53,8 +53,9 @@ describe('Outline', function () {
 
             }
         }
-        assert.strictEqual(res.IsSuccessfull, true);
+        assert.strictEqual(res.IsSuccessful, true);
     });
+
     it('With Goto Action', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource = new PdfResource("./Resources/Invoice.pdf");
@@ -95,9 +96,9 @@ describe('Outline', function () {
         pdfEndpoint.Outlines.push(outline2);
         var res = await pdfEndpoint.Process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessfull);
+            console.log("Result: " + res.IsSuccessful);
 
-            if (res.IsSuccessfull) {
+            if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/oultine1.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
@@ -105,8 +106,9 @@ describe('Outline', function () {
 
             }
         }
-        assert.strictEqual(res.IsSuccessfull, true);
+        assert.strictEqual(res.IsSuccessful, true);
     });
+    
     it('URL Action', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/Org.pdf");
@@ -153,9 +155,9 @@ describe('Outline', function () {
         pdfEndpoint.Outlines.push(outline);
         var res = await pdfEndpoint.Process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessfull);
+            console.log("Result: " + res.IsSuccessful);
 
-            if (res.IsSuccessfull) {
+            if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/oultine2.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
@@ -163,6 +165,6 @@ describe('Outline', function () {
 
             }
         }
-        assert.strictEqual(res.IsSuccessfull, true);
+        assert.strictEqual(res.IsSuccessful, true);
     });
 });

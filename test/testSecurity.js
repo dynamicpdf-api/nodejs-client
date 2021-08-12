@@ -14,7 +14,7 @@ function getEndpoint(testParams) {
     }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.BaseUrl = "https://localhost:44397/v1.0/pdf";
+    pdfEndpoint.BaseUrl = testParams.BaseUrl + pdfEndpoint.EndpointName;
     pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
@@ -36,17 +36,18 @@ describe('PDF Security', function () {
 
         var res = await pdfEndpoint.Process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessfull);
+            console.log("Result: " + res.IsSuccessful);
 
-            if (res.IsSuccessfull) {
+            if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes128Security.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessfull, true);
+        assert.strictEqual(res.IsSuccessful, true);
 
     });
+
     it('Aes128Security EncryptDocumentComponents', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
@@ -61,17 +62,18 @@ describe('PDF Security', function () {
 
         var res = await pdfEndpoint.Process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessfull);
+            console.log("Result: " + res.IsSuccessful);
 
-            if (res.IsSuccessfull) {
+            if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes128Security_EncryptDocumentComponents.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessfull, true);
+        assert.strictEqual(res.IsSuccessful, true);
 
     });
+
     it('Aes256Security', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
@@ -85,17 +87,18 @@ describe('PDF Security', function () {
 
         var res = await pdfEndpoint.Process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessfull);
+            console.log("Result: " + res.IsSuccessful);
 
-            if (res.IsSuccessfull) {
+            if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes256Security.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessfull, true);
+        assert.strictEqual(res.IsSuccessful, true);
 
     });
+
     it('Aes256Security EncryptDocumentComponents', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
@@ -110,17 +113,18 @@ describe('PDF Security', function () {
 
         var res = await pdfEndpoint.Process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessfull);
+            console.log("Result: " + res.IsSuccessful);
 
-            if (res.IsSuccessfull) {
+            if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes256Security_EncryptDocumentComponents.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessfull, true);
+        assert.strictEqual(res.IsSuccessful, true);
 
     });
+
     it('RC4128Security', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
@@ -134,17 +138,18 @@ describe('PDF Security', function () {
 
         var res = await pdfEndpoint.Process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessfull);
+            console.log("Result: " + res.IsSuccessful);
 
-            if (res.IsSuccessfull) {
+            if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/RC4128Security.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessfull, true);
+        assert.strictEqual(res.IsSuccessful, true);
 
     });
+    
     it('RC4128Security', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
@@ -159,15 +164,15 @@ describe('PDF Security', function () {
 
         var res = await pdfEndpoint.Process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessfull);
+            console.log("Result: " + res.IsSuccessful);
 
-            if (res.IsSuccessfull) {
+            if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/RC4128Security_EncryptMetadata.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessfull, true);
+        assert.strictEqual(res.IsSuccessful, true);
 
     });
 });

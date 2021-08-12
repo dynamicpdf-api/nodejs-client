@@ -23,7 +23,7 @@ function getEndpoint(testParams) {
     }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.BaseUrl = "https://localhost:44397/v1.0/pdf";
+    pdfEndpoint.BaseUrl = testParams.BaseUrl + pdfEndpoint.EndpointName;
     pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
@@ -35,7 +35,6 @@ describe('PdfEndpoint', function () {
     describe('Merge of two PDFs', function () {
 
         it('Merge', async function () {
-
             var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var resource2 = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
             var input1 = new PdfInput(resource1);
@@ -46,19 +45,19 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input2);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Merge.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Merge using byteArray as input', async function () {
-            
             var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var resource2 = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
             var input1 = new PdfInput(resource1);
@@ -69,17 +68,18 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input2);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Merge.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Merge Options', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var template = new Template("temp1");
@@ -116,18 +116,21 @@ describe('PdfEndpoint', function () {
 
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/MergeWithOptions.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
     });
+
+
+
     describe('Add page and pdf input', function () {
 
         it('Add page and pdf input', async function () {
@@ -142,17 +145,18 @@ describe('PdfEndpoint', function () {
 
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/pageAndPdf.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Add page and pdf input with Properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
@@ -165,17 +169,18 @@ describe('PdfEndpoint', function () {
 
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Add page and templates', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
@@ -190,18 +195,20 @@ describe('PdfEndpoint', function () {
 
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
     });
+
+
     describe('Test Formfield', function () {
 
         it('Fill text', async function () {
@@ -229,9 +236,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.FormFields.push(field8);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/formField.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -239,8 +246,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Fill text Form Flatten Remove', async function () {
             var resource = new PdfResource("./Resources/fw9AcroForm_14.pdf", "fw9AcroForm_14.pdf");
             var input = new PdfInput(resource);
@@ -269,9 +277,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.FormFields.push(field8);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/formFieldFlattenRemove.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -279,8 +287,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Fill text Form Flatten', async function () {
             var resource = new PdfResource("./Resources/fw9AcroForm_14.pdf", "fw9AcroForm_14.pdf");
             var input = new PdfInput(resource);
@@ -309,9 +318,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.FormFields.push(field8);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/formFieldFlatten.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -319,8 +328,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('FilePathRetainSignature', async function () {
             var resource = new PdfResource("./Resources/Org.pdf", "Org.pdf");
             var input = new PdfInput(resource);
@@ -330,9 +340,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.RetainSignatureFormFields = true;
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/FilePathRetainSignature.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -340,8 +350,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Radio Button', async function () {
             var resource = new PdfResource("./Resources/AllPageElements.pdf", "AllPageElements.pdf");
             var input = new PdfInput(resource);
@@ -351,9 +362,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.FormFields.push(field);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/radioButton.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -361,8 +372,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('List box', async function () {
             var resource = new PdfResource("./Resources/AllPageElements.pdf", "AllPageElements.pdf");
             var input = new PdfInput(resource);
@@ -372,9 +384,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.FormFields.push(field);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/listBox.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -382,9 +394,11 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
     });
+
+
     describe('Test Image', function () {
 
         it('Test Image input Gif', async function () {
@@ -398,9 +412,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imageGif.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -408,8 +422,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Test Image input Jpeg', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/Image1.jpg", "Image1.jpg");
@@ -421,9 +436,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imageJPG.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -431,8 +446,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Test Image input Tiff', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/CCITT_1.tif", "CCITT_1.tif");
@@ -444,9 +460,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imagetif.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -454,8 +470,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Test Image input MultiPageTiff', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/PalaisDuLouvre.tif", "PalaisDuLouvre.tif");
@@ -467,9 +484,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imageMultiPageTiff.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -477,8 +494,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Test Image input Png', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/170x220_T.png", "170x220_T.png");
@@ -488,9 +506,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imagePng.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -498,8 +516,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Test Image Scale', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/DocumentA100.pdf");
@@ -514,9 +533,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imageScale.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -524,8 +543,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Test Image XYWithTemplate', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/DocumentA100.pdf");
@@ -540,9 +560,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imageXYTemple.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -550,9 +570,11 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
     });
+
+
     describe('Test Font', function () {
 
         it('Core Fonts', async function () {
@@ -615,9 +637,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Font.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -625,7 +647,7 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
         it('Font otf ', async function () {
             var pdfEndpoint = getEndpoint(testParams);
@@ -637,9 +659,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontOtf.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -647,8 +669,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Font otf Embeded ', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
@@ -660,9 +683,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontOtfEmbeded.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -670,8 +693,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Font otf Subset ', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
@@ -683,9 +707,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontOtfSubset.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -693,8 +717,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Font ttf ', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
@@ -705,9 +730,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontTtf.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -715,8 +740,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Font ttf Embeded ', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
@@ -728,9 +754,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontTtfEmbeded.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -738,8 +764,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('Font ttf Subset ', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
@@ -751,9 +778,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Instructions.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontttfSubset.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -761,9 +788,11 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
     });
+
+
     describe('Color Pattern', function () {
         it('CMYKColor', async function () {
             var input = new PageInput();
@@ -774,9 +803,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/cmykColorPattern.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -784,8 +813,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('RGB Color', async function () {
             var input = new PageInput();
             var pdfEndpoint = getEndpoint(testParams);
@@ -795,9 +825,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/rgbColor.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -805,8 +835,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('RGB Color Named color sample', async function () {
             var input = new PageInput();
             var pdfEndpoint = getEndpoint(testParams);
@@ -816,9 +847,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/rgb_NamedColorPattern.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -826,8 +857,9 @@ describe('PdfEndpoint', function () {
 
                 }
             }
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+
         it('GrayScale', async function () {
             var input = new PageInput();
             var pdfEndpoint = getEndpoint(testParams);
@@ -837,17 +869,18 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/grayColorPattern.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
+        
         it('Invalid color', async function () {
             var input = new PageInput();
             var pdfEndpoint = getEndpoint(testParams);
@@ -857,9 +890,9 @@ describe('PdfEndpoint', function () {
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessfull);
+                console.log("Result: " + res.IsSuccessful);
 
-                if (res.IsSuccessfull) {
+                if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/invalidColorPatter.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
@@ -867,7 +900,7 @@ describe('PdfEndpoint', function () {
             }
 
 
-            assert.strictEqual(res.IsSuccessfull, true);
+            assert.strictEqual(res.IsSuccessful, true);
         });
     });
 });
