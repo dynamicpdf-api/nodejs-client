@@ -3,7 +3,6 @@ import fs from 'fs';
 import { TestParams } from './init.js';
 import { LayoutDataResource } from '../lib/LayoutDataResource.js';
 import { DlexLayout } from '../lib/DlexLayout.js';
-import { Pdf } from '../lib/Pdf.js';
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 function getEndpoint(dlexEndPoint, testParams) {
     if (testParams.AuthTLS == false) {

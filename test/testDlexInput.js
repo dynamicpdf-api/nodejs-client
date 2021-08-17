@@ -49,6 +49,7 @@ describe('Dlex Input', function () {
         }
         assert.strictEqual(res.IsSuccessful, true);
     });
+
     it('SimpleDlex_AddDlex', async function () {
 
         var testParams = new TestParams();
@@ -71,6 +72,7 @@ describe('Dlex Input', function () {
         }
         assert.strictEqual(res.IsSuccessful, true);
     });
+
     it('SimpleDlex_AddDlexCloud', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
@@ -90,6 +92,7 @@ describe('Dlex Input', function () {
         }
         assert.strictEqual(res.IsSuccessful, true);
     });
+
     it('SimpleDlex_AddDlexCloudResourceData', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
@@ -108,6 +111,7 @@ describe('Dlex Input', function () {
         }
         assert.strictEqual(res.IsSuccessful, true);
     });
+
     it('SimpleDlex_Cloud', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
@@ -127,6 +131,7 @@ describe('Dlex Input', function () {
         }
         assert.strictEqual(res.IsSuccessful, true);
     });
+
     it('SimpleDlex_CloudData', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
@@ -145,6 +150,7 @@ describe('Dlex Input', function () {
         }
         assert.strictEqual(res.IsSuccessful, true);
     });
+
     it('Template_Pdfoutput', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
@@ -169,6 +175,7 @@ describe('Dlex Input', function () {
         }
         assert.strictEqual(res.IsSuccessful, true);
     });
+    
     it('SimpleDlex_Pdfoutput', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);

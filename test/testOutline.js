@@ -1,5 +1,4 @@
 import assert from 'assert';
-import { PdfResponse } from "../lib/PdfResponse.js";
 import { PdfResource } from "../lib/PdfResource.js";
 import { PdfInput } from "../lib/PdfInput.js";
 import { Pdf } from "../lib/Pdf.js";
