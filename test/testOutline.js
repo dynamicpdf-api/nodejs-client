@@ -1,25 +1,15 @@
 import assert from 'assert';
-import { PdfResource } from "../lib/PdfResource.js";
-import { PdfInput } from "../lib/PdfInput.js";
-import { Pdf } from "../lib/Pdf.js";
-import { Outline } from "../lib/Outline.js";
-import { OutlineStyle } from "../lib/OutlineStyle.js";
 import fs from 'fs';
-import { GoToAction } from "../lib/GoToAction.js";
-import { UrlAction } from "../lib/UrlAction.js";
-import { ImageResource } from "../lib/ImageResource.js";
-import { ImageInput } from "../lib/ImageInput.js";
-import { MergeOptions } from "../lib/MergeOptions.js";
-import { PageZoom } from "../lib/PageZoom.js"
 import { TestParams } from './init.js';
-import { RgbColor } from '../lib/RgbColor.js';
+import { PdfResource, PdfInput, Pdf, Outline, GoToAction, UrlAction, ImageResource, MergeOptions, PageZoom, RgbColor, OutlineStyle,ImageInput } from "../lib/index.js";
+
 function getEndpoint(testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.BaseUrl = testParams.BaseUrl+pdfEndpoint.EndpointName;;
+    pdfEndpoint.BaseUrl = testParams.BaseUrl + pdfEndpoint.EndpointName;;
     pdfEndpoint.ApiKey = testParams.ApiKey;
     pdfEndpoint.Author = "sheetal";
     pdfEndpoint.Title = "pdf merger";
@@ -107,7 +97,7 @@ describe('Outline', function () {
         }
         assert.strictEqual(res.IsSuccessful, true);
     });
-    
+
     it('URL Action', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/Org.pdf");

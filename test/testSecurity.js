@@ -1,13 +1,8 @@
 import fs from 'fs';
 import assert from 'assert';
-import { PdfResource } from "../lib/PdfResource.js";
-import { PdfInput } from "../lib/PdfInput.js";
-import { Pdf } from "../lib/Pdf.js";
-import { Aes256Security } from '../lib/Aes256Security.js';
-import { Aes128Security } from '../lib/Aes128Security.js';
-import { RC4128Security } from '../lib/RC4128Security.js';
-import { TestParams } from '../test/init.js';
-import { EncryptDocumentComponents } from "../lib/EncryptDocumentComponents.js";
+import { TestParams } from './init.js';
+import { PdfResource, PdfInput, Pdf, Aes128Security, Aes256Security, RC4128Security, EncryptDocumentComponents } from "../lib/index.js";
+
 function getEndpoint(testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
@@ -149,7 +144,7 @@ describe('PDF Security', function () {
         assert.strictEqual(res.IsSuccessful, true);
 
     });
-    
+
     it('RC4128Security', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");

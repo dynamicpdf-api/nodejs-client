@@ -1,8 +1,7 @@
 import assert from 'assert';
 import fs from 'fs';
 import { TestParams } from './init.js';
-import { LayoutDataResource } from '../lib/LayoutDataResource.js';
-import { DlexLayout } from '../lib/DlexLayout.js';
+import { LayoutDataResource, DlexLayout } from '../lib/index.js';
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 function getEndpoint(dlexEndPoint, testParams) {
     if (testParams.AuthTLS == false) {
@@ -120,7 +119,7 @@ describe('Dlex Endpoint', function () {
         }
         assert.strictEqual(res.IsSuccessful, true);
     });
-    
+
     it('Invoice', async function () {
 
         var testParams = new TestParams();

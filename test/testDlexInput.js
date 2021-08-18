@@ -1,14 +1,8 @@
 import assert from 'assert';
 import fs from 'fs';
 import { TestParams } from './init.js';
-import { LayoutDataResource } from '../lib/LayoutDataResource.js';
-import { DlexResource } from '../lib/DlexResource.js';
-import { DlexInput } from '../lib/DlexInput.js';
-import { Template } from '../lib/Template.js';
-import { PageNumberingElement } from '../lib/elements/PageNumberingElement.js';
-import { ElementPlacement } from '../lib/elements/ElementPlacement.js';
-import { Pdf } from '../lib/Pdf.js';
-import { TextElement } from '../lib/elements/TextElement.js';
+import { LayoutDataResource, DlexResource, DlexInput, Template, PageNumberingElement, ElementPlacement, Pdf, TextElement } from '../lib/index.js';
+
 function getEndpoint(testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
@@ -175,7 +169,7 @@ describe('Dlex Input', function () {
         }
         assert.strictEqual(res.IsSuccessful, true);
     });
-    
+
     it('SimpleDlex_Pdfoutput', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);

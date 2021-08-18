@@ -16,9 +16,9 @@ function getEndpoint(text, testParams) {
     return text;
 }
 
-describe.only('Text Endpoint', function () {
+describe('Text Endpoint', function () {
     this.timeout(0);
-    it.only('TextExtraction', async function () {
+    it('TextExtraction', async function () {
 
         var testParams = new TestParams();
 

@@ -1,8 +1,7 @@
 import assert from 'assert';
 import fs from 'fs';
 import { TestParams } from './init.js';
-import { ImageInfo } from '../lib/ImageInfo.js';
-import { ImageResource } from '../lib/ImageResource.js';
+import { ImageInfo, ImageResource } from '../lib/index.js';
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 function getEndpoint(text, testParams) {
@@ -24,8 +23,8 @@ describe('ImageInfo Endpoint', function () {
         var testParams = new TestParams();
         var resource = new ImageResource("./Resources/Earth2.bmp");
         var image = new ImageInfo(resource);
-        image =getEndpoint(image, testParams);
-        var res= image.Process();
+        image = getEndpoint(image, testParams);
+        var res = image.Process();
 
         if (testParams.Logging) {
             console.log("Result: " + res.IsSuccessful);

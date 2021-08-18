@@ -1,37 +1,13 @@
 import fs from 'fs';
 import assert from 'assert';
-import { PdfResponse } from "../lib/PdfResponse.js";
-import { PdfResource } from "../lib/PdfResource.js";
-import { PdfInput } from "../lib/PdfInput.js";
-import { Pdf } from "../lib/Pdf.js";
-import { PageInput } from "../lib/PageInput.js";
-import { Template } from '../lib/Template.js';
-import { AztecBarcodeElement } from "../lib/elements/AztecBarcodeElement.js";
-import { ElementPlacement } from "../lib/elements/ElementPlacement.js";
-import { AztecSymbolSize } from "../lib/elements/AztecSymbolSize.js";
-import { Code11BarcodeElement } from "../lib/elements/Code11BarcodeElement.js";
-import { Code25BarcodeElement } from "../lib/elements/Code25BarcodeElement.js";
-import { Code39BarcodeElement } from "../lib/elements/Code39BarcodeElement.js";
-import { Code93BarcodeElement } from "../lib/elements/Code93BarcodeElement.js";
-import { Code128BarcodeElement } from "../lib/elements/Code128BarcodeElement.js";
-import { Pdf417BarcodeElement } from "../lib/elements/Pdf417BarcodeElement.js";
-import { MsiBarcodeElement } from "../lib/elements/MsiBarcodeElement.js";
-import { QrCodeElement } from "../lib/elements/QrCodeElement.js";
-import { Compaction } from "../lib/elements/Compaction.js";
-import { QrCodeFnc1 } from "../lib/elements/QrCodeFnc1.js";
-import { StackedGs1DataBarBarcodeElement } from "../lib/elements/StackedGs1DataBarBarcodeElement.js";
-import { LineElement } from "../lib/elements/LineElement.js";
-import { RectangleElement } from "../lib/elements/RectangleElement.js";
-import { PageNumberingElement } from "../lib/elements/PageNumberingElement.js";
-import { ImageElement } from '../lib/elements/ImageElement.js';
-import { ImageResource } from '../lib/ImageResource.js';
-import { DataMatrixBarcodeElement } from '../lib/elements/DataMatrixBarcodeElement.js';
-import { TextElement } from '../lib/elements/TextElement.js';
-import { TestParams } from './init.js';
-import { Font } from '../lib/Font.js';
-import { RgbColor } from '../lib/RgbColor.js';
-import { LineStyle } from '../lib/LineStyle.js';
-import { Color } from '../lib/Color.js';
+import { TestParams } from '../test/init.js';
+import {
+    PdfResource, PdfInput, Pdf, PageInput, Template, AztecBarcodeElement, ElementPlacement, AztecSymbolSize, Code11BarcodeElement, Code25BarcodeElement, Code128BarcodeElement,
+    Code39BarcodeElement, Code93BarcodeElement, Pdf417BarcodeElement, MsiBarcodeElement, QrCodeElement, QrCodeFnc1, Compaction, StackedGs1DataBarBarcodeElement
+    , LineElement, RectangleElement, PageNumberingElement, ImageElement, ImageResource, DataMatrixBarcodeElement, TextElement, Font, RgbColor, LineStyle
+} from "../lib/index.js";
+
+
 function getEndpoint(testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
@@ -567,7 +543,7 @@ describe('PdfEndpoint', function () {
             }
             assert.strictEqual(res.IsSuccessful, true);
         });
-        
+
         it('TextElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();

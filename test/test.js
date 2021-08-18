@@ -1,22 +1,8 @@
 import fs from 'fs';
 import assert from 'assert';
-import { PdfResource } from "../lib/PdfResource.js";
-import { PdfInput } from "../lib/PdfInput.js";
-import { Pdf } from "../lib/Pdf.js";
-import { FormField } from '../lib/FormField.js';
-import { ImageResource } from '../lib/ImageResource.js';
-import { ImageInput } from '../lib/ImageInput.js';
-import { PageInput } from '../lib/PageInput.js';
-import { TextElement } from '../lib/elements/TextElement.js'
-import { ElementPlacement } from '../lib/elements/ElementPlacement.js';
-import { Font } from '../lib/Font.js';
-import { TestParams } from './init.js';
-import { Template } from '../lib/Template.js';
-import { ImageElement } from '../lib/elements/ImageElement.js';
-import { CmykColor } from '../lib/CmykColor.js';
-import { RgbColor } from '../lib/RgbColor.js';
-import { Grayscale } from '../lib/Grayscale.js';
-import { MergeOptions } from '../lib/MergeOptions.js';
+import { TestParams } from '../test/init.js';
+import { PdfResource, PdfInput, Pdf, FormField, ImageResource, ImageInput, PageInput, TextElement, ElementPlacement, Font, Template, ImageElement, CmykColor, RgbColor, Grayscale, MergeOptions } from "../lib/index.js";
+
 function getEndpoint(testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
@@ -880,7 +866,7 @@ describe('PdfEndpoint', function () {
 
             assert.strictEqual(res.IsSuccessful, true);
         });
-        
+
         it('Invalid color', async function () {
             var input = new PageInput();
             var pdfEndpoint = getEndpoint(testParams);
