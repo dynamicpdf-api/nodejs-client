@@ -8,7 +8,7 @@ function getEndpoint(dlexEndPoint, testParams) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
     dlexEndPoint.loggingEnabled = testParams.Logging;
-    dlexEndPoint.BaseUrl = testParams.BaseUrl + dlexEndPoint.EndpointName;
+    dlexEndPoint.BaseUrl = testParams.BaseUrl;
     dlexEndPoint.ApiKey = testParams.ApiKey;
     dlexEndPoint.Author = "sheetal";
     dlexEndPoint.Title = "pdf merger";
