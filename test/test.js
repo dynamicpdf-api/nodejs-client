@@ -38,13 +38,15 @@ describe('PdfEndpoint', function () {
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
+
             }
 
             assert.strictEqual(res.IsSuccessful, true);
         });
 
         it('Merge using byteArray as input', async function () {
-            var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
+            var fileData = fs.readFileSync("./Resources/SinglePage.pdf");
+            var resource1 = new PdfResource(fileData, "SinglePage.pdf");
             var resource2 = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
             var input1 = new PdfInput(resource1);
 
