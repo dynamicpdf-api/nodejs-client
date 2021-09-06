@@ -1,7 +1,20 @@
 import assert from 'assert';
 import fs from 'fs';
 import { TestParams } from './init.js';
-import { PdfResource, PdfInput, Pdf, Outline, GoToAction, UrlAction, ImageResource, MergeOptions, PageZoom, RgbColor, OutlineStyle,ImageInput } from "../lib/index.js";
+import {
+    PdfResource,
+    PdfInput,
+    Pdf,
+    Outline,
+    GoToAction,
+    UrlAction,
+    ImageResource,
+    MergeOptions,
+    PageZoom,
+    RgbColor,
+    OutlineStyle,
+    ImageInput
+} from "./imports.js";
 
 function getEndpoint(testParams) {
     if (testParams.AuthTLS == false) {

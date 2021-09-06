@@ -1,7 +1,15 @@
 import fs from 'fs';
 import assert from 'assert';
 import { TestParams } from './init.js';
-import { PdfResource, PdfInput, Pdf, Aes128Security, Aes256Security, RC4128Security, EncryptDocumentComponents } from "../lib/index.js";
+import {
+    PdfResource,
+    PdfInput,
+    Pdf,
+    Aes128Security,
+    Aes256Security,
+    RC4128Security,
+    EncryptDocumentComponents
+} from "./imports.js";
 
 function getEndpoint(testParams) {
     if (testParams.AuthTLS == false) {

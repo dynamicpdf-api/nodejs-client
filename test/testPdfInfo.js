@@ -1,9 +1,11 @@
 import assert from 'assert';
 import fs from 'fs';
 import { TestParams } from './init.js';
-import { PdfInfo } from '../lib/PdfInfo.js';
-import { PdfResource } from '../lib/PdfResource.js';
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+import {
+    PdfInfo,
+    PdfResource
+} from "./imports.js";
+
 function getEndpoint(pdfInfo, testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'

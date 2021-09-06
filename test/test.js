@@ -1,7 +1,24 @@
 import fs from 'fs';
 import assert from 'assert';
-import { TestParams } from '../test/init.js';
-import { PdfResource, PdfInput, Pdf, FormField, ImageResource, ImageInput, PageInput, TextElement, ElementPlacement, Font, Template, ImageElement, CmykColor, RgbColor, Grayscale, MergeOptions } from "../lib/index.js";
+import { TestParams } from './init.js';
+import {
+    PdfResource,
+    PdfInput,
+    Pdf,
+    FormField,
+    ImageResource,
+    ImageInput,
+    PageInput,
+    TextElement,
+    ElementPlacement,
+    Font,
+    Template,
+    ImageElement,
+    CmykColor,
+    RgbColor,
+    Grayscale,
+    MergeOptions
+} from "./imports.js"
 
 function getEndpoint(testParams) {
     if (testParams.AuthTLS == false) {

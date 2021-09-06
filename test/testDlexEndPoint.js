@@ -1,8 +1,11 @@
 import assert from 'assert';
 import fs from 'fs';
 import { TestParams } from './init.js';
-import { LayoutDataResource, DlexLayout } from '../lib/index.js';
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
+import {
+    LayoutDataResource,
+    DlexLayout
+} from "./imports.js";
+
 function getEndpoint(dlexEndPoint, testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
@@ -22,7 +25,7 @@ describe('Dlex Endpoint', function () {
         var testParams = new TestParams();
 
         var layoutData = new LayoutDataResource("./Resources/AllReportElementsData.json", "AllReportElementsData.json")
-        var dlexEndPoint = new DlexLayout("resource/AllReportElements.dlex", layoutData);
+        var dlexEndPoint = new DlexLayout("AllReportElements.dlex", layoutData);
         dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
 
         var res = await dlexEndPoint.Process();
@@ -44,7 +47,7 @@ describe('Dlex Endpoint', function () {
 
         var testParams = new TestParams();
         var layoutData = new LayoutDataResource("./Resources/ContactList.json", "ContactList.json")
-        var dlexEndPoint = new DlexLayout("resource/ContactList.dlex", layoutData);
+        var dlexEndPoint = new DlexLayout("ContactList.dlex", layoutData);
         dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
         var res = await dlexEndPoint.Process();
 
@@ -64,7 +67,7 @@ describe('Dlex Endpoint', function () {
 
         var testParams = new TestParams();
         var layoutData = new LayoutDataResource("./Resources/ContentGroupData.json", "ContentGroupData")
-        var dlexEndPoint = new DlexLayout("resource/ContentGroup.dlex", layoutData);
+        var dlexEndPoint = new DlexLayout("ContentGroup.dlex", layoutData);
         dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
         var res = await dlexEndPoint.Process();
 
@@ -84,7 +87,7 @@ describe('Dlex Endpoint', function () {
 
         var testParams = new TestParams();
         var layoutData = new LayoutDataResource("./Resources/ContentGroupSubReportData.json", "ContentGroupSubReport.json")
-        var dlexEndPoint = new DlexLayout("resource/ContentGroupSubReport.dlex", layoutData);
+        var dlexEndPoint = new DlexLayout("ContentGroupSubReport.dlex", layoutData);
         dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
         var res = await dlexEndPoint.Process();
 
@@ -104,7 +107,7 @@ describe('Dlex Endpoint', function () {
 
         var testParams = new TestParams();
         var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json", "SimpleReportData.json")
-        var dlexEndPoint = new DlexLayout("resource/SimpleReportWithCoverPage.dlex", layoutData);
+        var dlexEndPoint = new DlexLayout("SimpleReportWithCoverPage.dlex", layoutData);
         dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
         var res = await dlexEndPoint.Process();
 
@@ -124,7 +127,7 @@ describe('Dlex Endpoint', function () {
 
         var testParams = new TestParams();
         var layoutData = new LayoutDataResource("./Resources/InvoiceReportData.json", "InvoiceReportData.json")
-        var dlexEndPoint = new DlexLayout("resource/Invoice.dlex", layoutData);
+        var dlexEndPoint = new DlexLayout("Invoice.dlex", layoutData);
         dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
         var res = await dlexEndPoint.Process();
 

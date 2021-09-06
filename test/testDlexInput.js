@@ -1,7 +1,16 @@
 import assert from 'assert';
 import fs from 'fs';
 import { TestParams } from './init.js';
-import { LayoutDataResource, DlexResource, DlexInput, Template, PageNumberingElement, ElementPlacement, Pdf, TextElement } from '../lib/index.js';
+import {
+    LayoutDataResource,
+    DlexResource,
+    DlexInput,
+    Template,
+    PageNumberingElement,
+    ElementPlacement,
+    Pdf,
+    TextElement
+} from "./imports.js";
 
 function getEndpoint(testParams) {
     if (testParams.AuthTLS == false) {

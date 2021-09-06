@@ -1,9 +1,11 @@
 import assert from 'assert';
 import fs from 'fs';
 import { TestParams } from './init.js';
-import { ImageInfo, ImageResource } from '../lib/index.js';
+import {
+    ImageInfo,
+    ImageResource
+} from "./imports.js";
 
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0;
 function getEndpoint(text, testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'

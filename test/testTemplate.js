@@ -1,11 +1,37 @@
 import fs from 'fs';
 import assert from 'assert';
-import { TestParams } from '../test/init.js';
+import { TestParams } from './init.js';
 import {
-    PdfResource, PdfInput, Pdf, PageInput, Template, AztecBarcodeElement, ElementPlacement, AztecSymbolSize, Code11BarcodeElement, Code25BarcodeElement, Code128BarcodeElement,
-    Code39BarcodeElement, Code93BarcodeElement, Pdf417BarcodeElement, MsiBarcodeElement, QrCodeElement, QrCodeFnc1, Compaction, StackedGs1DataBarBarcodeElement
-    , LineElement, RectangleElement, PageNumberingElement, ImageElement, ImageResource, DataMatrixBarcodeElement, TextElement, Font, RgbColor, LineStyle
-} from "../lib/index.js";
+    PdfResource,
+    PdfInput,
+    Pdf,
+    PageInput,
+    Template,
+    AztecBarcodeElement,
+    ElementPlacement,
+    AztecSymbolSize,
+    Code11BarcodeElement,
+    Code25BarcodeElement,
+    Code128BarcodeElement,
+    Code39BarcodeElement,
+    Code93BarcodeElement,
+    Pdf417BarcodeElement,
+    MsiBarcodeElement,
+    QrCodeElement,
+    QrCodeFnc1,
+    Compaction,
+    StackedGs1DataBarBarcodeElement,
+    LineElement,
+    RectangleElement,
+    PageNumberingElement,
+    ImageElement,
+    ImageResource,
+    DataMatrixBarcodeElement,
+    TextElement,
+    Font,
+    RgbColor,
+    LineStyle
+} from "./imports.js";
 
 
 function getEndpoint(testParams) {

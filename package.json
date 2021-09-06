@@ -33,8 +33,8 @@
   "bugs": {
     "url": "https://github.com/dynamicpdf-api/nodejs-client/issues"
   },
-  "homepage": "https://github.com/dynamicpdf-api/nodejs-client#readme",
+  "homepage": "https://cloud.dynamicpdf.com/",
   "devDependencies": {
-    "mocha": "^9.0.3"
+    "mocha": "^9.1.1"
   }
 }
