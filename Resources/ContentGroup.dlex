@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<document version="1.2" id="Document1" author="" keywords="" title="" subject="" xsi:schemaLocation="http://www.dynamicpdf.com http://www.dynamicpdf.com/schemas/DLEX12.xsd" xmlns="http://www.dynamicpdf.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<document version="2.0" id="Document1" author="" keywords="" title="" subject="" xsi:schemaLocation="http://www.dynamicpdf.com http://www.dynamicpdf.com/schemas/DLEX12.xsd" xmlns="http://www.dynamicpdf.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<report dataName="details" id="Report1">
 		<template id="Template1"/>
 		<header height="5" id="Header1"/>

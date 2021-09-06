@@ -1,4 +1,4 @@
-<document version="1.2" xsi:schemaLocation="http://www.dynamicpdf.com http://www.dynamicpdf.com/schemas/DLEX12.xsd" xmlns="http://www.dynamicpdf.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Invoice" author="" keywords="" title="" subject="">
+<document version="2.0" xsi:schemaLocation="http://www.dynamicpdf.com http://www.dynamicpdf.com/schemas/DLEX12.xsd" xmlns="http://www.dynamicpdf.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Invoice" author="" keywords="" title="" subject="">
 	<report dataName="OrderDetails" id="InvoiceReport" bottomMargin="36" leftMargin="36" rightMargin="36" topMargin="36">
 		<template id="Template1" templatePath="InvoiceTemplate.pdf"/>
 		<header height="288" id="Header">
