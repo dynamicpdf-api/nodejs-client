@@ -214,7 +214,7 @@ describe('PdfEndpoint', function () {
     });
 
 
-    describe('Test Formfield', function () {
+    describe('Test Form field', function () {
 
         it('Fill text', async function () {
             var resource = new PdfResource("./Resources/fw9AcroForm_14.pdf", "fw9AcroForm_14.pdf");
@@ -913,7 +913,7 @@ describe('PdfEndpoint', function () {
         it('File Path GetInstructions BeforeProcess', async function () {
             var pdf = getEndpoint(testParams);
             var template1 = new Template("./Resources/Temp1");
-            var element1 = new TextElement("Merger with Template(First Dcoument)", ElementPlacement.TopCenter);
+            var element1 = new TextElement("Merger with Template(First Document)", ElementPlacement.TopCenter);
             template1.Elements.push(element1);
 
             var resource = new PdfResource("./Resources/AllPageElements.pdf");
@@ -925,7 +925,7 @@ describe('PdfEndpoint', function () {
             pdf.Inputs.push(input);
 
             var template2 = new Template("Temp2");
-            var element2 = new TextElement("Merger with Template(Second Dcoument)", ElementPlacement.TopCenter);
+            var element2 = new TextElement("Merger with Template(Second Document)", ElementPlacement.TopCenter);
             template2.Elements.push(element2);
 
             var resource1 = new PdfResource("./Resources/All Fields Sample.pdf");
@@ -940,7 +940,7 @@ describe('PdfEndpoint', function () {
             pdf.Inputs.push(input1);
 
             var template3 = new Template("Temp3");
-            var element3 = new TextElement("Merger with Template(Third Dcoument)", ElementPlacement.TopCenter);
+            var element3 = new TextElement("Merger with Template(Third Document)", ElementPlacement.TopCenter);
             template3.Elements.push(element3);
 
             var resource2 = new PdfResource("./Resources/fw9AcroForm_14.pdf");
@@ -949,6 +949,58 @@ describe('PdfEndpoint', function () {
 
             pdf.Inputs.push(input2);
             var str = pdf.GetInstructionsJson();
+
+            var res = await pdf.Process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.IsSuccessful);
+
+                if (res.IsSuccessful) {
+                    var outStream = fs.createWriteStream("./output/pageAndPdf.pdf");
+                    outStream.write(res.SetPdfContent);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.IsSuccessful, true);
+        });
+        it('File Path GetInstructions AfterProcess', async function () {
+            var pdf = getEndpoint(testParams);
+            var template1 = new Template("Temp1");
+            var element1 = new TextElement("Merger with Template(First Document)", ElementPlacement.TopCenter);
+            template1.Elements.push(element1);
+
+            var resource = new PdfResource("./Resources/AllPageElements.pdf");
+            var input = new PdfInput(resource);
+            input.Template = template1;
+
+            var mergeOptions = new MergeOptions();
+            input.MergeOptions = mergeOptions;
+            pdf.Inputs.push(input);
+
+            var template2 = new Template("Temp2");
+            var element2 = new TextElement("Merger with Template(Second Document)", ElementPlacement.TopCenter);
+            template2.Elements.push(element2);
+
+            var resource1 = new PdfResource("./Resources/All Fields Sample.pdf");
+            var input1 = new PdfInput(resource1);
+            input1.Template = template2;
+
+            input1.StartPage = 1;
+            input1.PageCount = 1;
+            var mergeOptions1 = new MergeOptions();
+            mergeOptions1.FormsXfaData = true;
+            input1.MergeOptions = mergeOptions1;
+            pdf.Inputs.push(input1);
+
+            var template3 = new Template("Temp3");
+            var element3 = new TextElement("Merger with Template(Third Document)", ElementPlacement.TopCenter);
+            template3.Elements.push(element3);
+
+            var resource2 = new PdfResource("./Resources/fw9AcroForm_14.pdf");
+            var input2 = new PdfInput(resource2);
+            input2.Template = template3;
+
+            pdf.Inputs.push(input2);
 
             var res = await pdf.Process();
             if (testParams.Logging) {

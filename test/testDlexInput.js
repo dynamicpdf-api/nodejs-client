@@ -127,7 +127,7 @@ describe('Dlex Input', function () {
             console.log("Result: " + res.IsSuccessful);
 
             if (res.IsSuccessful) {
-                var outStream = fs.createWriteStream("./output/dlexSimpleDlex_Clouda.pdf");
+                var outStream = fs.createWriteStream("./output/dlexSimpleDlex_Cloud.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
             }
@@ -146,7 +146,7 @@ describe('Dlex Input', function () {
             console.log("Result: " + res.IsSuccessful);
 
             if (res.IsSuccessful) {
-                var outStream = fs.createWriteStream("./output/dlexSimpleDlex_Clouda.pdf");
+                var outStream = fs.createWriteStream("./output/dlexSimpleDlex_Cloud.pdf");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
             }

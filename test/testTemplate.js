@@ -52,7 +52,7 @@ describe('PdfEndpoint', function () {
     var testParams = new TestParams();
     describe('LineElement', function () {
 
-        it('Line Element wihout properties', async function () {
+        it('Line Element without properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var lineElement = new LineElement(ElementPlacement.TopCenter, 200, 200);
@@ -86,7 +86,7 @@ describe('PdfEndpoint', function () {
                 console.log("Result: " + res.IsSuccessful);
 
                 if (res.IsSuccessful) {
-                    var outStream = fs.createWriteStream("./output/LineElementWithPropeties.pdf");
+                    var outStream = fs.createWriteStream("./output/LineElementWithProperties.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
