@@ -3,3 +3,5 @@ Resources/
 node_modules/
 output/
 test-config.json
+cspell.json
+

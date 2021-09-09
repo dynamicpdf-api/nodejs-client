@@ -3,3 +3,4 @@ output/
 test/debug.js
 test/out.pdf
 test-config.json
+.vs/
