@@ -153,7 +153,7 @@ describe('PDF Security', function () {
 
     });
 
-    it('RC4128Security', async function () {
+    it('RC4128Security with encrypted metadata', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
         var input1 = new PdfInput(resource1);

@@ -241,7 +241,7 @@ describe('Outline', function () {
         var input1 = new PdfInput(resource1);
         pdf.Inputs.push(input1);
 
-        var outline = pdf.Outlines.Add("OutlineA", input1, -5, PageZoom.FitPage);
+        var outline = pdf.Outlines.Add("OutlineA", input1, 0, PageZoom.FitPage);
         outline.Color = RgbColor.Red;
         outline.Style = OutlineStyle.Bold;
         outline.Expanded = true;
