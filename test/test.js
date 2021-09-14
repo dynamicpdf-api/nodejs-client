@@ -76,7 +76,7 @@ describe('PdfEndpoint', function () {
                 console.log("Result: " + res.IsSuccessful);
 
                 if (res.IsSuccessful) {
-                    var outStream = fs.createWriteStream("./output/Merge.pdf");
+                    var outStream = fs.createWriteStream("./output/MergeusingbyteArrayasinput.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
@@ -88,7 +88,7 @@ describe('PdfEndpoint', function () {
         it('Merge Options', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var template = new Template("temp1");
-            var element = new TextElement("Merger with Template(even pages", ElementPlacement.TopCenter);
+            var element = new TextElement("Merger with Template(even pages)", ElementPlacement.TopCenter);
             element.EvenPages = true;
             template.Elements.push(element);
 
@@ -203,7 +203,7 @@ describe('PdfEndpoint', function () {
                 console.log("Result: " + res.IsSuccessful);
 
                 if (res.IsSuccessful) {
-                    var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
+                    var outStream = fs.createWriteStream("./output/pageAddpageandtemplates.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }

@@ -312,7 +312,7 @@ describe('PdfEndpoint', function () {
             barcodeElement.ProcessTilde = true;
             barcodeElement.ReaderInitializationSymbol = true;
             barcodeElement.Value = "test123";
-            barcodeElement.XOffset = 100;
+            barcodeElement.XOffset = 200;
             barcodeElement.YOffset = 100;
             templateA.Elements.push(barcodeElement);
             input1.Template = templateA;
