@@ -526,7 +526,7 @@ describe('PdfEndpoint', function () {
 
         it('Test Image Scale', async function () {
             var pdfEndpoint = getEndpoint(testParams);
-            var resource = new PdfResource("./Resources/DocumentA100.pdf");
+            var resource = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
             var input = new PdfInput(resource);
             var template = new Template("Temp1");
             var resource1 = new ImageResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif");
@@ -661,7 +661,7 @@ describe('PdfEndpoint', function () {
             var element = new TextElement("Hello", ElementPlacement.TopCenter);
             element.Font = font;
             input1.Elements.push(element);
-            pdfEndpoint.Instructions.Inputs.push(input1);
+            pdfEndpoint.Inputs.push(input1);
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessful);

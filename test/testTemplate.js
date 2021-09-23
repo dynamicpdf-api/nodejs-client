@@ -246,7 +246,7 @@ describe('PdfEndpoint', function () {
             templateA.Elements.push(bottomCenterElement);
 
             var bottomRightElement = new PageNumberingElement("%%CP(a)%% of %%TP%%", ElementPlacement.BottomRight, -50, -50);
-            bottomRightElement.Font = Font.Gs1;
+            bottomRightElement.Font = Font.TimesItalic;
             bottomRightElement.FontSize = 14.0;
             templateA.Elements.push(bottomRightElement);
 
