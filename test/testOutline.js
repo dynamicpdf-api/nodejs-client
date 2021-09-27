@@ -144,7 +144,7 @@ describe('Outline', function () {
         pdfEndpoint.Inputs.push(input);
 
         var outline = pdfEndpoint.Outlines.Add("OutlineA");
-        outline.Color = "Red";
+        outline.Color = RgbColor.Blue;
         outline.Style = OutlineStyle.bold;
         outline.Expanded = true;
 

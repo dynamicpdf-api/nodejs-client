@@ -193,7 +193,7 @@ describe('ImageInfo Endpoint', function () {
 
 
             if (res.IsSuccessful) {
-                var outStream = fs.createWriteStream("./output/imageInfoGrayScaleAlpha_Png.json");
+                var outStream = fs.createWriteStream("./output/imageInfoGroup4Fax.json");
                 outStream.write(res.SetPdfContent);
                 outStream.close();
             }

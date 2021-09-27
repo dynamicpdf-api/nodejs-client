@@ -558,8 +558,8 @@ describe('PdfEndpoint', function () {
             var template = new Template("Temp1");
             var resource1 = new ImageResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif");
             var element = new ImageElement(resource1, ElementPlacement.TopCenter);
-            element.XOffset = 50;
-            element.YOffset = 50;
+            element.XOffset = 250;
+            element.YOffset = 250;
             template.Elements.push(element);
             input.Template = template;
             pdfEndpoint.Inputs.push(input);
@@ -584,56 +584,56 @@ describe('PdfEndpoint', function () {
 
         it('Core Fonts', async function () {
             var input = new PageInput();
-            var element = new TextElement("Hello World", ElementPlacement.BottomLeft);
+            var element = new TextElement("PaleGreen", ElementPlacement.BottomLeft);
             element.Color = RgbColor.PaleGreen;
             element.Font = Font.TimesItalic;
             input.Elements.push(element);
-            element = new TextElement("Hello World", ElementPlacement.TopCenter, 0);
+            element = new TextElement("PaleVioletRed", ElementPlacement.TopCenter, 0);
             element.Color = RgbColor.PaleVioletRed;
             element.Font = Font.TimesBold;
             input.Elements.push(element);
-            element = new TextElement("Hello World", ElementPlacement.TopLeft);
+            element = new TextElement("PeachPuff", ElementPlacement.TopLeft);
             element.Color = RgbColor.PeachPuff;
             element.Font = Font.TimesBoldItalic;
             input.Elements.push(element);
-            element = new TextElement("Hello World", ElementPlacement.TopRight);
+            element = new TextElement("Plum", ElementPlacement.TopRight);
             element.Color = RgbColor.Plum;
             element.Font = Font.ZapfDingbats;
             input.Elements.push(element);
-            element = new TextElement("xyz", ElementPlacement.BottomRight);
+            element = new TextElement("Purple", ElementPlacement.BottomRight);
             element.Color = RgbColor.Purple;
             element.FontSize = 100;
             element.Font = Font.Courier;
             input.Elements.push(element);
-            element = new TextElement("Hello World", ElementPlacement.BottomCenter, 0, 550);
+            element = new TextElement("CourierBold", ElementPlacement.BottomCenter, 0, -50);
             element.Color = new RgbColor(1, 0, 1);
             element.Font = Font.CourierBold;
             input.Elements.push(element);
-            element = new TextElement("Hello World", ElementPlacement.TopCenter, 0, 100);
+            element = new TextElement("CourierOblique", ElementPlacement.TopCenter, 0, 100);
             element.Color = new CmykColor(1, 0, 0, 0);
             element.Font = Font.CourierOblique;
             input.Elements.push(element);
-            element = new TextElement("Hello World", ElementPlacement.TopCenter, 0, 50);
+            element = new TextElement("HelveticaBold", ElementPlacement.TopCenter, 0, 50);
             element.Color = new CmykColor(0, 1, 1, 0);
             element.FontSize = 100;
             element.Font = Font.HelveticaBold;
             input.Elements.push(element);
-            element = new TextElement("Hello World", ElementPlacement.TopLeft, 0, 350);
+            element = new TextElement("HelveticaBoldOblique", ElementPlacement.TopLeft, 0, 350);
             element.Color = new Grayscale(0.8);
             element.Font = Font.HelveticaBoldOblique;
             element.FontSize = 50;
             input.Elements.push(element);
-            element = new TextElement("Hello World", ElementPlacement.TopLeft, 250, 500);
+            element = new TextElement("HelveticaOblique", ElementPlacement.TopLeft, 250, 500);
             element.Color = new RgbColor(1, 0, 0);
             element.Font = Font.HelveticaOblique;
             element.FontSize = 50;
             input.Elements.push(element);
-            element = new TextElement("#&%() +0123", ElementPlacement.BottomLeft, 0, 200);
+            element = new TextElement("#&%() +0123", ElementPlacement.BottomLeft, 0, -200);
             element.Color = RgbColor.RosyBrown;
             element.Font = Font.Symbol;
             element.FontSize = 50;
             input.Elements.push(element);
-            element = new TextElement("Hello", ElementPlacement.TopLeft, 450, 450);
+            element = new TextElement("Salmon", ElementPlacement.TopLeft, 450, 450);
             element.Color = RgbColor.Salmon;
             element.Font = Font.TimesRoman;
             element.FontSize = 50;
@@ -803,7 +803,7 @@ describe('PdfEndpoint', function () {
             var input = new PageInput();
             var pdfEndpoint = getEndpoint(testParams);
             var textElement = new TextElement("Hello World", ElementPlacement.TopCenter);
-            textElement.Color = new CmykColor(1, 1, 0, 0);
+            textElement.Color = new CmykColor(1, 0, 0, 0);
             input.Elements.push(textElement);
             pdfEndpoint.Inputs.push(input);
             var res = await pdfEndpoint.Process();
@@ -955,7 +955,7 @@ describe('PdfEndpoint', function () {
                 console.log("Result: " + res.IsSuccessful);
 
                 if (res.IsSuccessful) {
-                    var outStream = fs.createWriteStream("./output/pageAndPdf.pdf");
+                    var outStream = fs.createWriteStream("./output/GetInstructionsBeforeProcess.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
@@ -1003,11 +1003,12 @@ describe('PdfEndpoint', function () {
             pdf.Inputs.push(input2);
 
             var res = await pdf.Process();
+            var str = pdf.GetInstructionsJson();
             if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessful);
 
                 if (res.IsSuccessful) {
-                    var outStream = fs.createWriteStream("./output/pageAndPdf.pdf");
+                    var outStream = fs.createWriteStream("./output/GetInstructionsAfterProcess.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }

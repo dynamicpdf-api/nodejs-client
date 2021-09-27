@@ -30,7 +30,8 @@ import {
     TextElement,
     Font,
     RgbColor,
-    LineStyle
+    LineStyle,
+    StackedGs1DataBarType
 } from "./imports.js";
 
 
@@ -71,13 +72,13 @@ describe('PdfEndpoint', function () {
             assert.strictEqual(res.IsSuccessful, true);
         });
 
-        it('Line Element wih properties', async function () {
+        it('Line Element with properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var lineElement = new LineElement(ElementPlacement.TopCenter, 200, 200);
-            lineElement.X1Offset = 100;
-            lineElement.Y1Offset = 100;
-            lineElement.Color = RgbColor.SeaShell;
+            var lineElement = new LineElement(ElementPlacement.BottomCenter);
+            lineElement.X2Offset = 100;
+            lineElement.Y2Offset = 100;
+            lineElement.Color = RgbColor.Blue;
             lineElement.LineStyle = LineStyle.DashLarge;
             input1.Elements.push(lineElement);
             pdfEndpoint.Inputs.push(input1);
@@ -145,7 +146,7 @@ describe('PdfEndpoint', function () {
         it('RectangleElement with border style', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var rectangleElement = new RectangleElement(ElementPlacement.TopCenter, 100, 50);
+            var rectangleElement = new RectangleElement(ElementPlacement.TopRight, 100, 50);
             rectangleElement.BorderStyle = LineStyle.Dots;
             input1.Elements.push(rectangleElement);
             pdfEndpoint.Inputs.push(input1);
@@ -219,7 +220,7 @@ describe('PdfEndpoint', function () {
 
         it('Page number with properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
-            var resource = new PdfResource("./Resources/Invoice.pdf", "Invoice.pdf");
+            var resource = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var input1 = new PdfInput(resource);
             pdfEndpoint.Inputs.push(input1);
 
@@ -249,13 +250,14 @@ describe('PdfEndpoint', function () {
             bottomRightElement.Font = Font.TimesItalic;
             bottomRightElement.FontSize = 14.0;
             templateA.Elements.push(bottomRightElement);
+            input1.Template = templateA;
 
             var res = await pdfEndpoint.Process();
             if (testParams.Logging) {
                 console.log("Result: " + res.IsSuccessful);
 
                 if (res.IsSuccessful) {
-                    var outStream = fs.createWriteStream("./output/pageNumberingElement.pdf");
+                    var outStream = fs.createWriteStream("./output/pageNumberingElementWithProperties.pdf");
                     outStream.write(res.SetPdfContent);
                     outStream.close();
                 }
@@ -305,7 +307,7 @@ describe('PdfEndpoint', function () {
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
             var barcodeElement = new AztecBarcodeElement("Hello World", ElementPlacement.TopCenter, 50);
-            barcodeElement.AztecSymbolSize = AztecSymbolSize.R125xC125;
+            barcodeElement.SymbolSize = AztecSymbolSize.R95xC95;
             barcodeElement.XDimension = 3;
             barcodeElement.Color = new RgbColor(0, 1, 0);
             barcodeElement.ErrorCorrection = 30;
@@ -450,7 +452,7 @@ describe('PdfEndpoint', function () {
             var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
             var barcodeElement = new Pdf417BarcodeElement("Hello World", ElementPlacement.TopCenter, 20);
-            barcodeElement.Color = "Red";
+            barcodeElement.Color = RgbColor.Brown;
             barcodeElement.Compaction = Compaction.Numeric;
             barcodeElement.CompactPdf417 = true;
             barcodeElement.EvenPages = true;
@@ -503,7 +505,7 @@ describe('PdfEndpoint', function () {
             var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
             var barcodeElement = new QrCodeElement("Hello World", ElementPlacement.TopCenter, 150);
-            barcodeElement.Color = "Orange";
+            barcodeElement.Color = RgbColor.Orange;
             barcodeElement.Version = 20;
             barcodeElement.Fnc1 = QrCodeFnc1.Gs1;
             templateA.Elements.push(barcodeElement);
@@ -527,6 +529,7 @@ describe('PdfEndpoint', function () {
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
             var barcodeElement = new StackedGs1DataBarBarcodeElement("1234567890", ElementPlacement.TopCenter, 150);
+            barcodeElement.StackedGs1DataBarType=StackedGs1DataBarType.StackedOmnidirectional;
             templateA.Elements.push(barcodeElement);
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);
@@ -575,7 +578,7 @@ describe('PdfEndpoint', function () {
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
             var textElement = new TextElement("Hello World", ElementPlacement.TopCenter);
-            textElement.Color = "RED";
+            textElement.Color = RgbColor.CadetBlue;
             templateA.Elements.push(textElement);
             input1.Template = templateA;
             pdfEndpoint.Inputs.push(input1);

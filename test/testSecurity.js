@@ -33,8 +33,6 @@ describe('PDF Security', function () {
 
         var security = new Aes128Security("user", "owner");
         pdfEndpoint.Security = security;
-
-        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
@@ -59,8 +57,6 @@ describe('PDF Security', function () {
         var security = new Aes128Security("user", "owner");
         security.DocumentComponents = EncryptDocumentComponents.All;
         pdfEndpoint.Security = security;
-
-        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
@@ -82,10 +78,9 @@ describe('PDF Security', function () {
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
         var input1 = new PdfInput(resource1);
 
-        var security = new Aes256Security("", "owner");
+        var security = new Aes256Security("user", "owner");
         pdfEndpoint.Security = security;
 
-        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
@@ -111,7 +106,6 @@ describe('PDF Security', function () {
         security.DocumentComponents = EncryptDocumentComponents.AllExceptMetadata;
         pdfEndpoint.Security = security;
 
-        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
@@ -136,7 +130,6 @@ describe('PDF Security', function () {
         var security = new RC4128Security("user", "owner");
         pdfEndpoint.Security = security;
 
-        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
@@ -161,8 +154,6 @@ describe('PDF Security', function () {
         var security = new RC4128Security("user", "owner");
         security.EncryptMetadata = true;
         pdfEndpoint.Security = security;
-
-        var pdfEndpoint = getEndpoint(testParams);
         pdfEndpoint.Inputs.push(input1);
 
         var res = await pdfEndpoint.Process();
