@@ -32,7 +32,7 @@ describe('Xmp Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/XmpSingelResource.xml");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -50,7 +50,7 @@ describe('Xmp Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/XmpSingelResource1.xml");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }

@@ -65,7 +65,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/LineElement.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -88,7 +88,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/LineElementWithProperties.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -112,7 +112,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/RectangleElement.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -134,7 +134,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/RectangleElementwithCorner.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -156,7 +156,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/RectangleElementwithBorderStyle.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -179,7 +179,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/RectangleElementwithBorderStyleArray.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -209,7 +209,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/pageNumberingElement.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -258,7 +258,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/pageNumberingElementWithProperties.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -288,7 +288,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/ImageElement.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -325,7 +325,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/AztecBarcode.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -347,7 +347,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Code11Barcode.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -369,7 +369,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Code25Barcode.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -392,7 +392,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Code39Barcode.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -415,7 +415,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Code93Barcode.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -439,7 +439,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Code128Barcode.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -471,7 +471,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Pdf417BarcodeElement.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -492,7 +492,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/MsiBarcodeElement.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -517,7 +517,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/QrCodeElement.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -539,7 +539,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/StackedGs1DataBarBarcodeElement.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -566,7 +566,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/DataMatrixBarcodeElement.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -588,7 +588,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Dim2BarcodeElement.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }

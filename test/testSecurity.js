@@ -41,7 +41,7 @@ describe('PDF Security', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes128Security.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -65,7 +65,7 @@ describe('PDF Security', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes128Security_EncryptDocumentComponents.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -89,7 +89,7 @@ describe('PDF Security', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes256Security.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -114,7 +114,7 @@ describe('PDF Security', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes256Security_EncryptDocumentComponents.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -138,7 +138,7 @@ describe('PDF Security', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/RC4128Security.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -162,7 +162,7 @@ describe('PDF Security', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/RC4128Security_EncryptMetadata.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }

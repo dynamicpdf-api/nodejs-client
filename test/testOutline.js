@@ -49,7 +49,7 @@ describe('Outline', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/outlineAddOutline.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -75,7 +75,7 @@ describe('Outline', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/outlineMergePdfs.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -107,7 +107,7 @@ describe('Outline', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/outlineTextElement.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -131,7 +131,7 @@ describe('Outline', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/outlineImport.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -154,7 +154,7 @@ describe('Outline', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/outlineWithFilePath.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -192,7 +192,7 @@ describe('Outline', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/outline.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -223,7 +223,7 @@ describe('Outline', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/outlineExistingPdf.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -251,7 +251,7 @@ describe('Outline', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/outlineWithGotoAction.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -280,7 +280,7 @@ describe('Outline', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/outlineURLAction.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }

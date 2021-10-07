@@ -32,7 +32,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoAllFormFields.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -50,7 +50,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoButton.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -68,7 +68,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoCheckbox.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -86,7 +86,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoCombo.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -104,7 +104,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoComboExport.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -122,7 +122,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoComboExport1.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -140,7 +140,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoComboExport2.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -158,7 +158,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoListBoxMultiSelect.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -176,7 +176,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoListBoxSingleSelect.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -194,7 +194,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoListMultiSelectExport1.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -212,7 +212,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoListMultiSelectExport2.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -230,7 +230,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoPushButton.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -248,7 +248,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoRadio.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -266,7 +266,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoSignature.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -284,7 +284,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoSignatureNoSign.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -302,7 +302,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoTextField.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -320,7 +320,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.IsSuccessful);
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoTextField2.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }

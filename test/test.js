@@ -52,7 +52,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Merge.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
 
@@ -77,7 +77,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/MergeusingbyteArrayasinput.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -125,7 +125,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/MergeWithOptions.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -154,7 +154,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/pageAndPdf.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -178,7 +178,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -204,7 +204,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/pageAddpageandtemplates.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -245,7 +245,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/formField.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -286,7 +286,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/formFieldFlattenRemove.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -327,7 +327,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/formFieldFlatten.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -349,7 +349,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/FilePathRetainSignature.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -371,7 +371,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/radioButton.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -393,7 +393,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/listBox.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -421,7 +421,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imageGif.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -445,7 +445,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imageJPG.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -469,7 +469,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imagetif.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -493,7 +493,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imageMultiPageTiff.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -515,7 +515,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imagePng.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -542,7 +542,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imageScale.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -569,7 +569,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/imageXYTemple.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -646,7 +646,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/Font.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -668,7 +668,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontOtf.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -692,7 +692,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontOtfEmbeded.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -716,7 +716,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontOtfSubset.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -739,7 +739,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontTtf.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -763,7 +763,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontTtfEmbeded.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -787,7 +787,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/fontttfSubset.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -812,7 +812,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/cmykColorPattern.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -834,7 +834,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/rgbColor.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -856,7 +856,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/rgb_NamedColorPattern.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
 
 
@@ -878,7 +878,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/grayColorPattern.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -899,7 +899,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/invalidColorPatter.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -956,7 +956,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/GetInstructionsBeforeProcess.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }
@@ -1009,7 +1009,7 @@ describe('PdfEndpoint', function () {
 
                 if (res.IsSuccessful) {
                     var outStream = fs.createWriteStream("./output/GetInstructionsAfterProcess.pdf");
-                    outStream.write(res.SetPdfContent);
+                    outStream.write(res.Content);
                     outStream.close();
                 }
             }

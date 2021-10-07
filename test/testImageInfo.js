@@ -34,7 +34,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/ImageInfo.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -54,7 +54,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/ImageInfo121_2bpp.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -74,7 +74,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/ImageInfo4bpp.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -94,7 +94,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/ImageInfoNorthwind_Logo.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -114,7 +114,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoError.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -134,7 +134,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoGrayScaleAlpha_Png.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -154,7 +154,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoGrayScaleAlpha16Bit_Png.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -174,7 +174,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoFaxTest.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -194,7 +194,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoGroup4Fax.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -214,7 +214,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoIndexed_Bmp.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -235,7 +235,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoIndexed_Png.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -255,7 +255,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoInterlaced_Png.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -275,7 +275,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoJpegTiff.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -295,7 +295,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoJpg.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -315,7 +315,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoLzwTiff.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -335,7 +335,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoPng.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -355,7 +355,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoRgba_Png.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -375,7 +375,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoTiff.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -395,7 +395,7 @@ describe('ImageInfo Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/imageInfoUnCompressedTiff.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }

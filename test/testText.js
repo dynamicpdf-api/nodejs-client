@@ -35,7 +35,7 @@ describe('Text Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/TextExtraction.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -58,7 +58,7 @@ describe('Text Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/textSinglePage.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -81,7 +81,7 @@ describe('Text Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/textMultiPage.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -102,7 +102,7 @@ describe('Text Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/textCJKFonts.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -123,7 +123,7 @@ describe('Text Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/textInput.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -144,7 +144,7 @@ describe('Text Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/textArabic.json");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }

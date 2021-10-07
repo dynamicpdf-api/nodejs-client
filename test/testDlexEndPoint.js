@@ -36,7 +36,7 @@ describe('Dlex Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexAllReportElements.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -56,7 +56,7 @@ describe('Dlex Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexContactListDlex.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -76,7 +76,7 @@ describe('Dlex Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexContentGroup.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -96,7 +96,7 @@ describe('Dlex Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexContentGroupSubReport.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -116,7 +116,7 @@ describe('Dlex Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleReportWithCoverPage.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -136,7 +136,7 @@ describe('Dlex Endpoint', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexInvoice.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }

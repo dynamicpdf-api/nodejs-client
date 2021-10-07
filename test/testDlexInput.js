@@ -46,7 +46,7 @@ describe('Dlex Input', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexPagenumberingLabelWithTemplate.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -69,7 +69,7 @@ describe('Dlex Input', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleDlex_AddDlex.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -89,7 +89,7 @@ describe('Dlex Input', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleDlex_AddDlexCloud.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -108,7 +108,7 @@ describe('Dlex Input', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleDlex_AddDlexCloudResourceData.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -128,7 +128,7 @@ describe('Dlex Input', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleDlex_Cloud.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -147,7 +147,7 @@ describe('Dlex Input', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleDlex_Cloud.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -172,7 +172,7 @@ describe('Dlex Input', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexTemplate_Pdfoutput.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
@@ -194,7 +194,7 @@ describe('Dlex Input', function () {
 
             if (res.IsSuccessful) {
                 var outStream = fs.createWriteStream("./output/SimpleDlex_Pdfoutput.pdf");
-                outStream.write(res.SetPdfContent);
+                outStream.write(res.Content);
                 outStream.close();
             }
         }
