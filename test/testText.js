@@ -11,10 +11,10 @@ function getEndpoint(text, testParams) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
     text.loggingEnabled = testParams.Logging;
-    text.BaseUrl = testParams.BaseUrl;
-    text.ApiKey = testParams.ApiKey;
-    text.Author = "sheetal";
-    text.Title = "pdf merger";
+    text.baseUrl = testParams.BaseUrl;
+    text.apiKey = testParams.ApiKey;
+    text.author = "sheetal";
+    text.title = "pdf merger";
     return text;
 }
 
@@ -27,19 +27,19 @@ describe('Text Endpoint', function () {
         var resource = new PdfResource("./Resources/Test_Textmarker_Serienbrief(2).pdf", "Test_Textmarker_Serienbrief(2).pdf")
         var text = new PdfText(resource);
         text = getEndpoint(text, testParams);
-        var res = await text.Process();
+        var res = await text.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/TextExtraction.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('SinglePage', async function () {
 
@@ -47,22 +47,22 @@ describe('Text Endpoint', function () {
 
         var resource = new PdfResource("./Resources/Test_Textmarker_Serienbrief(2).pdf", "Test_Textmarker_Serienbrief(2).pdf")
         var text = new PdfText(resource);
-        text.StartPage = 5;
-        text.PageCount = 1;
+        text.startPage = 5;
+        text.pageCount = 1;
         text = getEndpoint(text, testParams);
-        var res = await text.Process();
+        var res = await text.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/textSinglePage.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('MultiPage', async function () {
 
@@ -70,22 +70,22 @@ describe('Text Endpoint', function () {
 
         var resource = new PdfResource("./Resources/Test_Textmarker_Serienbrief(2).pdf", "Test_Textmarker_Serienbrief(2).pdf")
         var text = new PdfText(resource);
-        text.StartPage = 2;
-        text.PageCount = 3;
+        text.startPage = 2;
+        text.pageCount = 3;
         text = getEndpoint(text, testParams);
-        var res = await text.Process();
+        var res = await text.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/textMultiPage.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('CJKFonts', async function () {
 
@@ -94,19 +94,19 @@ describe('Text Endpoint', function () {
         var resource = new PdfResource("./Resources/pdf_font-zhcn.pdf", "pdf_font-zhcn.pdf")
         var text = new PdfText(resource);
         text = getEndpoint(text, testParams);
-        var res = await text.Process();
+        var res = await text.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/textCJKFonts.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('SpecialChars', async function () {
 
@@ -115,19 +115,19 @@ describe('Text Endpoint', function () {
         var resource = new PdfResource("./Resources/Input.pdf", "Input.pdf")
         var text = new PdfText(resource);
         text = getEndpoint(text, testParams);
-        var res = await text.Process();
+        var res = await text.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/textInput.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('Arabic', async function () {
 
@@ -136,18 +136,18 @@ describe('Text Endpoint', function () {
         var resource = new PdfResource("./Resources/Arabic.pdf", "Arabic.pdf")
         var text = new PdfText(resource);
         text = getEndpoint(text, testParams);
-        var res = await text.Process();
+        var res = await text.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/textArabic.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
 });

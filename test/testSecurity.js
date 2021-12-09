@@ -8,7 +8,7 @@ import {
     Aes128Security,
     Aes256Security,
     RC4128Security,
-    EncryptDocumentComponents
+    encryptDocumentComponents
 } from "./imports.js";
 
 function getEndpoint(testParams) {
@@ -17,10 +17,10 @@ function getEndpoint(testParams) {
     }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.BaseUrl = testParams.BaseUrl;
-    pdfEndpoint.ApiKey = testParams.ApiKey;
-    pdfEndpoint.Author = "sheetal";
-    pdfEndpoint.Title = "pdf merger";
+    pdfEndpoint.baseUrl = testParams.BaseUrl;
+    pdfEndpoint.apiKey = testParams.ApiKey;
+    pdfEndpoint.author = "sheetal";
+    pdfEndpoint.title = "pdf merger";
     return pdfEndpoint;
 }
 describe('PDF Security', function () {
@@ -32,20 +32,20 @@ describe('PDF Security', function () {
         var input1 = new PdfInput(resource1);
 
         var security = new Aes128Security("user", "owner");
-        pdfEndpoint.Security = security;
-        pdfEndpoint.Inputs.push(input1);
+        pdfEndpoint.security = security;
+        pdfEndpoint.inputs.push(input1);
 
-        var res = await pdfEndpoint.Process();
+        var res = await pdfEndpoint.process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes128Security.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
 
     });
 
@@ -55,21 +55,21 @@ describe('PDF Security', function () {
         var input1 = new PdfInput(resource1);
 
         var security = new Aes128Security("user", "owner");
-        security.DocumentComponents = EncryptDocumentComponents.All;
-        pdfEndpoint.Security = security;
-        pdfEndpoint.Inputs.push(input1);
+        security.documentComponents = encryptDocumentComponents.all;
+        pdfEndpoint.security = security;
+        pdfEndpoint.inputs.push(input1);
 
-        var res = await pdfEndpoint.Process();
+        var res = await pdfEndpoint.process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes128Security_EncryptDocumentComponents.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
 
     });
 
@@ -79,21 +79,21 @@ describe('PDF Security', function () {
         var input1 = new PdfInput(resource1);
 
         var security = new Aes256Security("user", "owner");
-        pdfEndpoint.Security = security;
+        pdfEndpoint.security = security;
 
-        pdfEndpoint.Inputs.push(input1);
+        pdfEndpoint.inputs.push(input1);
 
-        var res = await pdfEndpoint.Process();
+        var res = await pdfEndpoint.process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes256Security.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
 
     });
 
@@ -103,22 +103,22 @@ describe('PDF Security', function () {
         var input1 = new PdfInput(resource1);
 
         var security = new Aes256Security("user", "owner");
-        security.DocumentComponents = EncryptDocumentComponents.AllExceptMetadata;
-        pdfEndpoint.Security = security;
+        security.documentComponents = encryptDocumentComponents.allExceptMetadata;
+        pdfEndpoint.security = security;
 
-        pdfEndpoint.Inputs.push(input1);
+        pdfEndpoint.inputs.push(input1);
 
-        var res = await pdfEndpoint.Process();
+        var res = await pdfEndpoint.process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/Aes256Security_EncryptDocumentComponents.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
 
     });
 
@@ -128,21 +128,21 @@ describe('PDF Security', function () {
         var input1 = new PdfInput(resource1);
 
         var security = new RC4128Security("user", "owner");
-        pdfEndpoint.Security = security;
+        pdfEndpoint.security = security;
 
-        pdfEndpoint.Inputs.push(input1);
+        pdfEndpoint.inputs.push(input1);
 
-        var res = await pdfEndpoint.Process();
+        var res = await pdfEndpoint.process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/RC4128Security.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
 
     });
 
@@ -152,21 +152,21 @@ describe('PDF Security', function () {
         var input1 = new PdfInput(resource1);
 
         var security = new RC4128Security("user", "owner");
-        security.EncryptMetadata = true;
-        pdfEndpoint.Security = security;
-        pdfEndpoint.Inputs.push(input1);
+        security.encryptMetadata = true;
+        pdfEndpoint.security = security;
+        pdfEndpoint.inputs.push(input1);
 
-        var res = await pdfEndpoint.Process();
+        var res = await pdfEndpoint.process();
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/RC4128Security_EncryptMetadata.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
 
     });
 });

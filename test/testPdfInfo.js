@@ -11,10 +11,10 @@ function getEndpoint(pdfInfo, testParams) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
     pdfInfo.loggingEnabled = testParams.Logging;
-    pdfInfo.BaseUrl = testParams.BaseUrl;
-    pdfInfo.ApiKey = testParams.ApiKey;
-    pdfInfo.Author = "sheetal";
-    pdfInfo.Title = "pdf merger";
+    pdfInfo.baseUrl = testParams.BaseUrl;
+    pdfInfo.apiKey = testParams.ApiKey;
+    pdfInfo.author = "sheetal";
+    pdfInfo.title = "pdf merger";
     return pdfInfo;
 }
 
@@ -26,17 +26,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/AllFormFields.pdf", "AllFormFields.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoAllFormFields.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('Button', async function () {
 
@@ -44,17 +44,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/Button.pdf", "Button.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoButton.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('Checkbox', async function () {
 
@@ -62,17 +62,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/Checkbox.pdf", "Checkbox.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoCheckbox.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('Combo', async function () {
 
@@ -80,17 +80,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/Checkbox.pdf", "Checkbox.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoCombo.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('ComboExport', async function () {
 
@@ -98,17 +98,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/ComboExport.pdf", "ComboExport.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoComboExport.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('ComboExport1', async function () {
 
@@ -116,17 +116,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/ComboExport1.pdf", "ComboExport1.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoComboExport1.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('ComboExport2', async function () {
 
@@ -134,17 +134,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/ComboExport2.pdf", "ComboExport2.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoComboExport2.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('ListBoxMultiSelect', async function () {
 
@@ -152,17 +152,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/ListBoxMultiSelect.pdf", "ListBoxMultiSelect.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoListBoxMultiSelect.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('ListBoxSingleSelect', async function () {
 
@@ -170,17 +170,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/ListBoxSingleSelect.pdf", "ListBoxSingleSelect.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoListBoxSingleSelect.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('ListMultiSelectExport1', async function () {
 
@@ -188,17 +188,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/ListMultiSelectExport1.pdf", "ListMultiSelectExport1.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoListMultiSelectExport1.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('ListMultiSelectExport2', async function () {
 
@@ -206,17 +206,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/ListMultiSelectExport2.pdf", "ListMultiSelectExport2.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoListMultiSelectExport2.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('PushButton', async function () {
 
@@ -224,17 +224,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/PushButton.pdf", "PushButton.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoPushButton.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('Radio', async function () {
 
@@ -242,17 +242,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/Radio.pdf", "Radio.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoRadio.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('Signature', async function () {
 
@@ -260,17 +260,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/Signature.pdf", "Signature.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoSignature.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('SignatureNoSign', async function () {
 
@@ -278,17 +278,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/SignatureNoSign.pdf", "SignatureNoSign.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoSignatureNoSign.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('TextField', async function () {
 
@@ -296,17 +296,17 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/TextField.pdf", "TextField.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoTextField.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
     it('TextField2', async function () {
 
@@ -314,16 +314,16 @@ describe('PdfInfo Endpoint', function () {
         var resource = new PdfResource("./Resources/TextField2.pdf", "TextField2.pdf")
         var pdfInfo = new PdfInfo(resource);
         pdfInfo = getEndpoint(pdfInfo, testParams);
-        var res = await pdfInfo.Process();
+        var res = await pdfInfo.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
-            if (res.IsSuccessful) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoTextField2.json");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
 });

@@ -7,7 +7,7 @@ import {
     DlexInput,
     Template,
     PageNumberingElement,
-    ElementPlacement,
+    elementPlacement,
     Pdf,
     TextElement
 } from "./imports.js";
@@ -18,10 +18,10 @@ function getEndpoint(testParams) {
     }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.BaseUrl = testParams.BaseUrl;
-    pdfEndpoint.ApiKey = testParams.ApiKey;
-    pdfEndpoint.Author = "sheetal";
-    pdfEndpoint.Title = "pdf merger";
+    pdfEndpoint.baseUrl = testParams.BaseUrl;
+    pdfEndpoint.apiKey = testParams.ApiKey;
+    pdfEndpoint.author = "sheetal";
+    pdfEndpoint.title = "pdf merger";
     return pdfEndpoint;
 }
 
@@ -35,22 +35,22 @@ describe('Dlex Input', function () {
         var layoutData = new LayoutDataResource("./Resources/InvoiceReportData.json", "InvoiceReportData.json")
         var dlexInput = new DlexInput(dlex, layoutData);
         var template = new Template('temp');
-        var textElement = new PageNumberingElement("%%CP%%", ElementPlacement.TopLeft);
-        template.Elements.push(textElement);
-        dlexInput.Template = template;
-        pdf.Inputs.push(dlexInput);
-        var res = await pdf.Process();
+        var textElement = new PageNumberingElement("%%CP%%", elementPlacement.topLeft);
+        template.elements.push(textElement);
+        dlexInput.template = template;
+        pdf.inputs.push(dlexInput);
+        var res = await pdf.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexPagenumberingLabelWithTemplate.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
 
     it('SimpleDlex_AddDlex', async function () {
@@ -61,58 +61,58 @@ describe('Dlex Input', function () {
         var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json", "SimpleReportData.json")
         var dlexInput = new DlexInput(dlex, layoutData);
 
-        pdf.Inputs.push(dlexInput);
-        var res = await pdf.Process();
+        pdf.inputs.push(dlexInput);
+        var res = await pdf.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleDlex_AddDlex.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
 
     it('SimpleDlex_AddDlexCloud', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
         var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json", "SimpleReportData.json")
-        var dlexInput = pdf.AddDlex("SimpleReportWithCoverPage.dlex", layoutData);
+        var dlexInput = pdf.addDlex("SimpleReportWithCoverPage.dlex", layoutData);
 
-        var res = await pdf.Process();
+        var res = await pdf.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleDlex_AddDlexCloud.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
 
     it('SimpleDlex_AddDlexCloudResourceData', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
-        var dlexInput = pdf.AddDlex("SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
+        var dlexInput = pdf.addDlex("SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
 
-        var res = await pdf.Process();
+        var res = await pdf.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleDlex_AddDlexCloudResourceData.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
 
     it('SimpleDlex_Cloud', async function () {
@@ -120,38 +120,38 @@ describe('Dlex Input', function () {
         var pdf = getEndpoint(testParams);
         var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json");
         var dlexInput = new DlexInput("SimpleReportWithCoverPage.dlex", layoutData);
-        pdf.Inputs.push(dlexInput);
-        var res = await pdf.Process();
+        pdf.inputs.push(dlexInput);
+        var res = await pdf.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleDlex_Cloud.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
 
     it('SimpleDlex_CloudData', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
         var dlexInput = new DlexInput("SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
-        pdf.Inputs.push(dlexInput);
-        var res = await pdf.Process();
+        pdf.inputs.push(dlexInput);
+        var res = await pdf.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleDlex_Cloud.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
 
     it('Template_Pdfoutput', async function () {
@@ -161,22 +161,22 @@ describe('Dlex Input', function () {
         var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json");
         var dlexInput = new DlexInput(dlex, layoutData);
         var template = new Template("temp1");
-        var textElement = new TextElement("Hello World", ElementPlacement.TopLeft);
-        template.Elements.push(textElement);
-        dlexInput.Template = template;
-        pdf.Inputs.push(dlexInput);
-        var res = await pdf.Process();
+        var textElement = new TextElement("Hello World", elementPlacement.topLeft);
+        template.elements.push(textElement);
+        dlexInput.template = template;
+        pdf.inputs.push(dlexInput);
+        var res = await pdf.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexTemplate_Pdfoutput.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
 
     it('SimpleDlex_Pdfoutput', async function () {
@@ -186,18 +186,18 @@ describe('Dlex Input', function () {
         var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json");
         var dlexInput = new DlexInput(dlex, layoutData);
 
-        pdf.Inputs.push(dlexInput);
-        var res = await pdf.Process();
+        pdf.inputs.push(dlexInput);
+        var res = await pdf.process();
 
         if (testParams.Logging) {
-            console.log("Result: " + res.IsSuccessful);
+            console.log("Result: " + res.isSuccessful);
 
-            if (res.IsSuccessful) {
+            if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/SimpleDlex_Pdfoutput.pdf");
-                outStream.write(res.Content);
+                outStream.write(res.content);
                 outStream.close();
             }
         }
-        assert.strictEqual(res.IsSuccessful, true);
+        assert.strictEqual(res.isSuccessful, true);
     });
 });

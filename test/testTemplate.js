@@ -8,8 +8,8 @@ import {
     PageInput,
     Template,
     AztecBarcodeElement,
-    ElementPlacement,
-    AztecSymbolSize,
+    elementPlacement,
+    aztecSymbolSize,
     Code11BarcodeElement,
     Code25BarcodeElement,
     Code128BarcodeElement,
@@ -18,8 +18,8 @@ import {
     Pdf417BarcodeElement,
     MsiBarcodeElement,
     QrCodeElement,
-    QrCodeFnc1,
-    Compaction,
+    qrCodeFnc1,
+    compaction,
     StackedGs1DataBarBarcodeElement,
     LineElement,
     RectangleElement,
@@ -31,7 +31,7 @@ import {
     Font,
     RgbColor,
     LineStyle,
-    StackedGs1DataBarType
+    stackedGs1DataBarType
 } from "./imports.js";
 
 
@@ -41,10 +41,10 @@ function getEndpoint(testParams) {
     }
     var pdfEndpoint = new Pdf();
     pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.BaseUrl = testParams.BaseUrl;
-    pdfEndpoint.ApiKey = testParams.ApiKey;
-    pdfEndpoint.Author = "sheetal";
-    pdfEndpoint.Title = "pdf merger";
+    pdfEndpoint.baseUrl = testParams.BaseUrl;
+    pdfEndpoint.apiKey = testParams.ApiKey;
+    pdfEndpoint.author = "sheetal";
+    pdfEndpoint.title = "pdf merger";
     return pdfEndpoint;
 }
 
@@ -56,43 +56,43 @@ describe('PdfEndpoint', function () {
         it('Line Element without properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var lineElement = new LineElement(ElementPlacement.TopCenter, 200, 200);
-            input1.Elements.push(lineElement);
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var lineElement = new LineElement(elementPlacement.topCenter, 200, 200);
+            input1.elements.push(lineElement);
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/LineElement.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('Line Element with properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var lineElement = new LineElement(ElementPlacement.BottomCenter);
-            lineElement.X2Offset = 100;
-            lineElement.Y2Offset = 100;
-            lineElement.Color = RgbColor.Blue;
-            lineElement.LineStyle = LineStyle.DashLarge;
-            input1.Elements.push(lineElement);
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var lineElement = new LineElement(elementPlacement.bottomCenter);
+            lineElement.x2Offset = 100;
+            lineElement.y2Offset = 100;
+            lineElement.color = RgbColor.blue;
+            lineElement.lineStyle = LineStyle.dashLarge;
+            input1.elements.push(lineElement);
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/LineElementWithProperties.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
     });
 
@@ -102,90 +102,90 @@ describe('PdfEndpoint', function () {
         it('Simple Rectangle', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var rectangleElement = new RectangleElement(ElementPlacement.TopCenter, 100, 50);
-            rectangleElement.FillColor = RgbColor.HotPink;
-            input1.Elements.push(rectangleElement);
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var rectangleElement = new RectangleElement(elementPlacement.topCenter, 100, 50);
+            rectangleElement.fillColor = RgbColor.hotPink;
+            input1.elements.push(rectangleElement);
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/RectangleElement.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('RectangleElement with Corner', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var rectangleElement = new RectangleElement(ElementPlacement.TopCenter, 100, 50);
-            rectangleElement.CornerRadius = 20;
-            input1.Elements.push(rectangleElement);
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var rectangleElement = new RectangleElement(elementPlacement.topCenter, 100, 50);
+            rectangleElement.cornerRadius = 20;
+            input1.elements.push(rectangleElement);
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/RectangleElementwithCorner.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('RectangleElement with border style', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var rectangleElement = new RectangleElement(ElementPlacement.TopRight, 100, 50);
-            rectangleElement.BorderStyle = LineStyle.Dots;
-            input1.Elements.push(rectangleElement);
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var rectangleElement = new RectangleElement(elementPlacement.topRight, 100, 50);
+            rectangleElement.borderStyle = LineStyle.dots;
+            input1.elements.push(rectangleElement);
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/RectangleElementwithBorderStyle.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('RectangleElement with border style Array', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var rectangleElement = new RectangleElement(ElementPlacement.TopCenter, 100, 50);
+            var rectangleElement = new RectangleElement(elementPlacement.topCenter, 100, 50);
             var styleArray = [2, 1, 4, 2];
-            rectangleElement.BorderStyle = new LineStyle(styleArray);
-            input1.Elements.push(rectangleElement);
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            rectangleElement.borderStyle = new LineStyle(styleArray);
+            input1.elements.push(rectangleElement);
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/RectangleElementwithBorderStyleArray.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
     });
 
@@ -196,105 +196,105 @@ describe('PdfEndpoint', function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/Invoice.pdf", "Invoice.pdf");
             var input1 = new PdfInput(resource);
-            pdfEndpoint.Inputs.push(input1);
+            pdfEndpoint.inputs.push(input1);
 
             var templateA = new Template("TemplateA");
-            var pageNumberingElement = new PageNumberingElement("%%CP%% of %%TP%%", ElementPlacement.TopLeft);
-            templateA.Elements.push(pageNumberingElement);
-            input1.Template = templateA;
+            var pageNumberingElement = new PageNumberingElement("%%CP%% of %%TP%%", elementPlacement.topLeft);
+            templateA.elements.push(pageNumberingElement);
+            input1.template = templateA;
 
-            var res = await pdfEndpoint.Process();
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/pageNumberingElement.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('Page number with properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var input1 = new PdfInput(resource);
-            pdfEndpoint.Inputs.push(input1);
+            pdfEndpoint.inputs.push(input1);
 
             var templateA = new Template("TemplateA");
-            var topLeftElement = new PageNumberingElement("%%CP(1)%% of %%TP%%", ElementPlacement.TopLeft, 50, 50);
-            topLeftElement.FontSize = 14.0;
-            templateA.Elements.push(topLeftElement);
+            var topLeftElement = new PageNumberingElement("%%CP(1)%% of %%TP%%", elementPlacement.topLeft, 50, 50);
+            topLeftElement.fontSize = 14.0;
+            templateA.elements.push(topLeftElement);
 
-            var topCenterElement = new PageNumberingElement("%%SP(I)%% of %%ST%%", ElementPlacement.TopCenter, 50, 50);
-            topCenterElement.FontSize = 14.0;
-            templateA.Elements.push(topCenterElement);
+            var topCenterElement = new PageNumberingElement("%%SP(I)%% of %%ST%%", elementPlacement.topCenter, 50, 50);
+            topCenterElement.fontSize = 14.0;
+            templateA.elements.push(topCenterElement);
 
-            var topRightElement = new PageNumberingElement("%%CP(i)%% of %%TP%%", ElementPlacement.TopRight, -50, 50);
-            topRightElement.FontSize = 14.0;
-            templateA.Elements.push(topRightElement);
+            var topRightElement = new PageNumberingElement("%%CP(i)%% of %%TP%%", elementPlacement.topRight, -50, 50);
+            topRightElement.fontSize = 14.0;
+            templateA.elements.push(topRightElement);
 
-            var bottomLeftElement = new PageNumberingElement("%%CP(I)%% of %%TP%%", ElementPlacement.BottomLeft, 50, -50);
-            bottomLeftElement.FontSize = 14.0;
-            templateA.Elements.push(bottomLeftElement);
+            var bottomLeftElement = new PageNumberingElement("%%CP(I)%% of %%TP%%", elementPlacement.bottomLeft, 50, -50);
+            bottomLeftElement.fontSize = 14.0;
+            templateA.elements.push(bottomLeftElement);
 
-            var bottomCenterElement = new PageNumberingElement("%%CP(b)%% of %%TP%%", ElementPlacement.BottomCenter, 50, -50);
-            bottomCenterElement.Font = Font.Courier;
-            bottomCenterElement.FontSize = 14.0;
-            templateA.Elements.push(bottomCenterElement);
+            var bottomCenterElement = new PageNumberingElement("%%CP(b)%% of %%TP%%", elementPlacement.bottomCenter, 50, -50);
+            bottomCenterElement.font = Font.courier;
+            bottomCenterElement.fontSize = 14.0;
+            templateA.elements.push(bottomCenterElement);
 
-            var bottomRightElement = new PageNumberingElement("%%CP(a)%% of %%TP%%", ElementPlacement.BottomRight, -50, -50);
-            bottomRightElement.Font = Font.TimesItalic;
-            bottomRightElement.FontSize = 14.0;
-            templateA.Elements.push(bottomRightElement);
-            input1.Template = templateA;
+            var bottomRightElement = new PageNumberingElement("%%CP(a)%% of %%TP%%", elementPlacement.bottomRight, -50, -50);
+            bottomRightElement.font = Font.timesItalic;
+            bottomRightElement.fontSize = 14.0;
+            templateA.elements.push(bottomRightElement);
+            input1.template = templateA;
 
-            var res = await pdfEndpoint.Process();
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/pageNumberingElementWithProperties.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
     });
 
 
     describe('ImageElement', function () {
 
-        it('Should return res.IsSuccessful==true', async function () {
+        it('Should return res.isSuccessful==true', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var input1 = new PdfInput(resource);
 
             var templateA = new Template("TemplateA");
             var resource2 = new ImageResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif");
-            var imageResource = new ImageElement(resource2, ElementPlacement.TopCenter);
-            templateA.Elements.push(imageResource);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var imageResource = new ImageElement(resource2, elementPlacement.topCenter);
+            templateA.elements.push(imageResource);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/ImageElement.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
 
 
         });
@@ -306,75 +306,75 @@ describe('PdfEndpoint', function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
-            var barcodeElement = new AztecBarcodeElement("Hello World", ElementPlacement.TopCenter, 50);
-            barcodeElement.SymbolSize = AztecSymbolSize.R95xC95;
-            barcodeElement.XDimension = 3;
-            barcodeElement.Color = new RgbColor(0, 1, 0);
-            barcodeElement.ErrorCorrection = 30;
-            barcodeElement.ProcessTilde = true;
-            barcodeElement.ReaderInitializationSymbol = true;
-            barcodeElement.Value = "test123";
-            barcodeElement.XOffset = 200;
-            barcodeElement.YOffset = 100;
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var barcodeElement = new AztecBarcodeElement("Hello World", elementPlacement.topCenter, 50);
+            barcodeElement.symbolSize = aztecSymbolSize.r95xC95;
+            barcodeElement.xDimension = 3;
+            barcodeElement.color = new RgbColor(0, 1, 0);
+            barcodeElement.errorCorrection = 30;
+            barcodeElement.processTilde = true;
+            barcodeElement.readerInitializationSymbol = true;
+            barcodeElement.value = "test123";
+            barcodeElement.xOffset = 200;
+            barcodeElement.yOffset = 100;
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/AztecBarcode.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('Code11BarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
-            var barcodeElement = new Code11BarcodeElement("12345678", ElementPlacement.TopCenter, 50);
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var barcodeElement = new Code11BarcodeElement("12345678", elementPlacement.topCenter, 50);
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/Code11Barcode.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('Code25BarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
-            var barcodeElement = new Code25BarcodeElement("12345678", ElementPlacement.TopCenter, 150);
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var barcodeElement = new Code25BarcodeElement("12345678", elementPlacement.topCenter, 150);
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/Code25Barcode.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('Code39BarcodeElement', async function () {
@@ -382,22 +382,22 @@ describe('PdfEndpoint', function () {
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
-            var barcodeElement = new Code39BarcodeElement("CODE 39", ElementPlacement.TopCenter, 150);
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var barcodeElement = new Code39BarcodeElement("CODE 39", elementPlacement.topCenter, 150);
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/Code39Barcode.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('Code93BarcodeElement', async function () {
@@ -405,45 +405,45 @@ describe('PdfEndpoint', function () {
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
-            var barcodeElement = new Code93BarcodeElement("CODE 93", ElementPlacement.TopCenter, 150);
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var barcodeElement = new Code93BarcodeElement("CODE 93", elementPlacement.topCenter, 150);
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/Code93Barcode.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('Code128BarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
-            var barcodeElement = new Code128BarcodeElement("CODE 128", ElementPlacement.TopCenter, 150);
-            barcodeElement.UccEan128 = true;
-            barcodeElement.ProcessTilde = true;
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var barcodeElement = new Code128BarcodeElement("CODE 128", elementPlacement.topCenter, 150);
+            barcodeElement.uccEan128 = true;
+            barcodeElement.processTilde = true;
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/Code128Barcode.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('Pdf417BarcodeElement', async function () {
@@ -451,52 +451,52 @@ describe('PdfEndpoint', function () {
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
-            var barcodeElement = new Pdf417BarcodeElement("Hello World", ElementPlacement.TopCenter, 20);
-            barcodeElement.Color = RgbColor.Brown;
-            barcodeElement.Compaction = Compaction.Numeric;
-            barcodeElement.CompactPdf417 = true;
-            barcodeElement.EvenPages = true;
-            barcodeElement.Placement = ElementPlacement.TopRight;
-            barcodeElement.ProcessTilde = true;
-            barcodeElement.XDimension = 4;
-            barcodeElement.YDimension = 5;
-            barcodeElement.XOffset = -50;
-            barcodeElement.YOffset = 50;
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var barcodeElement = new Pdf417BarcodeElement("Hello World", elementPlacement.topCenter, 20);
+            barcodeElement.color = RgbColor.brown;
+            barcodeElement.compaction = compaction.numeric;
+            barcodeElement.compactPdf417 = true;
+            barcodeElement.evenPages = true;
+            barcodeElement.placement = elementPlacement.topRight;
+            barcodeElement.processTilde = true;
+            barcodeElement.xDimension = 4;
+            barcodeElement.yDimension = 5;
+            barcodeElement.xOffset = -50;
+            barcodeElement.yOffset = 50;
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/Pdf417BarcodeElement.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('MsiBarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
-            var barcodeElement = new MsiBarcodeElement("1234567890", ElementPlacement.TopCenter, 150);
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var barcodeElement = new MsiBarcodeElement("1234567890", elementPlacement.topCenter, 150);
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/MsiBarcodeElement.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('QrCodeElement', async function () {
@@ -504,96 +504,96 @@ describe('PdfEndpoint', function () {
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
-            var barcodeElement = new QrCodeElement("Hello World", ElementPlacement.TopCenter, 150);
-            barcodeElement.Color = RgbColor.Orange;
-            barcodeElement.Version = 20;
-            barcodeElement.Fnc1 = QrCodeFnc1.Gs1;
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var barcodeElement = new QrCodeElement("Hello World", elementPlacement.topCenter, 150);
+            barcodeElement.color = RgbColor.orange;
+            barcodeElement.version = 20;
+            barcodeElement.fnc1 = qrCodeFnc1.gs1;
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/QrCodeElement.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('StackedGs1DataBarBarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
-            var barcodeElement = new StackedGs1DataBarBarcodeElement("1234567890", ElementPlacement.TopCenter, 150);
-            barcodeElement.StackedGs1DataBarType=StackedGs1DataBarType.StackedOmnidirectional;
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var barcodeElement = new StackedGs1DataBarBarcodeElement("1234567890", elementPlacement.topCenter, 150);
+            barcodeElement.stackedGs1DataBarType = stackedGs1DataBarType.stackedOmnidirectional;
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/StackedGs1DataBarBarcodeElement.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('DataMatrixBarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
             var input1 = new PdfInput(resource1);
-            var barcodeElement = new DataMatrixBarcodeElement("Hello World", ElementPlacement.TopCenter, 0);
-            barcodeElement.Placement = ElementPlacement.TopLeft;
-            barcodeElement.XOffset = 50;
-            barcodeElement.YOffset = 50;
-            barcodeElement.XDimension = 3;
-            barcodeElement.ProcessTilde = true;
+            var barcodeElement = new DataMatrixBarcodeElement("Hello World", elementPlacement.topCenter, 0);
+            barcodeElement.placement = elementPlacement.topLeft;
+            barcodeElement.xOffset = 50;
+            barcodeElement.yOffset = 50;
+            barcodeElement.xDimension = 3;
+            barcodeElement.processTilde = true;
             var templateA = new Template("TemplateA");
-            templateA.Elements.push(barcodeElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            templateA.elements.push(barcodeElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/DataMatrixBarcodeElement.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
 
         it('TextElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
-            var textElement = new TextElement("Hello World", ElementPlacement.TopCenter);
-            textElement.Color = RgbColor.CadetBlue;
-            templateA.Elements.push(textElement);
-            input1.Template = templateA;
-            pdfEndpoint.Inputs.push(input1);
-            var res = await pdfEndpoint.Process();
+            var textElement = new TextElement("Hello World", elementPlacement.topCenter);
+            textElement.color = RgbColor.cadetBlue;
+            templateA.elements.push(textElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
             if (testParams.Logging) {
-                console.log("Result: " + res.IsSuccessful);
+                console.log("Result: " + res.isSuccessful);
 
-                if (res.IsSuccessful) {
+                if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/Dim2BarcodeElement.pdf");
-                    outStream.write(res.Content);
+                    outStream.write(res.content);
                     outStream.close();
                 }
             }
 
-            assert.strictEqual(res.IsSuccessful, true);
+            assert.strictEqual(res.isSuccessful, true);
         });
     });
 });
