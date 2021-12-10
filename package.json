@@ -22,7 +22,10 @@
     "merge",
     "report",
     "form fill",
-    "encrypt"
+    "encrypt",
+    "split",
+    "stamp",
+    "watermark"
   ],
   "author": "DynamicPDF API <support@dynamicpdf.com>",
   "license": "MIT",
