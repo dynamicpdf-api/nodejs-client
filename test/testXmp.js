@@ -6,16 +6,20 @@ import {
     PdfResource
 } from "./imports.js";
 
-function getEndpoint(pdfXmp, testParams) {
+function getEndpoint(endpoint, testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
-    pdfXmp.loggingEnabled = testParams.Logging;
-    pdfXmp.baseUrl = testParams.BaseUrl;
-    pdfXmp.apiKey = testParams.ApiKey;
-    pdfXmp.author = "sheetal";
-    pdfXmp.title = "pdf merger";
-    return pdfXmp;
+    endpoint.loggingEnabled = testParams.Logging;
+    if (testParams.BaseUrl.length > 0) {
+        endpoint.baseUrl = testParams.BaseUrl;
+    }
+    if (testParams.ApiKey.length > 0) {
+        endpoint.apiKey = testParams.ApiKey;
+    }
+    endpoint.author = "sheetal";
+    endpoint.title = "pdf merger";
+    return endpoint;
 }
 
 describe('Xmp Endpoint', function () {

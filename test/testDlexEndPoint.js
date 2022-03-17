@@ -6,16 +6,20 @@ import {
     DlexLayout
 } from "./imports.js";
 
-function getEndpoint(dlexEndPoint, testParams) {
+function getEndpoint(endpoint, testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
-    dlexEndPoint.loggingEnabled = testParams.Logging;
-    dlexEndPoint.baseUrl = testParams.BaseUrl;
-    dlexEndPoint.apiKey = testParams.ApiKey;
-    dlexEndPoint.author = "sheetal";
-    dlexEndPoint.title = "pdf merger";
-    return dlexEndPoint;
+    endpoint.loggingEnabled = testParams.Logging;
+    if (testParams.BaseUrl.length > 0) {
+        endpoint.baseUrl = testParams.BaseUrl;
+    }
+    if (testParams.ApiKey.length > 0) {
+        endpoint.apiKey = testParams.ApiKey;
+    }
+    endpoint.author = "sheetal";
+    endpoint.title = "pdf merger";
+    return endpoint;
 }
 
 describe('Dlex Endpoint', function () {

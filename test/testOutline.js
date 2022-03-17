@@ -22,13 +22,17 @@ function getEndpoint(testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
-    var pdfEndpoint = new Pdf();
-    pdfEndpoint.loggingEnabled = testParams.Logging;
-    pdfEndpoint.baseUrl = testParams.BaseUrl;
-    pdfEndpoint.apiKey = testParams.ApiKey;
-    pdfEndpoint.author = "sheetal";
-    pdfEndpoint.title = "pdf merger";
-    return pdfEndpoint;
+    var endpoint = new Pdf();
+    endpoint.loggingEnabled = testParams.Logging;
+    if (testParams.BaseUrl.length > 0) {
+        endpoint.baseUrl = testParams.BaseUrl;
+    }
+    if (testParams.ApiKey.length > 0) {
+        endpoint.apiKey = testParams.ApiKey;
+    }
+    endpoint.author = "sheetal";
+    endpoint.title = "pdf merger";
+    return endpoint;
 }
 
 describe('Outline', function () {
@@ -237,7 +241,7 @@ describe('Outline', function () {
         var input = new PdfInput(resource);
         pdf.inputs.push(input);
 
-        var resource1 = new PdfResource("./Resources/SinglePage.pdf","SinglePage.pdf");
+        var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
         var input1 = new PdfInput(resource1);
         pdf.inputs.push(input1);
 

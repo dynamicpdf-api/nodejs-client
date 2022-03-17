@@ -6,16 +6,20 @@ import {
     PdfResource
 } from "./imports.js";
 
-function getEndpoint(pdfInfo, testParams) {
+function getEndpoint(endpoint, testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
-    pdfInfo.loggingEnabled = testParams.Logging;
-    pdfInfo.baseUrl = testParams.BaseUrl;
-    pdfInfo.apiKey = testParams.ApiKey;
-    pdfInfo.author = "sheetal";
-    pdfInfo.title = "pdf merger";
-    return pdfInfo;
+    endpoint.loggingEnabled = testParams.Logging;
+    if (testParams.BaseUrl.length > 0) {
+        endpoint.baseUrl = testParams.BaseUrl;
+    }
+    if (testParams.ApiKey.length > 0) {
+        endpoint.apiKey = testParams.ApiKey;
+    }
+    endpoint.author = "sheetal";
+    endpoint.title = "pdf merger";
+    return endpoint;
 }
 
 describe('PdfInfo Endpoint', function () {

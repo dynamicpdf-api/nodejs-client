@@ -6,16 +6,20 @@ import {
     ImageResource
 } from "./imports.js";
 
-function getEndpoint(text, testParams) {
+function getEndpoint(endpoint, testParams) {
     if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
     }
-    text.loggingEnabled = testParams.Logging;
-    text.baseUrl = testParams.BaseUrl;
-    text.apiKey = testParams.ApiKey;
-    text.author = "sheetal";
-    text.title = "pdf merger";
-    return text;
+    endpoint.loggingEnabled = testParams.Logging;
+    if (testParams.BaseUrl.length > 0) {
+        endpoint.baseUrl = testParams.BaseUrl;
+    }
+    if (testParams.ApiKey.length > 0) {
+        endpoint.apiKey = testParams.ApiKey;
+    }
+    endpoint.author = "sheetal";
+    endpoint.title = "pdf merger";
+    return endpoint;
 }
 
 describe('ImageInfo Endpoint', function () {

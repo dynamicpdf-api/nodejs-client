@@ -21,8 +21,8 @@ export class TestParams {
         }
     }
 
-    get ApiKey() { return this.#params.ApiKey; }
-    get BaseUrl() { return this.#params.BaseUrl; }
+    get ApiKey() { return this.#params.ApiKey.trim(); }
+    get BaseUrl() { return this.#params.BaseUrl.trim(); }
     get AuthTLS() { return this.#params.AuthTLS; }
     get Logging() { return this.#params.Logging; }
 };
