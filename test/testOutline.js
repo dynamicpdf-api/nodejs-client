@@ -38,27 +38,7 @@ function getEndpoint(testParams) {
 describe('Outline', function () {
     this.timeout(0);
     var testParams = new TestParams();
-    it('Add Outline', async function () {
-        var pdf = getEndpoint(testParams);
-        var pageInput = pdf.addPage();
-        var element = new TextElement("Hello World 1", elementPlacement.topCenter);
-        pageInput.elements.push(element);
-
-        var rootOutline = pdf.outlines.add("Root Outline");
-        rootOutline.expanded = true;
-
-        var res = await pdf.process();
-        if (testParams.Logging) {
-            console.log("Result: " + res.isSuccessful);
-
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/outlineAddOutline.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        }
-        assert.strictEqual(res.isSuccessful, true);
-    });
+    
     it('Merge Pdfs', async function () {
         var pdf = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/DocumentA100.pdf");
@@ -141,100 +121,6 @@ describe('Outline', function () {
         }
         assert.strictEqual(res.isSuccessful, true);
     });
-    it('Pdf Input FilePath Outline', async function () {
-        var pdfEndpoint = getEndpoint(testParams);
-        var resource = new PdfResource("./Resources/Emptypages.pdf");
-        var input = new PdfInput(resource);
-        pdfEndpoint.inputs.push(input);
-
-        var outline = pdfEndpoint.outlines.add("OutlineA");
-        outline.color = RgbColor.blue;
-        outline.style = outlineStyle.bold;
-        outline.expanded = true;
-
-        var res = await pdfEndpoint.process();
-        if (testParams.Logging) {
-            console.log("Result: " + res.isSuccessful);
-
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/outlineWithFilePath.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        }
-        assert.strictEqual(res.isSuccessful, true);
-    });
-
-    it('Pdf Input File Path Outline All', async function () {
-        var pdf = getEndpoint(testParams);
-
-        var invoiceResource = new PdfResource("./Resources/Invoice.pdf");
-        var invoiceInput = new PdfInput(invoiceResource);
-
-        pdf.inputs.push(invoiceInput);
-
-        var imageResource = new ImageResource("./Resources/CCITT_1.tif");
-        var imageInput = new ImageInput(imageResource);
-        pdf.inputs.push(imageInput);
-
-        var mergeOutlineResource = new PdfResource("./Resources/MergeOutlineInput.pdf");
-        var mergeOutlineInput = new PdfInput(mergeOutlineResource);
-        pdf.inputs.push(mergeOutlineInput);
-
-        var outline = pdf.outlines.add("Invoice", invoiceInput);
-
-        var outline1 = pdf.outlines.add("Picture", imageInput);
-
-        var outline2 = pdf.outlines.add("Outlines in Doc A 100");
-        outline2.children.addPdfOutlines(mergeOutlineInput);
-
-        var outline3 = pdf.outlines.add("DynamicPDF is Cool!", "https://www.dynamicpdf.com");
-
-        var res = await pdf.process();
-        if (testParams.Logging) {
-            console.log("Result: " + res.isSuccessful);
-
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/outline.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        }
-        assert.strictEqual(res.isSuccessful, true);
-    });
-
-
-    it('Outlines for Existing Pdf', async function () {
-        var pdfEndpoint = getEndpoint(testParams);
-        var resource1 = new PdfResource("./Resources/DocumentA100.pdf");
-        var input1 = pdfEndpoint.addPdf(resource1);
-        input1.id = "document2";
-
-        var resource2 = new PdfResource("./Resources/Invoice.pdf");
-        var input2 = pdfEndpoint.addPdf(resource2);
-        input2.id = "invoice";
-
-        var rootOutline = pdfEndpoint.outlines.add("Root Outline");
-        rootOutline.expanded = true;
-
-        rootOutline.children.add("DocumentA 100", input1, 0, pageZoom.FitPage);
-        rootOutline.children.add("Invoice", input2);
-
-
-        var res = await pdfEndpoint.process();
-        if (testParams.Logging) {
-            console.log("Result: " + res.isSuccessful);
-
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/outlineExistingPdf.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        }
-        assert.strictEqual(res.isSuccessful, true);
-    });
-
-
     it('With Goto Action', async function () {
         var pdf = getEndpoint(testParams);
         var resource = new PdfResource("./Resources/Org.pdf");
