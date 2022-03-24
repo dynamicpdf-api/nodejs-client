@@ -13,6 +13,7 @@ import {
     elementPlacement,
     Font,
     Template,
+    ImageElement,
     CmykColor,
     RgbColor,
     Grayscale,
@@ -50,7 +51,6 @@ describe('PdfEndpoint', function () {
             element.evenPages = false;
             template.elements.push(element);
 
-            //var resource1 = new PdfResource("AllPageElements.pdf", "AllPageElements.pdf");
             var input = new PdfInput("AllPageElements.pdf");
             input.template = template;
 
@@ -71,7 +71,9 @@ describe('PdfEndpoint', function () {
             input1.mergeOptions = mergeOptions1;
             pdfEndpoint.inputs.push(input1);
 
-            var resource3 = new PdfResource("./Resources/fw9AcroForm_14.pdf");
+            // Test byteArray input too.
+            var fileData = fs.readFileSync("./Resources/fw9AcroForm_14.pdf");
+            var resource3 = new PdfResource(fileData, "fw9AcroForm_14.pdf");
             var input2 = new PdfInput(resource3);
             input2.template = template;
 
@@ -180,6 +182,30 @@ describe('PdfEndpoint', function () {
 
                 if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/DifferentInputs.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+
+        it('Add page and pdf input with Properties', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+            var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
+            var input1 = new PdfInput(resource1);
+            pdfEndpoint.inputs.push(input1);
+
+            var input2 = pdfEndpoint.addPage(500, 600);
+            var element = new TextElement("test", elementPlacement.topCenter);
+            input2.elements.push(element);
+
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
                     outStream.write(res.content);
                     outStream.close();
                 }
@@ -416,6 +442,33 @@ describe('PdfEndpoint', function () {
             }
             assert.strictEqual(res.isSuccessful, true);
         });
+
+        it('Test Image Scale', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+            var resource = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
+            var input = new PdfInput(resource);
+            var template = new Template("Temp1");
+            var resource1 = new ImageResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif");
+            var element = new ImageElement(resource1, elementPlacement.topCenter);
+            element.scaleX = 3;
+            element.scaleY = 3;
+            template.elements.push(element);
+            input.template = template;
+            pdfEndpoint.inputs.push(input);
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/imageScale.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+
+
+                }
+            }
+            assert.strictEqual(res.isSuccessful, true);
+        });
     });
 
 
@@ -423,10 +476,60 @@ describe('PdfEndpoint', function () {
 
         it('Core Fonts', async function () {
             var input = new PageInput();
-            var element = new TextElement("Hello World", elementPlacement.bottomLeft);
+            var element = new TextElement("PaleGreen", elementPlacement.bottomLeft);
+            element.color = RgbColor.paleGreen;
+            element.font = Font.timesItalic;
+            input.elements.push(element);
+            element = new TextElement("PaleVioletRed", elementPlacement.topCenter, 0);
+            element.color = RgbColor.paleVioletRed;
+            element.font = Font.timesBold;
+            input.elements.push(element);
+            element = new TextElement("PeachPuff", elementPlacement.topLeft);
+            element.color = RgbColor.peachPuff;
             element.font = Font.timesBoldItalic;
             input.elements.push(element);
-            
+            element = new TextElement("Plum", elementPlacement.topRight);
+            element.color = RgbColor.plum;
+            element.font = Font.zapfDingbats;
+            input.elements.push(element);
+            element = new TextElement("Purple", elementPlacement.bottomRight);
+            element.color = RgbColor.purple;
+            element.fontSize = 100;
+            element.font = Font.courier;
+            input.elements.push(element);
+            element = new TextElement("CourierBold", elementPlacement.bottomCenter, 0, -50);
+            element.color = new RgbColor(1, 0, 1);
+            element.font = Font.courierBold;
+            input.elements.push(element);
+            element = new TextElement("CourierOblique", elementPlacement.topCenter, 0, 100);
+            element.color = new CmykColor(1, 0, 0, 0);
+            element.font = Font.courierOblique;
+            input.elements.push(element);
+            element = new TextElement("HelveticaBold", elementPlacement.topCenter, 0, 50);
+            element.color = new CmykColor(0, 1, 1, 0);
+            element.fontSize = 100;
+            element.font = Font.helveticaBold;
+            input.elements.push(element);
+            element = new TextElement("HelveticaBoldOblique", elementPlacement.topLeft, 0, 350);
+            element.color = new Grayscale(0.8);
+            element.font = Font.helveticaBoldOblique;
+            element.fontSize = 50;
+            input.elements.push(element);
+            element = new TextElement("HelveticaOblique", elementPlacement.topLeft, 250, 500);
+            element.color = new RgbColor(1, 0, 0);
+            element.font = Font.helveticaOblique;
+            element.fontSize = 50;
+            input.elements.push(element);
+            element = new TextElement("#&%() +0123", elementPlacement.bottomLeft, 0, -200);
+            element.color = RgbColor.rosyBrown;
+            element.font = Font.symbol;
+            element.fontSize = 50;
+            input.elements.push(element);
+            element = new TextElement("Salmon", elementPlacement.topLeft, 450, 450);
+            element.color = RgbColor.salmon;
+            element.font = Font.timesRoman;
+            element.fontSize = 50;
+            input.elements.push(element);
             var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.inputs.push(input);
             var res = await pdfEndpoint.process();
@@ -445,6 +548,8 @@ describe('PdfEndpoint', function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var font = Font.fromFile("./Resources/verdanab.ttf", "verdanab.ttf");
+            font.embed = true;
+            font.subset = true;
             var element = new TextElement("Hello", elementPlacement.topCenter);
             element.font = font;
             input1.elements.push(element);
@@ -544,6 +649,67 @@ describe('PdfEndpoint', function () {
             }
 
             assert.strictEqual(res.isSuccessful, true);
+        });
+    });
+
+    describe('Get Instructions Json Samples', function () {
+
+        it('File Path GetInstructions', async function () {
+            var pdf = getEndpoint(testParams);
+            var template1 = new Template("./Resources/Temp1");
+            var element1 = new TextElement("Merger with Template(First Document)", elementPlacement.topCenter);
+            template1.elements.push(element1);
+
+            var resource = new PdfResource("./Resources/AllPageElements.pdf");
+            var input = new PdfInput(resource);
+            input.template = template1;
+
+            var mergeOptions = new MergeOptions();
+            input.mergeOptions = mergeOptions;
+            pdf.inputs.push(input);
+
+            var template2 = new Template("Temp2");
+            var element2 = new TextElement("Merger with Template(Second Document)", elementPlacement.topCenter);
+            template2.elements.push(element2);
+
+            var resource1 = new PdfResource("./Resources/All Fields Sample.pdf");
+            var input1 = new PdfInput(resource1);
+            input1.template = template2;
+
+            input1.startPage = 1;
+            input1.pageCount = 1;
+            var mergeOptions1 = new MergeOptions();
+            mergeOptions1.formsXfaData = true;
+            input1.mergeOptions = mergeOptions1;
+            pdf.inputs.push(input1);
+
+            var template3 = new Template("Temp3");
+            var element3 = new TextElement("Merger with Template(Third Document)", elementPlacement.topCenter);
+            template3.elements.push(element3);
+
+            var resource2 = new PdfResource("./Resources/fw9AcroForm_14.pdf");
+            var input2 = new PdfInput(resource2);
+            input2.template = template3;
+
+            pdf.inputs.push(input2);
+
+            var jsonBefore = JSON.parse(pdf.getInstructionsJson());
+            var res = await pdf.process();
+            var jsonAfter = JSON.parse(pdf.getInstructionsJson());
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                console.log("JSON Before:\n________________________________________________________" + jsonBefore);
+                console.log("JSON After: \n________________________________________________________" + jsonAfter);
+    
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/GetInstructionsBeforeProcess.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful && jsonBefore != null && jsonAfter !=null, true);
         });
     });
 });

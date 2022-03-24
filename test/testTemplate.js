@@ -60,6 +60,25 @@ describe('PdfEndpoint', function () {
     var testParams = new TestParams();
     describe('LineElement', function () {
 
+        it('Line Element without properties', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+            var input1 = new PageInput();
+            var lineElement = new LineElement(elementPlacement.topCenter, 200, 200);
+            input1.elements.push(lineElement);
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/LineElement.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+            assert.strictEqual(res.isSuccessful, true);
+        });
+
         it('Line Element with properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
@@ -114,6 +133,28 @@ describe('PdfEndpoint', function () {
 
             assert.strictEqual(res.isSuccessful, true);
         });
+        it('RectangleElement with border style Array', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+            var input1 = new PageInput();
+            var rectangleElement = new RectangleElement(elementPlacement.topCenter, 100, 50);
+            var styleArray = [2, 1, 4, 2];
+            rectangleElement.borderStyle = new LineStyle(styleArray);
+            input1.elements.push(rectangleElement);
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/RectangleElementwithBorderStyleArray.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
     });
 
 
@@ -158,26 +199,34 @@ describe('PdfEndpoint', function () {
 
             var templateA = new Template("TemplateA");
             var topLeftElement = new PageNumberingElement("%%CP(1)%% of %%TP%%", elementPlacement.topLeft, 50, 50);
+            topLeftElement.fontSize = 14.0;
             topLeftElement.evenPages = true;
             templateA.elements.push(topLeftElement);
 
             var topCenterElement = new PageNumberingElement("%%SP(I)%% of %%ST%%", elementPlacement.topCenter, 50, 50);
+            topCenterElement.fontSize = 14.0;
             topCenterElement.oddPages = true;
             templateA.elements.push(topCenterElement);
 
             var topRightElement = new PageNumberingElement("%%CP(i)%% of %%TP%%", elementPlacement.topRight, -50, 50);
+            topRightElement.fontSize = 14.0;
             topRightElement.evenPages = true;
             templateA.elements.push(topRightElement);
 
             var bottomLeftElement = new PageNumberingElement("%%CP(I)%% of %%TP%%", elementPlacement.bottomLeft, 50, -50);
+            bottomLeftElement.fontSize = 14.0;
             bottomLeftElement.oddPages = true;
             templateA.elements.push(bottomLeftElement);
 
             var bottomCenterElement = new PageNumberingElement("%%CP(b)%% of %%TP%%", elementPlacement.bottomCenter, 50, -50);
+            bottomCenterElement.font = Font.courier;
+            bottomCenterElement.fontSize = 14.0;
             bottomCenterElement.evenPages = true;
             templateA.elements.push(bottomCenterElement);
 
             var bottomRightElement = new PageNumberingElement("%%CP(a)%% of %%TP%%", elementPlacement.bottomRight, -50, -50);
+            bottomRightElement.font = Font.timesItalic;
+            bottomRightElement.fontSize = 14.0;
             bottomRightElement.oddPages = true;
             templateA.elements.push(bottomRightElement);
 
