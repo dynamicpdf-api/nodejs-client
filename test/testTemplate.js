@@ -512,10 +512,11 @@ describe('PdfEndpoint', function () {
         it('Gs1DataBarBarcode', async function () {
             var pdfEndpoint = getEndpoint(testParams);
 
-            var pdfInput = new PdfInput("./Resources/Emptypages.pdf");
+            var pdfResource = new PdfResource("./Resources/Emptypages.pdf")
+            var pdfInput = new PdfInput(pdfResource);
 
             var templateA = new Template("TemplateA");
-            var barcodeElement = new Gs1DataBarBarcodeElement("12345678", elementPlacement.topCenter, 50, gs1DataBarType.omnidirectional, 0 , -100);
+            var barcodeElement = new Gs1DataBarBarcodeElement("12345678", elementPlacement.topCenter, 50, gs1DataBarType.omnidirectional, 0 , 100);
             templateA.elements.push(barcodeElement);
             pdfInput.template = templateA;
             pdfEndpoint.inputs.push(pdfInput);
@@ -524,7 +525,7 @@ describe('PdfEndpoint', function () {
                 console.log("Result: " + res.isSuccessful);
 
                 if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/StackedGs1DataBarBarcodeElement.pdf");
+                    var outStream = fs.createWriteStream("./output/Gs1DataBarBarcodeElement.pdf");
                     outStream.write(res.content);
                     outStream.close();
                 }
@@ -565,8 +566,7 @@ describe('PdfEndpoint', function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
-            var barcodeElement = new StackedGs1DataBarBarcodeElement("1234567890", elementPlacement.topCenter, 150);
-            barcodeElement.stackedGs1DataBarType = stackedGs1DataBarType.stackedOmnidirectional;
+            var barcodeElement = new StackedGs1DataBarBarcodeElement("1234567890", elementPlacement.topCenter, stackedGs1DataBarType.stackedOmnidirectional, 150);
             templateA.elements.push(barcodeElement);
             input1.template = templateA;
             pdfEndpoint.inputs.push(input1);
