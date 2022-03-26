@@ -77,30 +77,6 @@ describe('PDF Security', function () {
 
     });
 
-    it('Aes256Security', async function () {
-        var pdfEndpoint = getEndpoint(testParams);
-        var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
-        var input1 = new PdfInput(resource1);
-
-        var security = new Aes256Security("user", "owner");
-        pdfEndpoint.security = security;
-
-        pdfEndpoint.inputs.push(input1);
-
-        var res = await pdfEndpoint.process();
-        if (testParams.Logging) {
-            console.log("Result: " + res.isSuccessful);
-
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/Aes256Security.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        }
-        assert.strictEqual(res.isSuccessful, true);
-
-    });
-
     it('Aes256Security EncryptDocumentComponents', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
@@ -126,38 +102,13 @@ describe('PDF Security', function () {
 
     });
 
-    it('RC4128Security', async function () {
-        var pdfEndpoint = getEndpoint(testParams);
-        var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
-        var input1 = new PdfInput(resource1);
-
-        var security = new RC4128Security("user", "owner");
-        pdfEndpoint.security = security;
-
-        pdfEndpoint.inputs.push(input1);
-
-        var res = await pdfEndpoint.process();
-        if (testParams.Logging) {
-            console.log("Result: " + res.isSuccessful);
-
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/RC4128Security.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        }
-        assert.strictEqual(res.isSuccessful, true);
-
-    });
-
     it('RC4128Security with encrypted metadata', async function () {
         var pdfEndpoint = getEndpoint(testParams);
-        var resource1 = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf");
-        var input1 = new PdfInput(resource1);
+        var input1 = new PdfInput("XmpAndOtherSample.pdf");
 
         var security = new RC4128Security("user", "owner");
-        security.encryptMetadata = true;
         pdfEndpoint.security = security;
+        security.encryptMetadata = true;
         pdfEndpoint.inputs.push(input1);
 
         var res = await pdfEndpoint.process();

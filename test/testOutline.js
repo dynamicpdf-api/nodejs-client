@@ -59,6 +59,7 @@ describe('Outline', function () {
         }
         assert.strictEqual(res.isSuccessful, true);
     });
+
     it('Merge Pdfs', async function () {
         var pdf = getEndpoint(testParams);
         var resource1 = new PdfResource("./Resources/DocumentA100.pdf");
@@ -141,6 +142,7 @@ describe('Outline', function () {
         }
         assert.strictEqual(res.isSuccessful, true);
     });
+
     it('Pdf Input FilePath Outline', async function () {
         var pdfEndpoint = getEndpoint(testParams);
         var resource = new PdfResource("./Resources/Emptypages.pdf");
@@ -233,7 +235,6 @@ describe('Outline', function () {
         }
         assert.strictEqual(res.isSuccessful, true);
     });
-
 
     it('With Goto Action', async function () {
         var pdf = getEndpoint(testParams);

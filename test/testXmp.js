@@ -24,7 +24,7 @@ function getEndpoint(endpoint, testParams) {
 
 describe('Xmp Endpoint', function () {
     this.timeout(0);
-    it('XmpSingelResource', async function () {
+    it('XmpResource', async function () {
 
         var testParams = new TestParams();
         var resource = new PdfResource("./Resources/bab6c782-2e85-4c6a-b248-9518a06549e900000.pdf", "bab6c782-2e85-4c6a-b248-9518a06549e900000.pdf")
@@ -36,24 +36,6 @@ describe('Xmp Endpoint', function () {
             console.log("Result: " + res.isSuccessful);
             if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/XmpSingelResource.xml");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        }
-        assert.strictEqual(res.isSuccessful, true);
-    });
-    it('XmpSingelResource1', async function () {
-
-        var testParams = new TestParams();
-        var resource = new PdfResource("./Resources/aaa_crash.pdf", "aaa_crash.pdf")
-        var text = new PdfXmp(resource);
-        text = getEndpoint(text, testParams);
-        var res = await text.process();
-
-        if (testParams.Logging) {
-            console.log("Result: " + res.isSuccessful);
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/XmpSingelResource1.xml");
                 outStream.write(res.content);
                 outStream.close();
             }

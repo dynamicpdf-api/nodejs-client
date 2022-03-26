@@ -9,6 +9,7 @@ import {
     Template,
     AztecBarcodeElement,
     elementPlacement,
+    gs1DataBarType,
     aztecSymbolSize,
     Code11BarcodeElement,
     Code25BarcodeElement,
@@ -17,9 +18,11 @@ import {
     Code93BarcodeElement,
     Pdf417BarcodeElement,
     MsiBarcodeElement,
+    Iata25BarcodeElement,
     QrCodeElement,
     qrCodeFnc1,
     compaction,
+    Gs1DataBarBarcodeElement,
     StackedGs1DataBarBarcodeElement,
     LineElement,
     RectangleElement,
@@ -107,7 +110,13 @@ describe('PdfEndpoint', function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var rectangleElement = new RectangleElement(elementPlacement.topCenter, 100, 50);
-            rectangleElement.fillColor = RgbColor.hotPink;
+            rectangleElement.xOffset = 50;
+            rectangleElement.yOffset = 50;
+            rectangleElement.cornerRadius = 10;
+            rectangleElement.borderWidth = 5;
+            rectangleElement.borderStyle = LineStyle.dots;
+            rectangleElement.borderColor = RgbColor.blue;
+            rectangleElement.fillColor = RgbColor.green;
             input1.elements.push(rectangleElement);
             pdfEndpoint.inputs.push(input1);
             var res = await pdfEndpoint.process();
@@ -124,51 +133,6 @@ describe('PdfEndpoint', function () {
 
             assert.strictEqual(res.isSuccessful, true);
         });
-
-        it('RectangleElement with Corner', async function () {
-            var pdfEndpoint = getEndpoint(testParams);
-            var input1 = new PageInput();
-            var rectangleElement = new RectangleElement(elementPlacement.topCenter, 100, 50);
-            rectangleElement.cornerRadius = 20;
-            input1.elements.push(rectangleElement);
-            pdfEndpoint.inputs.push(input1);
-            var res = await pdfEndpoint.process();
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/RectangleElementwithCorner.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-
-
-            assert.strictEqual(res.isSuccessful, true);
-        });
-
-        it('RectangleElement with border style', async function () {
-            var pdfEndpoint = getEndpoint(testParams);
-            var input1 = new PageInput();
-            var rectangleElement = new RectangleElement(elementPlacement.topRight, 100, 50);
-            rectangleElement.borderStyle = LineStyle.dots;
-            input1.elements.push(rectangleElement);
-            pdfEndpoint.inputs.push(input1);
-            var res = await pdfEndpoint.process();
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/RectangleElementwithBorderStyle.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-
-
-            assert.strictEqual(res.isSuccessful, true);
-        });
-
         it('RectangleElement with border style Array', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
@@ -198,12 +162,17 @@ describe('PdfEndpoint', function () {
 
         it('Page number', async function () {
             var pdfEndpoint = getEndpoint(testParams);
-            var resource = new PdfResource("./Resources/Invoice.pdf", "Invoice.pdf");
+            var resource = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
             var input1 = new PdfInput(resource);
             pdfEndpoint.inputs.push(input1);
 
+            var fontResource = Font.fromFile("./Resources/verdanab.ttf","verdanab");
+
             var templateA = new Template("TemplateA");
             var pageNumberingElement = new PageNumberingElement("%%CP%% of %%TP%%", elementPlacement.topLeft);
+            pageNumberingElement.font = fontResource;
+            pageNumberingElement.fontSize = 14;
+            pageNumberingElement.color = RgbColor.red;
             templateA.elements.push(pageNumberingElement);
             input1.template = templateA;
 
@@ -222,7 +191,7 @@ describe('PdfEndpoint', function () {
             assert.strictEqual(res.isSuccessful, true);
         });
 
-        it('Page number with properties', async function () {
+        it('Page number with Tokens', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var input1 = new PdfInput(resource);
@@ -231,29 +200,36 @@ describe('PdfEndpoint', function () {
             var templateA = new Template("TemplateA");
             var topLeftElement = new PageNumberingElement("%%CP(1)%% of %%TP%%", elementPlacement.topLeft, 50, 50);
             topLeftElement.fontSize = 14.0;
+            topLeftElement.evenPages = true;
             templateA.elements.push(topLeftElement);
 
             var topCenterElement = new PageNumberingElement("%%SP(I)%% of %%ST%%", elementPlacement.topCenter, 50, 50);
             topCenterElement.fontSize = 14.0;
+            topCenterElement.oddPages = true;
             templateA.elements.push(topCenterElement);
 
             var topRightElement = new PageNumberingElement("%%CP(i)%% of %%TP%%", elementPlacement.topRight, -50, 50);
             topRightElement.fontSize = 14.0;
+            topRightElement.evenPages = true;
             templateA.elements.push(topRightElement);
 
             var bottomLeftElement = new PageNumberingElement("%%CP(I)%% of %%TP%%", elementPlacement.bottomLeft, 50, -50);
             bottomLeftElement.fontSize = 14.0;
+            bottomLeftElement.oddPages = true;
             templateA.elements.push(bottomLeftElement);
 
             var bottomCenterElement = new PageNumberingElement("%%CP(b)%% of %%TP%%", elementPlacement.bottomCenter, 50, -50);
             bottomCenterElement.font = Font.courier;
             bottomCenterElement.fontSize = 14.0;
+            bottomCenterElement.evenPages = true;
             templateA.elements.push(bottomCenterElement);
 
             var bottomRightElement = new PageNumberingElement("%%CP(a)%% of %%TP%%", elementPlacement.bottomRight, -50, -50);
             bottomRightElement.font = Font.timesItalic;
             bottomRightElement.fontSize = 14.0;
+            bottomRightElement.oddPages = true;
             templateA.elements.push(bottomRightElement);
+
             input1.template = templateA;
 
             var res = await pdfEndpoint.process();
@@ -275,7 +251,7 @@ describe('PdfEndpoint', function () {
 
     describe('ImageElement', function () {
 
-        it('Should return res.isSuccessful==true', async function () {
+        it('Gif ImageElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
             var input1 = new PdfInput(resource);
@@ -307,11 +283,15 @@ describe('PdfEndpoint', function () {
 
     describe('Barcode', function () {
         it('AztecBarcodeElement', async function () {
+
             var pdfEndpoint = getEndpoint(testParams);
+
             var input1 = new PageInput();
+
             var templateA = new Template("TemplateA");
+
             var barcodeElement = new AztecBarcodeElement("Hello World", elementPlacement.topCenter, 50);
-            barcodeElement.symbolSize = aztecSymbolSize.r95xC95;
+            barcodeElement.symbolSize = aztecSymbolSize.r105xC105;
             barcodeElement.xDimension = 3;
             barcodeElement.color = new RgbColor(0, 1, 0);
             barcodeElement.errorCorrection = 30;
@@ -322,6 +302,7 @@ describe('PdfEndpoint', function () {
             barcodeElement.yOffset = 100;
             templateA.elements.push(barcodeElement);
             input1.template = templateA;
+            
             pdfEndpoint.inputs.push(input1);
             var res = await pdfEndpoint.process();
             if (testParams.Logging) {
@@ -528,12 +509,64 @@ describe('PdfEndpoint', function () {
             assert.strictEqual(res.isSuccessful, true);
         });
 
+        it('Gs1DataBarBarcode', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+
+            var pdfResource = new PdfResource("./Resources/Emptypages.pdf")
+            var pdfInput = new PdfInput(pdfResource);
+
+            var templateA = new Template("TemplateA");
+            var barcodeElement = new Gs1DataBarBarcodeElement("12345678", elementPlacement.topCenter, 50, gs1DataBarType.omnidirectional, 0 , 100);
+            templateA.elements.push(barcodeElement);
+            pdfInput.template = templateA;
+            pdfEndpoint.inputs.push(pdfInput);
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/Gs1DataBarBarcodeElement.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+            assert.strictEqual(res.isSuccessful, true);
+        });
+
+        it('Iata25BarcodeElement', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+
+            var input1 = new PageInput();
+            var templateA = new Template("TemplateA");
+            var barcodeElement = new Iata25BarcodeElement("12345678", elementPlacement.topCenter, 50, 100, 10);
+            barcodeElement.height = 60;
+            barcodeElement.color = RgbColor.yellow;
+            barcodeElement.xDimension = 3;
+            barcodeElement.textColor = RgbColor.pink;
+            //barcodeElement.includeCheckDigit = true;
+            templateA.elements.push(barcodeElement);
+            
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/Iata25BarcodeElement.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+            assert.strictEqual(res.isSuccessful, true);
+        });
+
         it('StackedGs1DataBarBarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
             var templateA = new Template("TemplateA");
-            var barcodeElement = new StackedGs1DataBarBarcodeElement("1234567890", elementPlacement.topCenter, 150);
-            barcodeElement.stackedGs1DataBarType = stackedGs1DataBarType.stackedOmnidirectional;
+            var barcodeElement = new StackedGs1DataBarBarcodeElement("1234567890", elementPlacement.topCenter, stackedGs1DataBarType.stackedOmnidirectional, 150);
             templateA.elements.push(barcodeElement);
             input1.template = templateA;
             pdfEndpoint.inputs.push(input1);
