@@ -2,7 +2,15 @@
 
 # Node.js Client (`nodejs-client`)
 
-The NodeJS Client API uses the DynamicPDF Cloud API to create, merge, split, form fill, stamp, secure/encrypt PDF documents. For more information please visit [DynamicPDF Cloud API](https://cloud.dynamicpdf.com/ "DynamicPDF Cloud API Homepage"). Examples using this client library can be taken from [nodejs-client-examples](https://github.com/dynamicpdf-api/nodejs-client-examples "nodejs-client-examples at GitHub"). Support for other languages/platforms can be found on [GitHub](https://github.com/dynamicpdf-api "DynamicPDF Cloud API at GitHub") 
+The NodeJS Client API uses the DynamicPDF Cloud API to create, merge, split, form fill, stamp, secure/encrypt PDF documents. For more information please visit [DynamicPDF Cloud API](https://cloud.dynamicpdf.com/ "DynamicPDF Cloud API Homepage"). Examples using this client library can be taken from [nodejs-client-examples](https://github.com/dynamicpdf-api/nodejs-client-examples "nodejs-client-examples at GitHub"). Support for other languages/platforms can be found on [GitHub](https://github.com/dynamicpdf-api "DynamicPDF Cloud API at GitHub").
+
+## Installation
+
+To install the prebuilt binary, use [`npm`](https://docs.npmjs.com/). 
+
+```bash
+npm install nodejs-client
+```
 
 ## Documentation
 
@@ -20,11 +28,11 @@ The NodeJS Client API uses the DynamicPDF Cloud API to create, merge, split, for
 
 ## REST Client
 
-* The nodejs-client uses the node.js built-in HTTP module (https://nodejs.dev/learn/the-nodejs-http-module).
+* The `nodejs-client` uses the node.js built-in HTTP module (https://nodejs.dev/learn/the-nodejs-http-module).
 
 ## **Tutorials**
 
-The following table lists the tutorial project or file name.  In Visual Studio each tutorial is it's own project. In the remaining client libraries each tutorial is its own individual class. 
+The following table lists the tutorial project or file name.  
 
 | Tutorial Title                                     | Project/File/Class      | Tutorial Location                                            |
 | -------------------------------------------------- | ----------------------- | ------------------------------------------------------------ |
