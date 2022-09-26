@@ -29,69 +29,72 @@ describe('HTML to PDF', function () {
     it('Using string', async function () {
         var htmlEndpoint = getEndpoint(testParams);
         var input = new HtmlInput("<html><body>hello</body></html>");
-        var pageSize= new PageSize();
-        pageSize.Name=pageSizeName.A5;
-        htmlEndpoint.PageSize=pageSize;
+        var pageSize = new PageSize();
+        pageSize.Name = pageSizeName.A5;
+        htmlEndpoint.PageSize = pageSize;
         htmlEndpoint.Inputs = input;
         var res = await htmlEndpoint.process();
-        
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/HtmlString.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        
+
+        if (res.isSuccessful) {
+            var outStream = fs.createWriteStream("./output/HtmlString.pdf");
+            outStream.write(res.content);
+            outStream.close();
+        }
+
         assert.strictEqual(res.isSuccessful, true);
 
     });
     it('Using string and basepath', async function () {
         var htmlEndpoint = getEndpoint(testParams);
-        var input = new HtmlInput("<html><body>hello<img src='cat.png'></img></body></html>","./imageResources/");
-        var pageSize= new PageSize(pageSizeName.DoublePostcard);
-        htmlEndpoint.PageSize=pageSize;
+        var input = new HtmlInput("<html><body><h1> HELLO</h1> <img src='googlelogo_color_272x92dp.png' /></body></html>");
+        htmlEndpoint.BasePath= "https://www.google.com/images/branding/googlelogo/1x/";
+        var pageSize = new PageSize(pageSizeName.DoublePostcard);
+        htmlEndpoint.PageSize = pageSize;
+        htmlEndpoint.Orientation = orientation.landscape;
         htmlEndpoint.Inputs = input;
         var res = await htmlEndpoint.process();
-        
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/HtmlStringAndBasepath.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        
+
+        if (res.isSuccessful) {
+            var outStream = fs.createWriteStream("./output/HtmlStringAndBasepath.pdf");
+            outStream.write(res.content);
+            outStream.close();
+        }
+
         assert.strictEqual(res.isSuccessful, true);
 
     });
     it('Using resource', async function () {
         var htmlEndpoint = getEndpoint(testParams);
         var input = new HtmlInput('./Resources/htmlSample.html');
-        var pageSize= new PageSize(600,500);
-        htmlEndpoint.PageSize=pageSize;
+        var pageSize = new PageSize(600, 500);
+        htmlEndpoint.Orientation = orientation.portrait;
+        htmlEndpoint.PageSize = pageSize;
         htmlEndpoint.Inputs = input;
         var res = await htmlEndpoint.process();
-        
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/HtmlResource.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        
+
+        if (res.isSuccessful) {
+            var outStream = fs.createWriteStream("./output/HtmlResource.pdf");
+            outStream.write(res.content);
+            outStream.close();
+        }
+
         assert.strictEqual(res.isSuccessful, true);
 
     });
     it('Using string and Margin', async function () {
         var htmlEndpoint = getEndpoint(testParams);
         var input = new HtmlInput("<html><body>hello</body></html>");
-        htmlEndpoint.Orientation=orientation.landscape;
-        htmlEndpoint.TopMargin=300;
+        htmlEndpoint.Orientation = orientation.landscape;
+        htmlEndpoint.TopMargin = 300;
         htmlEndpoint.Inputs = input;
         var res = await htmlEndpoint.process();
-        
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/HtmlStringWithMargin.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        
+
+        if (res.isSuccessful) {
+            var outStream = fs.createWriteStream("./output/HtmlStringWithMargin.pdf");
+            outStream.write(res.content);
+            outStream.close();
+        }
+
         assert.strictEqual(res.isSuccessful, true);
 
     });
