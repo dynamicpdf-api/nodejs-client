@@ -5,8 +5,8 @@ const testConfigFile = './test-config.json';
 export class TestParams {
     #params = null;
     #defaults = {
-        ApiKey: "[YOUR API KEY GOES HERE]",
-        BaseUrl: "https://api.dynamicpdf.com/",
+        ApiKey: "DP.99CFJ3uF9Gr1lKDUImxceCiPvwCmsoevvvcqizChDATTSJsYSH/zvAVF",
+        BaseUrl: "https://localhost:44397/",
         AuthTLS: true,
         Logging: false
     };
