@@ -77,4 +77,39 @@ describe('HTML to PDF', function () {
         assert.strictEqual(res.isSuccessful, true);
 
     });
+    it('Using Resource and Margin', async function () {
+        var resource = new HtmlResource("./Resources/htmlSample.html");
+        var pdfEndpoint = getEndpoint(testParams);
+        var input = new HtmlInput(resource,"",PageSize.DoublePostcard);
+        input.PageOrientation = Orientation.landscape;
+        input.TopMargin = 300;
+        pdfEndpoint.inputs.push(input);
+        var res = await pdfEndpoint.process();
+
+        if (res.isSuccessful) {
+            var outStream = fs.createWriteStream("./output/HtmlResourceWithMargin.pdf");
+            outStream.write(res.content);
+            outStream.close();
+        }
+
+        assert.strictEqual(res.isSuccessful, true);
+
+    });
+    it('Using Resource and PageSize', async function () {
+        var resource = new HtmlResource("./Resources/htmlSample.html");
+        var pdfEndpoint = getEndpoint(testParams);
+        var input = new HtmlInput(resource,"" ,PageSize.DoublePostcard);
+        //input.PageSize=PageSize.A3;
+        pdfEndpoint.inputs.push(input);
+        var res = await pdfEndpoint.process();
+
+        if (res.isSuccessful) {
+            var outStream = fs.createWriteStream("./output/HtmlResourceWithPageSize.pdf");
+            outStream.write(res.content);
+            outStream.close();
+        }
+
+        assert.strictEqual(res.isSuccessful, true);
+
+    });
 });
