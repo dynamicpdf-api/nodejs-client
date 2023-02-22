@@ -29,7 +29,7 @@ describe('Dlex Endpoint', function () {
 
         var testParams = new TestParams();
         var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json", "SimpleReportData.json")
-        var dlexEndPoint = new DlexLayout("SimpleReportWithCoverPage.dlex", layoutData);
+        var dlexEndPoint = new DlexLayout("TFWResources/SimpleReportWithCoverPage.dlex", layoutData);
         dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
         var res = await dlexEndPoint.process();
 
@@ -49,7 +49,7 @@ describe('Dlex Endpoint', function () {
 
         var testParams = new TestParams();
         var layoutData = new LayoutDataResource("./Resources/InvoiceReportData.json", "InvoiceReportData.json")
-        var dlexEndPoint = new DlexLayout("Invoice.dlex", layoutData);
+        var dlexEndPoint = new DlexLayout("TFWResources/InvoiceOrderId.dlex", layoutData);
         dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
         var res = await dlexEndPoint.process();
 

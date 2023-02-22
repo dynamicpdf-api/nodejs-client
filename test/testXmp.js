@@ -27,7 +27,7 @@ describe('Xmp Endpoint', function () {
     it('XmpResource', async function () {
 
         var testParams = new TestParams();
-        var resource = new PdfResource("./Resources/bab6c782-2e85-4c6a-b248-9518a06549e900000.pdf", "bab6c782-2e85-4c6a-b248-9518a06549e900000.pdf")
+        var resource = new PdfResource("./Resources/XmpAndOtherSample.pdf", "XmpAndOtherSample.pdf")
         var text = new PdfXmp(resource);
         text = getEndpoint(text, testParams);
         var res = await text.process();
