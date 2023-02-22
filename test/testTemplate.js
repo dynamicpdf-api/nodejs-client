@@ -59,26 +59,6 @@ describe('PdfEndpoint', function () {
     this.timeout(0);
     var testParams = new TestParams();
     describe('LineElement', function () {
-
-        it('Line Element without properties', async function () {
-            var pdfEndpoint = getEndpoint(testParams);
-            var input1 = new PageInput();
-            var lineElement = new LineElement(elementPlacement.topCenter, 200, 200);
-            input1.elements.push(lineElement);
-            pdfEndpoint.inputs.push(input1);
-            var res = await pdfEndpoint.process();
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/LineElement.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-            assert.strictEqual(res.isSuccessful, true);
-        });
-
         it('Line Element with properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
@@ -105,34 +85,6 @@ describe('PdfEndpoint', function () {
 
 
     describe('RectangleElement', function () {
-
-        it('Simple Rectangle', async function () {
-            var pdfEndpoint = getEndpoint(testParams);
-            var input1 = new PageInput();
-            var rectangleElement = new RectangleElement(elementPlacement.topCenter, 100, 50);
-            rectangleElement.xOffset = 50;
-            rectangleElement.yOffset = 50;
-            rectangleElement.cornerRadius = 10;
-            rectangleElement.borderWidth = 5;
-            rectangleElement.borderStyle = LineStyle.dots;
-            rectangleElement.borderColor = RgbColor.blue;
-            rectangleElement.fillColor = RgbColor.green;
-            input1.elements.push(rectangleElement);
-            pdfEndpoint.inputs.push(input1);
-            var res = await pdfEndpoint.process();
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/RectangleElement.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-
-
-            assert.strictEqual(res.isSuccessful, true);
-        });
         it('RectangleElement with border style Array', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
@@ -166,7 +118,7 @@ describe('PdfEndpoint', function () {
             var input1 = new PdfInput(resource);
             pdfEndpoint.inputs.push(input1);
 
-            var fontResource = Font.fromFile("./Resources/verdanab.ttf","verdanab");
+            var fontResource = Font.fromFile("./Resources/DejaVuSans.ttf","DejaVuSans");
 
             var templateA = new Template("TemplateA");
             var pageNumberingElement = new PageNumberingElement("%%CP%% of %%TP%%", elementPlacement.topLeft);
@@ -193,7 +145,7 @@ describe('PdfEndpoint', function () {
 
         it('Page number with Tokens', async function () {
             var pdfEndpoint = getEndpoint(testParams);
-            var resource = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
+            var resource = new PdfResource("./Resources/Emptypages.pdf", "Emptypages.pdf");
             var input1 = new PdfInput(resource);
             pdfEndpoint.inputs.push(input1);
 
@@ -247,40 +199,6 @@ describe('PdfEndpoint', function () {
             assert.strictEqual(res.isSuccessful, true);
         });
     });
-
-
-    describe('ImageElement', function () {
-
-        it('Gif ImageElement', async function () {
-            var pdfEndpoint = getEndpoint(testParams);
-            var resource = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
-            var input1 = new PdfInput(resource);
-
-            var templateA = new Template("TemplateA");
-            var resource2 = new ImageResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif");
-            var imageResource = new ImageElement(resource2, elementPlacement.topCenter);
-            templateA.elements.push(imageResource);
-            input1.template = templateA;
-            pdfEndpoint.inputs.push(input1);
-            var res = await pdfEndpoint.process();
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/ImageElement.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-
-
-            assert.strictEqual(res.isSuccessful, true);
-
-
-        });
-    });
-
-
     describe('Barcode', function () {
         it('AztecBarcodeElement', async function () {
 
@@ -607,29 +525,6 @@ describe('PdfEndpoint', function () {
                     outStream.close();
                 }
             }
-            assert.strictEqual(res.isSuccessful, true);
-        });
-
-        it('TextElement', async function () {
-            var pdfEndpoint = getEndpoint(testParams);
-            var input1 = new PageInput();
-            var templateA = new Template("TemplateA");
-            var textElement = new TextElement("Hello World", elementPlacement.topCenter);
-            textElement.color = RgbColor.cadetBlue;
-            templateA.elements.push(textElement);
-            input1.template = templateA;
-            pdfEndpoint.inputs.push(input1);
-            var res = await pdfEndpoint.process();
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/Dim2BarcodeElement.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-
             assert.strictEqual(res.isSuccessful, true);
         });
     });

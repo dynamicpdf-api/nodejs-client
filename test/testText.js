@@ -28,7 +28,7 @@ describe('Text Endpoint', function () {
 
         var testParams = new TestParams();
 
-        var resource = new PdfResource("./Resources/Test_Textmarker_Serienbrief(2).pdf", "Test_Textmarker_Serienbrief(2).pdf")
+        var resource = new PdfResource("./Resources/TimeMachine.pdf", "TimeMachine.pdf")
         var text = new PdfText(resource);
         text = getEndpoint(text, testParams);
         var res = await text.process();
@@ -49,7 +49,7 @@ describe('Text Endpoint', function () {
 
         var testParams = new TestParams();
 
-        var resource = new PdfResource("./Resources/Test_Textmarker_Serienbrief(2).pdf", "Test_Textmarker_Serienbrief(2).pdf")
+        var resource = new PdfResource("./Resources/TimeMachine.pdf", "TimeMachine.pdf")
         var text = new PdfText(resource);
         text.startPage = 5;
         text.pageCount = 1;
@@ -72,7 +72,7 @@ describe('Text Endpoint', function () {
 
         var testParams = new TestParams();
 
-        var resource = new PdfResource("./Resources/Test_Textmarker_Serienbrief(2).pdf", "Test_Textmarker_Serienbrief(2).pdf")
+        var resource = new PdfResource("./Resources/TimeMachine.pdf", "TimeMachine.pdf")
         var text = new PdfText(resource);
         text.startPage = 2;
         text.pageCount = 3;

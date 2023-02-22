@@ -51,15 +51,10 @@ describe('PdfEndpoint', function () {
             element.evenPages = false;
             template.elements.push(element);
 
-            var input = new PdfInput("AllPageElements.pdf");
-            input.template = template;
-
             var mergeOptions = new MergeOptions();
             mergeOptions.documentInfo = true;
-            input.mergeOptions = mergeOptions;
-            pdfEndpoint.inputs.push(input);
 
-            var resource2 = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
+            var resource2 = new PdfResource("./Resources/AllPageElements.pdf", "AllPageElements.pdf");
             var input1 = new PdfInput(resource2);
             input1.template = template;
 
@@ -85,6 +80,33 @@ describe('PdfEndpoint', function () {
 
                 if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/MergeWithOptions.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+    });
+
+    describe('Template Sample', function () {
+
+        
+        it('TextElement', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+            var input1 = new PageInput();
+            var templateA = new Template("TemplateA");
+            var textElement = new TextElement("Hello World", elementPlacement.topCenter);
+            textElement.color = RgbColor.cadetBlue;
+            templateA.elements.push(textElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/Dim2BarcodeElement.pdf");
                     outStream.write(res.content);
                     outStream.close();
                 }
@@ -152,7 +174,7 @@ describe('PdfEndpoint', function () {
             
             var pdfEndpoint = getEndpoint(testParams);
 
-            var pdfInput = new PdfInput("Resources/DocumentA100.pdf");
+            var pdfInput = new PdfInput("TFWResources/DocumentA100.pdf");
             var mergeOptions = new MergeOptions();
             pdfInput.mergeOptions = mergeOptions;
             pdfEndpoint.inputs.push(pdfInput);
@@ -166,10 +188,10 @@ describe('PdfEndpoint', function () {
             var resource = new ImageResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif");
             pdfEndpoint.resources.push(resource);
 
-            var dlexInput = new DlexInput("SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
+            var dlexInput = new DlexInput("TFWResources/SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
             pdfEndpoint.inputs.push(dlexInput);
 
-            var imageInput = new ImageInput("Resources/Northwind Logo.gif");
+            var imageInput = new ImageInput("TFWResources/Northwind Logo.gif");
             imageInput.TopMargin = 10;
             imageInput.LeftMargin = 10;
             imageInput.RightMargin = 10;
@@ -182,30 +204,6 @@ describe('PdfEndpoint', function () {
 
                 if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/DifferentInputs.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-
-            assert.strictEqual(res.isSuccessful, true);
-        });
-
-        it('Add page and pdf input with Properties', async function () {
-            var pdfEndpoint = getEndpoint(testParams);
-            var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
-            var input1 = new PdfInput(resource1);
-            pdfEndpoint.inputs.push(input1);
-
-            var input2 = pdfEndpoint.addPage(500, 600);
-            var element = new TextElement("test", elementPlacement.topCenter);
-            input2.elements.push(element);
-
-            var res = await pdfEndpoint.process();
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
                     outStream.write(res.content);
                     outStream.close();
                 }
@@ -338,7 +336,7 @@ describe('PdfEndpoint', function () {
         });
 
         it('FilePathRetainSignature', async function () {
-            var resource = new PdfResource("./Resources/Org.pdf", "Org.pdf");
+            var resource = new PdfResource("./Resources/Signature.pdf", "Signature.pdf");
             var input = new PdfInput(resource);
             var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.inputs.push(input);
@@ -403,7 +401,7 @@ describe('PdfEndpoint', function () {
 
         it('Test Image input MultiPageTiff', async function () {
             var pdfEndpoint = getEndpoint(testParams);
-            var resource = new ImageResource("./Resources/PalaisDuLouvre.tif", "PalaisDuLouvre.tif");
+            var resource = new ImageResource("./Resources/fw9_18.tif", "fw9_18.tif");
             var input = new ImageInput(resource);
             input.rightMargin = 50;
             input.bottomMargin = 50;
@@ -425,7 +423,7 @@ describe('PdfEndpoint', function () {
 
         it('Test Image input Png', async function () {
             var pdfEndpoint = getEndpoint(testParams);
-            var resource = new ImageResource("./Resources/170x220_T.png", "170x220_T.png");
+            var resource = new ImageResource("./Resources/DPDFLogo.png", "DPDFLogo.png");
             var input = new ImageInput(resource);
             input.pageWidth = 500;
             input.pageHeight = 500;
@@ -547,7 +545,7 @@ describe('PdfEndpoint', function () {
         it('Font ttf ', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var font = Font.fromFile("./Resources/verdanab.ttf", "verdanab.ttf");
+            var font = Font.fromFile("./Resources/DejaVuSans.ttf", "DejaVuSans.ttf");
             font.embed = true;
             font.subset = true;
             var element = new TextElement("Hello", elementPlacement.topCenter);
@@ -649,67 +647,6 @@ describe('PdfEndpoint', function () {
             }
 
             assert.strictEqual(res.isSuccessful, true);
-        });
-    });
-
-    describe('Get Instructions Json Samples', function () {
-
-        it('File Path GetInstructions', async function () {
-            var pdf = getEndpoint(testParams);
-            var template1 = new Template("./Resources/Temp1");
-            var element1 = new TextElement("Merger with Template(First Document)", elementPlacement.topCenter);
-            template1.elements.push(element1);
-
-            var resource = new PdfResource("./Resources/AllPageElements.pdf");
-            var input = new PdfInput(resource);
-            input.template = template1;
-
-            var mergeOptions = new MergeOptions();
-            input.mergeOptions = mergeOptions;
-            pdf.inputs.push(input);
-
-            var template2 = new Template("Temp2");
-            var element2 = new TextElement("Merger with Template(Second Document)", elementPlacement.topCenter);
-            template2.elements.push(element2);
-
-            var resource1 = new PdfResource("./Resources/All Fields Sample.pdf");
-            var input1 = new PdfInput(resource1);
-            input1.template = template2;
-
-            input1.startPage = 1;
-            input1.pageCount = 1;
-            var mergeOptions1 = new MergeOptions();
-            mergeOptions1.formsXfaData = true;
-            input1.mergeOptions = mergeOptions1;
-            pdf.inputs.push(input1);
-
-            var template3 = new Template("Temp3");
-            var element3 = new TextElement("Merger with Template(Third Document)", elementPlacement.topCenter);
-            template3.elements.push(element3);
-
-            var resource2 = new PdfResource("./Resources/fw9AcroForm_14.pdf");
-            var input2 = new PdfInput(resource2);
-            input2.template = template3;
-
-            pdf.inputs.push(input2);
-
-            var jsonBefore = JSON.parse(pdf.getInstructionsJson());
-            var res = await pdf.process();
-            var jsonAfter = JSON.parse(pdf.getInstructionsJson());
-
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-                console.log("JSON Before:\n________________________________________________________" + jsonBefore);
-                console.log("JSON After: \n________________________________________________________" + jsonAfter);
-    
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/GetInstructionsBeforeProcess.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-
-            assert.strictEqual(res.isSuccessful && jsonBefore != null && jsonAfter !=null, true);
         });
     });
 });

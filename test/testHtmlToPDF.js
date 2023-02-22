@@ -44,11 +44,17 @@ describe('HTML to PDF', function () {
         assert.strictEqual(res.isSuccessful, true);
 
     });
-    it('Using string and basepath', async function () {
+    it('Using string and parameters', async function () {
         var resource = new HtmlResource("<html><body><h1> HELLO</h1> <img src='googlelogo_color_272x92dp.png' /></body></html>");
         var pdfEndpoint = getEndpoint(testParams);
         var input = new HtmlInput(resource, PageSize.DoublePostcard, Orientation.landscape);
         input.BasePath = "https://www.google.com/images/branding/googlelogo/1x/";
+        input.PageWidth = 300;
+        input.PageHeight = 200;
+        input.TopMargin = 10;
+        input.BottomMargin = 10;
+        input.RightMargin = 40;
+        input.LeftMargin = 40;
         pdfEndpoint.inputs.push(input);
         var res = await pdfEndpoint.process();
         if (testParams.Logging) {
@@ -62,12 +68,10 @@ describe('HTML to PDF', function () {
         assert.strictEqual(res.isSuccessful, true);
 
     });
-    it('Using string and Margin', async function () {
-        var resource = new HtmlResource("<html><body>hello</body></html>");
+    it('Using Resource', async function () {
+        var resource = new HtmlResource("./Resources/html.html");
         var pdfEndpoint = getEndpoint(testParams);
         var input = new HtmlInput(resource, PageSize.DoublePostcard);
-        input.Orientation = Orientation.landscape;
-        input.TopMargin = 300;
         pdfEndpoint.inputs.push(input);
         var res = await pdfEndpoint.process();
         if (testParams.Logging) {
@@ -81,12 +85,12 @@ describe('HTML to PDF', function () {
         assert.strictEqual(res.isSuccessful, true);
 
     });
-    it('Using Resource and Margin', async function () {
-        var resource = new HtmlResource("./Resources/htmlSample.html");
+    it('Using Resource and PageHeightPageWidth', async function () {
+        var resource = new HtmlResource("./Resources/html.html");
         var pdfEndpoint = getEndpoint(testParams);
         var input = new HtmlInput(resource, "", PageSize.DoublePostcard);
-        input.PageOrientation = Orientation.landscape;
-        input.TopMargin = 300;
+        input.PageHeight = 400;
+        input.PageWidth = 300;
         pdfEndpoint.inputs.push(input);
         var res = await pdfEndpoint.process();
         if (testParams.Logging) {
@@ -101,10 +105,33 @@ describe('HTML to PDF', function () {
 
     });
     it('Using Resource and PageSize', async function () {
-        var resource = new HtmlResource("./Resources/htmlSample.html");
+        var resource = new HtmlResource("./Resources/html.html");
         var pdfEndpoint = getEndpoint(testParams);
         var input = new HtmlInput(resource, "", PageSize.DoublePostcard);
         //input.PageSize=PageSize.A3;
+        pdfEndpoint.inputs.push(input);
+        var res = await pdfEndpoint.process();
+        if (testParams.Logging) {
+            console.log("Result: " + res.isSuccessful);
+            if (res.isSuccessful) {
+                var outStream = fs.createWriteStream("./output/HtmlResourceWithPageSize.pdf");
+                outStream.write(res.content);
+                outStream.close();
+            }
+        }
+        assert.strictEqual(res.isSuccessful, true);
+
+    });
+    it('Using Resource and parameters', async function () {
+        var resource = new HtmlResource("./Resources/html.html");
+        var pdfEndpoint = getEndpoint(testParams);
+        var input = new HtmlInput(resource, "", PageSize.DoublePostcard);
+        //input.PageSize=PageSize.A3;
+        input.PageOrientation = Orientation.landscape;
+        input.LeftMargin = 30;
+        input.RightMargin =30;
+        input.TopMargin =30;
+        input.BottomMargin=30;
         pdfEndpoint.inputs.push(input);
         var res = await pdfEndpoint.process();
         if (testParams.Logging) {

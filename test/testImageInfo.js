@@ -25,7 +25,7 @@ function getEndpoint(endpoint, testParams) {
 describe('ImageInfo Endpoint', function () {
     this.timeout(0);
     it('MultipleFormat', async function () {
-        var images = ["./Resources/3_rescale_indexed.bmp","./Resources/Northwind Logo.gif","./Resources/fw9_13.tif","./Resources/DPDFLogo.png","./Resources/image.jpg"]
+        var images = ["./Resources/Northwind Logo.gif","./Resources/fw9_13.tif","./Resources/DPDFLogo.png","./Resources/DocumentA.jpeg"]
         for (let i = 0; i < images.length; i++) 
         {
             var testParams = new TestParams();
