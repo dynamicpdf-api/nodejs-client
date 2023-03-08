@@ -129,9 +129,9 @@ describe('HTML to PDF', function () {
         //input.PageSize=PageSize.A3;
         input.PageOrientation = Orientation.landscape;
         input.LeftMargin = 30;
-        input.RightMargin =30;
-        input.TopMargin =30;
-        input.BottomMargin=30;
+        input.RightMargin = 30;
+        input.TopMargin = 30;
+        input.BottomMargin = 30;
         pdfEndpoint.inputs.push(input);
         var res = await pdfEndpoint.process();
         if (testParams.Logging) {
