@@ -143,6 +143,37 @@ describe('PdfEndpoint', function () {
             assert.strictEqual(res.isSuccessful, true);
         });
 
+        it('Page number with Fonts', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+            var resource = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
+            var input1 = new PdfInput(resource);
+            pdfEndpoint.inputs.push(input1);
+
+            var fontResource = "./Resources/DejaVuSans.ttf";    
+
+            var templateA = new Template("TemplateA");
+            var pageNumberingElement = new PageNumberingElement("%%CP%% of %%TP%%", elementPlacement.topLeft);
+            pageNumberingElement.font = new Font(fontResource);
+            pageNumberingElement.fontSize = 14;
+            pageNumberingElement.color = RgbColor.red;
+            templateA.elements.push(pageNumberingElement);
+            input1.template = templateA;
+
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/pageNumberingElementWithFonts.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+
         it('Page number with Tokens', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/Emptypages.pdf", "Emptypages.pdf");
