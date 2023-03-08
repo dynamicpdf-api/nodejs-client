@@ -109,7 +109,7 @@ describe('PdfEndpoint', function () {
         });
     });
 
-
+    
     describe('pageNumberingElement', function () {
 
         it('Page number', async function () {
@@ -118,7 +118,7 @@ describe('PdfEndpoint', function () {
             var input1 = new PdfInput(resource);
             pdfEndpoint.inputs.push(input1);
 
-            var fontResource = Font.fromFile("./Resources/DejaVuSans.ttf","DejaVuSans");
+            var fontResource = Font.fromFile("./Resources/DejaVuSans.ttf", "DejaVuSans");
 
             var templateA = new Template("TemplateA");
             var pageNumberingElement = new PageNumberingElement("%%CP%% of %%TP%%", elementPlacement.topLeft);
@@ -143,6 +143,37 @@ describe('PdfEndpoint', function () {
             assert.strictEqual(res.isSuccessful, true);
         });
 
+        it('Page number with Fonts', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+            var resource = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
+            var input1 = new PdfInput(resource);
+            pdfEndpoint.inputs.push(input1);
+
+            var fontResource = "./Resources/DejaVuSans.ttf";    
+
+            var templateA = new Template("TemplateA");
+            var pageNumberingElement = new PageNumberingElement("%%CP%% of %%TP%%", elementPlacement.topLeft);
+            pageNumberingElement.font = new Font(fontResource);
+            pageNumberingElement.fontSize = 14;
+            pageNumberingElement.color = RgbColor.red;
+            templateA.elements.push(pageNumberingElement);
+            input1.template = templateA;
+
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/pageNumberingElementWithFonts.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+
         it('Page number with Tokens', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new PdfResource("./Resources/Emptypages.pdf", "Emptypages.pdf");
@@ -151,33 +182,37 @@ describe('PdfEndpoint', function () {
 
             var templateA = new Template("TemplateA");
             var topLeftElement = new PageNumberingElement("%%CP(1)%% of %%TP%%", elementPlacement.topLeft, 50, 50);
+            topLeftElement.font = Font.courier;
             topLeftElement.fontSize = 14.0;
             topLeftElement.evenPages = true;
             templateA.elements.push(topLeftElement);
 
             var topCenterElement = new PageNumberingElement("%%SP(I)%% of %%ST%%", elementPlacement.topCenter, 50, 50);
+            topCenterElement.font = Font.courierBold;
             topCenterElement.fontSize = 14.0;
             topCenterElement.oddPages = true;
             templateA.elements.push(topCenterElement);
 
             var topRightElement = new PageNumberingElement("%%CP(i)%% of %%TP%%", elementPlacement.topRight, -50, 50);
+            topRightElement.font = Font.helvetica;
             topRightElement.fontSize = 14.0;
             topRightElement.evenPages = true;
             templateA.elements.push(topRightElement);
 
             var bottomLeftElement = new PageNumberingElement("%%CP(I)%% of %%TP%%", elementPlacement.bottomLeft, 50, -50);
+            bottomLeftElement.font = Font.helveticaOblique;
             bottomLeftElement.fontSize = 14.0;
             bottomLeftElement.oddPages = true;
             templateA.elements.push(bottomLeftElement);
 
             var bottomCenterElement = new PageNumberingElement("%%CP(b)%% of %%TP%%", elementPlacement.bottomCenter, 50, -50);
-            bottomCenterElement.font = Font.courier;
+            bottomCenterElement.font = Font.timesRoman;
             bottomCenterElement.fontSize = 14.0;
             bottomCenterElement.evenPages = true;
             templateA.elements.push(bottomCenterElement);
 
             var bottomRightElement = new PageNumberingElement("%%CP(a)%% of %%TP%%", elementPlacement.bottomRight, -50, -50);
-            bottomRightElement.font = Font.timesItalic;
+            bottomRightElement.font = Font.timesBoldItalic;
             bottomRightElement.fontSize = 14.0;
             bottomRightElement.oddPages = true;
             templateA.elements.push(bottomRightElement);
@@ -220,7 +255,7 @@ describe('PdfEndpoint', function () {
             barcodeElement.yOffset = 100;
             templateA.elements.push(barcodeElement);
             input1.template = templateA;
-            
+
             pdfEndpoint.inputs.push(input1);
             var res = await pdfEndpoint.process();
             if (testParams.Logging) {
@@ -434,7 +469,7 @@ describe('PdfEndpoint', function () {
             var pdfInput = new PdfInput(pdfResource);
 
             var templateA = new Template("TemplateA");
-            var barcodeElement = new Gs1DataBarBarcodeElement("12345678", elementPlacement.topCenter, 50, gs1DataBarType.omnidirectional, 0 , 100);
+            var barcodeElement = new Gs1DataBarBarcodeElement("12345678", elementPlacement.topCenter, 50, gs1DataBarType.omnidirectional, 0, 100);
             templateA.elements.push(barcodeElement);
             pdfInput.template = templateA;
             pdfEndpoint.inputs.push(pdfInput);
@@ -463,7 +498,7 @@ describe('PdfEndpoint', function () {
             barcodeElement.textColor = RgbColor.pink;
             //barcodeElement.includeCheckDigit = true;
             templateA.elements.push(barcodeElement);
-            
+
             input1.template = templateA;
             pdfEndpoint.inputs.push(input1);
 
