@@ -1,6 +1,7 @@
 import fs from 'fs';
 import assert from 'assert';
 import { TestParams } from './init.js';
+import { RectangleElement } from '../lib/elements/RectangleElement.js';
 import {
     PdfResource,
     PdfInput,
@@ -641,6 +642,32 @@ describe('PdfEndpoint', function () {
 
                 if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/grayColorPattern.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+    });
+    describe('Get Instructions Json Samples', function () {
+        it('Google Font', async function () {
+
+            var testParams = new TestParams();
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = new PageInput();
+            var textElement = new TextElement("Hello World", elementPlacement.topCenter,100,200);
+            textElement.font= Font.google("kablammo");
+            textElement.fontSize = 40;
+            pageInput.elements.push(textElement);
+            pdfEndpoint.inputs.push(pageInput);
+
+            var res = await pdfEndpoint.process();
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/rectangleElement.pdf");
                     outStream.write(res.content);
                     outStream.close();
                 }
