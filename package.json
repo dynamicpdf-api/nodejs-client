@@ -31,6 +31,7 @@
   "license": "MIT",
   "dependencies": {
     "form-data": "^4.x.x",
+    "path": "^0.12.7",
     "uuid": "^8.x.x"
   },
   "bugs": {

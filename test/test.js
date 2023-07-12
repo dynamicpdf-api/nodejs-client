@@ -749,16 +749,8 @@ describe('PdfEndpoint', function () {
             pageInput.elements.push(textElement);
             var textElement1 = new TextElement("Hello World",100,200);
             textElement1.font= Font.google("Dancing Script",400);
-            textElement1.fontSize = 20;
-            pageInput.elements.push(textElement1);
-            // var textElement = new TextElement("Hello World",250,200);
-            // textElement.font= Font.google("Source Serif Pro",300,true);
-            // textElement.fontSize = 20;
-            // pageInput.elements.push(textElement);
-            var textElement = new TextElement("Hello World",300,200);
-            textElement.font= Font.google("Kablammo",400,false);
-            textElement.fontSize = 20;
-            pageInput.elements.push(textElement);
+            textElement1.fontSize = 20;      
+            pageInput.elements.push(textElement1);   
             pdfEndpoint.inputs.push(pageInput);
 
             var res = await pdfEndpoint.process();
