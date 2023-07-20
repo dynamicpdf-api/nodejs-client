@@ -1,6 +1,6 @@
 {
   "name": "@dynamicpdf/api",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Node.js client library for the DynamicPDF Cloud API.",
   "main": "lib/index.js",
   "type": "module",
@@ -31,6 +31,7 @@
   "license": "MIT",
   "dependencies": {
     "form-data": "^4.x.x",
+    "path": "^0.12.7",
     "uuid": "^8.x.x"
   },
   "bugs": {

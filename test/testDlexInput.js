@@ -96,4 +96,26 @@ describe('Dlex Input', function () {
         }
         assert.strictEqual(res.isSuccessful, true);
     });
+
+    it('SimpleDlex_ImageURI', async function () {
+        var testParams = new TestParams();
+        var pdf = getEndpoint(testParams);
+        var dlex = new DlexResource("./Resources/dynamic-image.dlex");
+        var layoutData = new LayoutDataResource("./Resources/ImageData.json");
+        var dlexInput = new DlexInput(dlex, layoutData);
+
+        pdf.inputs.push(dlexInput);
+        var res = await pdf.process();
+
+        if (testParams.Logging) {
+            console.log("Result: " + res.isSuccessful);
+
+            if (res.isSuccessful) {
+                var outStream = fs.createWriteStream("./output/SimpleDlex_ImageURIoutput.pdf");
+                outStream.write(res.content);
+                outStream.close();
+            }
+        }
+        assert.strictEqual(res.isSuccessful, true);
+    });
 });

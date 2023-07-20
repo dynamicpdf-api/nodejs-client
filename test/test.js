@@ -1,6 +1,7 @@
 import fs from 'fs';
 import assert from 'assert';
 import { TestParams } from './init.js';
+import { RectangleElement } from '../lib/elements/RectangleElement.js';
 import {
     PdfResource,
     PdfInput,
@@ -649,4 +650,120 @@ describe('PdfEndpoint', function () {
             assert.strictEqual(res.isSuccessful, true);
         });
     });
+
+    describe('Get Instructions Json Samples', function () {
+
+        it('File Path GetInstructions', async function () {
+            var pdf = getEndpoint(testParams);
+            var template1 = new Template("./Resources/Temp1");
+            var element1 = new TextElement("Merger with Template(First Document)", elementPlacement.topCenter);
+            template1.elements.push(element1);
+
+            var resource = new PdfResource("./Resources/AllPageElements.pdf");
+            var input = new PdfInput(resource);
+            input.template = template1;
+
+            var mergeOptions = new MergeOptions();
+            input.mergeOptions = mergeOptions;
+            pdf.inputs.push(input);
+
+            var template2 = new Template("Temp2");
+            var element2 = new TextElement("Merger with Template(Second Document)", elementPlacement.topCenter);
+            template2.elements.push(element2);
+
+            var resource1 = new PdfResource("./Resources/All Fields Sample.pdf");
+            var input1 = new PdfInput(resource1);
+            input1.template = template2;
+
+            input1.startPage = 1;
+            input1.pageCount = 1;
+            var mergeOptions1 = new MergeOptions();
+            mergeOptions1.formsXfaData = true;
+            input1.mergeOptions = mergeOptions1;
+            pdf.inputs.push(input1);
+
+            var template3 = new Template("Temp3");
+            var element3 = new TextElement("Merger with Template(Third Document)", elementPlacement.topCenter);
+            template3.elements.push(element3);
+
+            var resource2 = new PdfResource("./Resources/fw9AcroForm_14.pdf");
+            var input2 = new PdfInput(resource2);
+            input2.template = template3;
+
+            pdf.inputs.push(input2);
+
+            var jsonBefore = JSON.parse(pdf.getInstructionsJson());
+            var res = await pdf.process();
+            var jsonAfter = JSON.parse(pdf.getInstructionsJson());
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                console.log("JSON Before:\n________________________________________________________" + jsonBefore);
+                console.log("JSON After: \n________________________________________________________" + jsonAfter);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/GetInstructionsBeforeProcess.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful && jsonBefore != null && jsonAfter != null, true);
+        });
+    });
+
+    describe('Get Instructions Json Samples', function () {
+        it('Google Font', async function () {
+
+            var testParams = new TestParams();
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = new PageInput();
+            var textElement = new TextElement("Hello World", elementPlacement.topCenter,100,200);
+            textElement.font= Font.google("Kablammo");
+            textElement.fontSize = 40;
+            pageInput.elements.push(textElement);
+            pdfEndpoint.inputs.push(pageInput);
+
+            var res = await pdfEndpoint.process();
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/googleFont.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+    });
+        it('Google Font', async function () {
+
+            var testParams = new TestParams();
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = new PageInput();
+            var textElement = new TextElement("Hello World");
+            textElement.font= Font.google("Tilt Prism");
+            textElement.fontSize = 20;
+            pageInput.elements.push(textElement);
+            var textElement1 = new TextElement("Hello World",100,200);
+            textElement1.font= Font.google("Dancing Script",400);
+            textElement1.fontSize = 20;      
+            pageInput.elements.push(textElement1);   
+            pdfEndpoint.inputs.push(pageInput);
+
+            var res = await pdfEndpoint.process();
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/googleFont1.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
 });
