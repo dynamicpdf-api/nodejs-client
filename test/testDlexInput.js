@@ -54,7 +54,7 @@ describe('Dlex Input', function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
         var dlex = new DlexResource("./Resources/SimpleReportWithCoverPage.dlex");
-        var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json");
+        var layoutData = new LayoutDataResource(fs.readFileSync("./Resources/SimpleReportData.json"), "SimpleReportData.json")       
         var dlexInput = new DlexInput(dlex, layoutData);
         var template = new Template("temp1");
         var textElement = new TextElement("Hello World", elementPlacement.topLeft);
