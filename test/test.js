@@ -38,6 +38,10 @@ function getEndpoint(testParams) {
     }
     endpoint.author = "sheetal";
     endpoint.title = "pdf merger";
+    endpoint.subject = "topLevel document metadata";
+    endpoint.creator = "John Creator";
+    endpoint.producer = "ceTe Software";
+    endpoint.keywords = "dynamicpdf api example pdf dotnet instructions";
     return endpoint;
 }
 describe('PdfEndpoint', function () {
