@@ -38,10 +38,6 @@ function getEndpoint(testParams) {
     }
     endpoint.author = "sheetal";
     endpoint.title = "pdf merger";
-    endpoint.subject = "topLevel document metadata";
-    endpoint.creator = "John Creator";
-    endpoint.producer = "ceTe Software";
-    endpoint.keywords = "dynamicpdf api example pdf dotnet instructions";
     return endpoint;
 }
 describe('PdfEndpoint', function () {
@@ -125,6 +121,12 @@ describe('PdfEndpoint', function () {
 
         it('Text Element', async function () {
             var pdfEndpoint = getEndpoint(testParams);
+
+            pdfEndpoint.subject = "topLevel document metadata";
+            pdfEndpoint.creator = "John Creator";
+            pdfEndpoint.producer = "ceTe Software";
+            pdfEndpoint.keywords = "dynamicpdf api example pdf dotnet instructions";
+            pdfEndpoint.tag = true;
             
             var pageInput = new PageInput();
             var element = new TextElement("Hello World", elementPlacement.topCenter);
