@@ -3,7 +3,8 @@ import fs from 'fs';
 import { TestParams } from './init.js';
 import {
     LayoutDataResource,
-    DlexLayout
+    DlexLayout,
+    DlexResource
 } from "./imports.js";
 
 function getEndpoint(endpoint, testParams) {
@@ -38,6 +39,28 @@ describe('Dlex Endpoint', function () {
 
             if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexSimpleReportWithCoverPage.pdf");
+                outStream.write(res.content);
+                outStream.close();
+            }
+        }
+        assert.strictEqual(res.isSuccessful, true);
+    });
+
+    it('DlexWithAdditionalResource', async function () {
+
+        var testParams = new TestParams();
+        var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json", "SimpleReportData.json")
+        var dlexResource = new DlexResource("./Resources/SimpleReportWithCoverPage.dlex", "SimpleReportWithCoverPage.dlex");
+        var dlexEndPoint = new DlexLayout(dlexResource, layoutData);
+        dlexEndPoint.dlexAdditionalResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif")
+        dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
+        var res = await dlexEndPoint.process();
+
+        if (testParams.Logging) {
+            console.log("Result: " + res.isSuccessful);
+
+            if (res.isSuccessful) {
+                var outStream = fs.createWriteStream("./output/dlexWithAdditionalResource.pdf");
                 outStream.write(res.content);
                 outStream.close();
             }
