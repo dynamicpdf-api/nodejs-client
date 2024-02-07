@@ -62,11 +62,14 @@ describe('PdfEndpoint', function () {
         it('Line Element with properties', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var lineElement = new LineElement(elementPlacement.bottomCenter);
-            lineElement.x2Offset = 100;
-            lineElement.y2Offset = 100;
+            input1.PageHeight = 612;
+            input1.PageWidth = 1008;
+            var lineElement = new LineElement(elementPlacement.topLeft, 900, 150); 
+            lineElement.xOffset = 305;
+            lineElement.yOffset = 150;
+            lineElement.width = 4;
             lineElement.color = RgbColor.blue;
-            lineElement.lineStyle = LineStyle.dashLarge;
+            lineElement.lineStyle = LineStyle.dash;
             input1.elements.push(lineElement);
             pdfEndpoint.inputs.push(input1);
             var res = await pdfEndpoint.process();
@@ -90,7 +93,11 @@ describe('PdfEndpoint', function () {
             var input1 = new PageInput();
             var rectangleElement = new RectangleElement(elementPlacement.topCenter, 100, 50);
             var styleArray = [2, 1, 4, 2];
+            rectangleElement.fillColor = RgbColor.red
+            rectangleElement.borderColor = RgbColor.blue
             rectangleElement.borderStyle = new LineStyle(styleArray);
+            rectangleElement.cornerRadius = 10
+            rectangleElement.borderWidth = 5
             input1.elements.push(rectangleElement);
             pdfEndpoint.inputs.push(input1);
             var res = await pdfEndpoint.process();

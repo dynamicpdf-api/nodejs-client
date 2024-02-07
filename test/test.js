@@ -90,7 +90,7 @@ describe('PdfEndpoint', function () {
         });
     });
 
-    describe('Template Sample', function () {
+    describe('Template Sample', async function () {
 
         
         it('TextElement', async function () {
@@ -432,8 +432,9 @@ describe('PdfEndpoint', function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/DPDFLogo.png", "DPDFLogo.png");
             var input = new ImageInput(resource);
-            input.pageWidth = 500;
+            input.pageWidth = 1008;
             input.pageHeight = 500;
+            input.scaleX = 5;
             pdfEndpoint.inputs.push(input);
             var res = await pdfEndpoint.process();
             if (testParams.Logging) {
