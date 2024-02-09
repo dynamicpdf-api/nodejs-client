@@ -1,6 +1,6 @@
 {
   "name": "@dynamicpdf/api",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Node.js client library for the DynamicPDF Cloud API.",
   "main": "lib/index.js",
   "type": "module",
