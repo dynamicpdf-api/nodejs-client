@@ -12,9 +12,9 @@ import {
 import { TextReplace } from '../lib/TextReplace.js';
 
 function getEndpoint(testParams) {
-    // if (testParams.AuthTLS == false) {
+    if (testParams.AuthTLS == false) {
         process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
-    // }
+    }
     var endpoint = new Pdf();
     endpoint.loggingEnabled = testParams.Logging;
     if (testParams.BaseUrl.length > 0) {
@@ -38,8 +38,8 @@ describe('Word Input', function () {
         var word =new WordInput(resource);
         word.LeftMargin=100;
         word.TopMargin =100;
-       // word.PageWidth = 300;
-        word.PageSize=PageSize.A3;
+        word.PageWidth = 1008;
+        word.PageHeight = 612;
         pdf.inputs.push(word);
         var res = await pdf.process();
 

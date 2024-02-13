@@ -94,7 +94,7 @@ describe('PdfEndpoint', function () {
         });
     });
 
-    describe('Template Sample', function () {
+    describe('Template Sample', async function () {
 
         
         it('TextElement', async function () {
@@ -436,8 +436,9 @@ describe('PdfEndpoint', function () {
             var pdfEndpoint = getEndpoint(testParams);
             var resource = new ImageResource("./Resources/DPDFLogo.png", "DPDFLogo.png");
             var input = new ImageInput(resource);
-            input.pageWidth = 500;
+            input.pageWidth = 1008;
             input.pageHeight = 500;
+            input.scaleX = 5;
             pdfEndpoint.inputs.push(input);
             var res = await pdfEndpoint.process();
             if (testParams.Logging) {
@@ -573,6 +574,82 @@ describe('PdfEndpoint', function () {
                     outStream.close();
                 }
             }
+            assert.strictEqual(res.isSuccessful, true);
+        });
+        it('Google Font', async function () {
+
+            var testParams = new TestParams();
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = new PageInput();
+            var textElement = new TextElement("Hello World", elementPlacement.topCenter,100,200);
+            textElement.font= Font.google("Kablammo");
+            textElement.fontSize = 40;
+            pageInput.elements.push(textElement);
+            pdfEndpoint.inputs.push(pageInput);
+
+            var res = await pdfEndpoint.process();
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/googleFont.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+        it('Google Font weight', async function () {
+
+            var testParams = new TestParams();
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = new PageInput();
+            var textElement = new TextElement("Hello World");
+            textElement.font= Font.google("Roboto:Bold");
+            textElement.fontSize = 20;
+            pageInput.elements.push(textElement);
+            var textElement1 = new TextElement("Hello World",100,200);
+            textElement1.font= Font.google("Dancing Script",400);
+            textElement1.fontSize = 20;      
+            pageInput.elements.push(textElement1);   
+            pdfEndpoint.inputs.push(pageInput);
+
+            var res = await pdfEndpoint.process();
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/googleFontWeight.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+        it('Global Font', async function () {
+
+            var testParams = new TestParams();
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = new PageInput();
+            var textElement = new TextElement("Hello World", elementPlacement.topCenter,100,200);
+            textElement.font= Font.global("Paris Normal");
+            textElement.fontSize = 40;
+            pageInput.elements.push(textElement);
+            pdfEndpoint.inputs.push(pageInput);
+
+            var res = await pdfEndpoint.process();
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/globalFont.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
             assert.strictEqual(res.isSuccessful, true);
         });
     });
@@ -720,60 +797,5 @@ describe('PdfEndpoint', function () {
 
             assert.strictEqual(res.isSuccessful && jsonBefore != null && jsonAfter != null, true);
         });
-    });
-
-    describe('Get Instructions Json Samples', function () {
-        it('Google Font', async function () {
-
-            var testParams = new TestParams();
-            var pdfEndpoint = getEndpoint(testParams);
-            var pageInput = new PageInput();
-            var textElement = new TextElement("Hello World", elementPlacement.topCenter,100,200);
-            textElement.font= Font.google("Kablammo");
-            textElement.fontSize = 40;
-            pageInput.elements.push(textElement);
-            pdfEndpoint.inputs.push(pageInput);
-
-            var res = await pdfEndpoint.process();
-
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/googleFont.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-
-            assert.strictEqual(res.isSuccessful, true);
-        });
-    });
-        it('Google Font', async function () {
-
-            var testParams = new TestParams();
-            var pdfEndpoint = getEndpoint(testParams);
-            var pageInput = new PageInput();
-            var textElement = new TextElement("Hello World");
-            textElement.font= Font.google("Tilt Prism");
-            textElement.fontSize = 20;
-            pageInput.elements.push(textElement);
-            var textElement1 = new TextElement("Hello World",100,200);
-            textElement1.font= Font.google("Dancing Script",400);
-            textElement1.fontSize = 20;      
-            pageInput.elements.push(textElement1);   
-            pdfEndpoint.inputs.push(pageInput);
-
-            var res = await pdfEndpoint.process();
-
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/googleFont1.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-
-            assert.strictEqual(res.isSuccessful, true);
-        });
+    });  
 });

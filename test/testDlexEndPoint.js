@@ -68,6 +68,26 @@ describe('Dlex Endpoint', function () {
         assert.strictEqual(res.isSuccessful, true);
     });
 
+    it('DlexWithGlobalFont', async function () {
+
+        var testParams = new TestParams();
+        var layoutData = new LayoutDataResource("./Resources/Test.json", "Test.json")
+        var dlexEndPoint = new DlexLayout("TFWResources/Test.dlex", layoutData);
+        dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
+        var res = await dlexEndPoint.process();
+
+        if (testParams.Logging) {
+            console.log("Result: " + res.isSuccessful);
+
+            if (res.isSuccessful) {
+                var outStream = fs.createWriteStream("./output/dlexWithGlobalFont.pdf");
+                outStream.write(res.content);
+                outStream.close();
+            }
+        }
+        assert.strictEqual(res.isSuccessful, true);
+    });
+
     it('Invoice', async function () {
 
         var testParams = new TestParams();
