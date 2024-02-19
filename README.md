@@ -1,11 +1,13 @@
 # DynamicPDF API - Node.js Client
 
-A NodeJS Client API that uses the DynamicPDF API to create, merge, split, form fill, stamp, secure/encrypt PDF documents.
+The DynamicPDF API consists of the following endpoints.
 
-For more information please visit [DynamicPDF Cloud API](https://cloud.dynamicpdf.com/ "DynamicPDF Cloud API Homepage")
+* `dlex-layout`
+* `image-info`
+* `pdf`
+* `pdf-info`
+* `pdf-text`
+* `pdf-xmp`
 
-Examples for this client library can be taken from [nodejs-client-examples](https://github.com/dynamicpdf-api/nodejs-client-examples "nodejs-client-examples at GitHub")
-
-Support for other languages/platforms can be found at [GitHub](https://github.com/dynamicpdf-api "DynamicPDF Cloud API at GitHub") 
-
+For more information, please visit [DynamicPDF API](https://cloud.dynamicpdf.com/ "DynamicPDF Cloud API Homepage"). Support for other languages/platforms (PHP, C#, Node.js) is available on GitHub ([DynamicPDF API at GitHub](https://github.com/dynamicpdf-api "DynamicPDF API at GitHub")).
 
