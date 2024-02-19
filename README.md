@@ -1,3 +1,5 @@
+![](./logo-banner2.png)
+
 # DynamicPDF API - Node.js Client
 
 The DynamicPDF API Node.js Client library consists of code for working with the following endpoints.
