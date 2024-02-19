@@ -9,5 +9,18 @@ The DynamicPDF API consists of the following endpoints.
 * `pdf-text`
 * `pdf-xmp`
 
-For more information, please visit [DynamicPDF API](https://cloud.dynamicpdf.com/ "DynamicPDF Cloud API Homepage"). Support for other languages/platforms (PHP, C#, Node.js) is available on GitHub ([DynamicPDF API at GitHub](https://github.com/dynamicpdf-api "DynamicPDF API at GitHub")).
+## NPM
 
+* The DynamicPDF.API library is available using the Node Package Manager (NPM).
+
+```bash
+npm i @dynamicpdf/api
+```
+
+# Support
+
+The primary source for the DynamicPDF API support is through [Stack Overflow](https://stackoverflow.com/questions/tagged/dynamicpdf-api). Please use the "[dynamicpdf-api](https://stackoverflow.com/questions/tagged/dynamicpdf-api)" tag to ask questions. Our support team actively monitors the tag and responds promptly to any questions.  Also, let us know you asked the question by following up with an email to [support@dynamicpdf.com](mailto:support@dynamicpdf.com). 
+
+# License
+
+The `nodejs-client-examples` library is licensed under the [MIT License](./LICENSE).
