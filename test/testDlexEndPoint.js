@@ -3,7 +3,8 @@ import fs from 'fs';
 import { TestParams } from './init.js';
 import {
     LayoutDataResource,
-    DlexLayout
+    DlexLayout,
+    DlexResource
 } from "./imports.js";
 
 function getEndpoint(endpoint, testParams) {
@@ -29,7 +30,7 @@ describe('Dlex Endpoint', function () {
 
         var testParams = new TestParams();
         var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json", "SimpleReportData.json")
-        var dlexEndPoint = new DlexLayout("SimpleReportWithCoverPage.dlex", layoutData);
+        var dlexEndPoint = new DlexLayout("TFWResources/SimpleReportWithCoverPage.dlex", layoutData);
         dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
         var res = await dlexEndPoint.process();
 
@@ -45,11 +46,53 @@ describe('Dlex Endpoint', function () {
         assert.strictEqual(res.isSuccessful, true);
     });
 
+    it('DlexWithAdditionalResource', async function () {
+
+        var testParams = new TestParams();
+        var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json", "SimpleReportData.json")
+        var dlexResource = new DlexResource("./Resources/SimpleReportWithCoverPage.dlex", "SimpleReportWithCoverPage.dlex");
+        var dlexEndPoint = new DlexLayout(dlexResource, layoutData);
+        dlexEndPoint.dlexAdditionalResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif")
+        dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
+        var res = await dlexEndPoint.process();
+
+        if (testParams.Logging) {
+            console.log("Result: " + res.isSuccessful);
+
+            if (res.isSuccessful) {
+                var outStream = fs.createWriteStream("./output/dlexWithAdditionalResource.pdf");
+                outStream.write(res.content);
+                outStream.close();
+            }
+        }
+        assert.strictEqual(res.isSuccessful, true);
+    });
+
+    it('DlexWithGlobalFont', async function () {
+
+        var testParams = new TestParams();
+        var layoutData = new LayoutDataResource("./Resources/Test.json", "Test.json")
+        var dlexEndPoint = new DlexLayout("TFWResources/Test.dlex", layoutData);
+        dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
+        var res = await dlexEndPoint.process();
+
+        if (testParams.Logging) {
+            console.log("Result: " + res.isSuccessful);
+
+            if (res.isSuccessful) {
+                var outStream = fs.createWriteStream("./output/dlexWithGlobalFont.pdf");
+                outStream.write(res.content);
+                outStream.close();
+            }
+        }
+        assert.strictEqual(res.isSuccessful, true);
+    });
+
     it('Invoice', async function () {
 
         var testParams = new TestParams();
         var layoutData = new LayoutDataResource("./Resources/InvoiceReportData.json", "InvoiceReportData.json")
-        var dlexEndPoint = new DlexLayout("Invoice.dlex", layoutData);
+        var dlexEndPoint = new DlexLayout("TFWResources/InvoiceOrderId.dlex", layoutData);
         dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
         var res = await dlexEndPoint.process();
 

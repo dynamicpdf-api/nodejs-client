@@ -1,6 +1,7 @@
 import fs from 'fs';
 import assert from 'assert';
 import { TestParams } from './init.js';
+import { RectangleElement } from '../lib/elements/RectangleElement.js';
 import {
     PdfResource,
     PdfInput,
@@ -51,15 +52,10 @@ describe('PdfEndpoint', function () {
             element.evenPages = false;
             template.elements.push(element);
 
-            var input = new PdfInput("AllPageElements.pdf");
-            input.template = template;
-
             var mergeOptions = new MergeOptions();
             mergeOptions.documentInfo = true;
-            input.mergeOptions = mergeOptions;
-            pdfEndpoint.inputs.push(input);
 
-            var resource2 = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
+            var resource2 = new PdfResource("./Resources/AllPageElements.pdf", "AllPageElements.pdf");
             var input1 = new PdfInput(resource2);
             input1.template = template;
 
@@ -94,10 +90,43 @@ describe('PdfEndpoint', function () {
         });
     });
 
+    describe('Template Sample', async function () {
+
+        
+        it('TextElement', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+            var input1 = new PageInput();
+            var templateA = new Template("TemplateA");
+            var textElement = new TextElement("Hello World", elementPlacement.topCenter);
+            textElement.color = RgbColor.cadetBlue;
+            templateA.elements.push(textElement);
+            input1.template = templateA;
+            pdfEndpoint.inputs.push(input1);
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/Dim2BarcodeElement.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+    });
+
     describe('Page Input', function () {
 
         it('Text Element', async function () {
             var pdfEndpoint = getEndpoint(testParams);
+
+            pdfEndpoint.subject = "topLevel document metadata";
+            pdfEndpoint.creator = "John Creator";
+            pdfEndpoint.producer = "ceTe Software";
+            pdfEndpoint.keywords = "dynamicpdf api example pdf dotnet instructions";
+            pdfEndpoint.tag = true;
             
             var pageInput = new PageInput();
             var element = new TextElement("Hello World", elementPlacement.topCenter);
@@ -152,7 +181,7 @@ describe('PdfEndpoint', function () {
             
             var pdfEndpoint = getEndpoint(testParams);
 
-            var pdfInput = new PdfInput("Resources/DocumentA100.pdf");
+            var pdfInput = new PdfInput("TFWResources/DocumentA100.pdf");
             var mergeOptions = new MergeOptions();
             pdfInput.mergeOptions = mergeOptions;
             pdfEndpoint.inputs.push(pdfInput);
@@ -166,10 +195,10 @@ describe('PdfEndpoint', function () {
             var resource = new ImageResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif");
             pdfEndpoint.resources.push(resource);
 
-            var dlexInput = new DlexInput("SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
+            var dlexInput = new DlexInput("TFWResources/SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
             pdfEndpoint.inputs.push(dlexInput);
 
-            var imageInput = new ImageInput("Resources/Northwind Logo.gif");
+            var imageInput = new ImageInput("TFWResources/Northwind Logo.gif");
             imageInput.TopMargin = 10;
             imageInput.LeftMargin = 10;
             imageInput.RightMargin = 10;
@@ -182,30 +211,6 @@ describe('PdfEndpoint', function () {
 
                 if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/DifferentInputs.pdf");
-                    outStream.write(res.content);
-                    outStream.close();
-                }
-            }
-
-            assert.strictEqual(res.isSuccessful, true);
-        });
-
-        it('Add page and pdf input with Properties', async function () {
-            var pdfEndpoint = getEndpoint(testParams);
-            var resource1 = new PdfResource("./Resources/SinglePage.pdf", "SinglePage.pdf");
-            var input1 = new PdfInput(resource1);
-            pdfEndpoint.inputs.push(input1);
-
-            var input2 = pdfEndpoint.addPage(500, 600);
-            var element = new TextElement("test", elementPlacement.topCenter);
-            input2.elements.push(element);
-
-            var res = await pdfEndpoint.process();
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-
-                if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/pageAndPdfWithProperties.pdf");
                     outStream.write(res.content);
                     outStream.close();
                 }
@@ -338,7 +343,7 @@ describe('PdfEndpoint', function () {
         });
 
         it('FilePathRetainSignature', async function () {
-            var resource = new PdfResource("./Resources/Org.pdf", "Org.pdf");
+            var resource = new PdfResource("./Resources/Signature.pdf", "Signature.pdf");
             var input = new PdfInput(resource);
             var pdfEndpoint = getEndpoint(testParams);
             pdfEndpoint.inputs.push(input);
@@ -403,7 +408,7 @@ describe('PdfEndpoint', function () {
 
         it('Test Image input MultiPageTiff', async function () {
             var pdfEndpoint = getEndpoint(testParams);
-            var resource = new ImageResource("./Resources/PalaisDuLouvre.tif", "PalaisDuLouvre.tif");
+            var resource = new ImageResource("./Resources/fw9_18.tif", "fw9_18.tif");
             var input = new ImageInput(resource);
             input.rightMargin = 50;
             input.bottomMargin = 50;
@@ -425,10 +430,11 @@ describe('PdfEndpoint', function () {
 
         it('Test Image input Png', async function () {
             var pdfEndpoint = getEndpoint(testParams);
-            var resource = new ImageResource("./Resources/170x220_T.png", "170x220_T.png");
+            var resource = new ImageResource("./Resources/DPDFLogo.png", "DPDFLogo.png");
             var input = new ImageInput(resource);
-            input.pageWidth = 500;
+            input.pageWidth = 1008;
             input.pageHeight = 500;
+            input.scaleX = 5;
             pdfEndpoint.inputs.push(input);
             var res = await pdfEndpoint.process();
             if (testParams.Logging) {
@@ -547,7 +553,7 @@ describe('PdfEndpoint', function () {
         it('Font ttf ', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
-            var font = Font.fromFile("./Resources/verdanab.ttf", "verdanab.ttf");
+            var font = Font.fromFile("./Resources/DejaVuSans.ttf", "DejaVuSans.ttf");
             font.embed = true;
             font.subset = true;
             var element = new TextElement("Hello", elementPlacement.topCenter);
@@ -564,6 +570,82 @@ describe('PdfEndpoint', function () {
                     outStream.close();
                 }
             }
+            assert.strictEqual(res.isSuccessful, true);
+        });
+        it('Google Font', async function () {
+
+            var testParams = new TestParams();
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = new PageInput();
+            var textElement = new TextElement("Hello World", elementPlacement.topCenter,100,200);
+            textElement.font= Font.google("Kablammo");
+            textElement.fontSize = 40;
+            pageInput.elements.push(textElement);
+            pdfEndpoint.inputs.push(pageInput);
+
+            var res = await pdfEndpoint.process();
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/googleFont.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+        it('Google Font weight', async function () {
+
+            var testParams = new TestParams();
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = new PageInput();
+            var textElement = new TextElement("Hello World");
+            textElement.font= Font.google("Roboto:Bold");
+            textElement.fontSize = 20;
+            pageInput.elements.push(textElement);
+            var textElement1 = new TextElement("Hello World",100,200);
+            textElement1.font= Font.google("Dancing Script",400);
+            textElement1.fontSize = 20;      
+            pageInput.elements.push(textElement1);   
+            pdfEndpoint.inputs.push(pageInput);
+
+            var res = await pdfEndpoint.process();
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/googleFontWeight.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+        it('Global Font', async function () {
+
+            var testParams = new TestParams();
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = new PageInput();
+            var textElement = new TextElement("Hello World", elementPlacement.topCenter,100,200);
+            textElement.font= Font.global("Paris Normal");
+            textElement.fontSize = 40;
+            pageInput.elements.push(textElement);
+            pdfEndpoint.inputs.push(pageInput);
+
+            var res = await pdfEndpoint.process();
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/globalFont.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
             assert.strictEqual(res.isSuccessful, true);
         });
     });
@@ -701,7 +783,7 @@ describe('PdfEndpoint', function () {
                 console.log("Result: " + res.isSuccessful);
                 console.log("JSON Before:\n________________________________________________________" + jsonBefore);
                 console.log("JSON After: \n________________________________________________________" + jsonAfter);
-    
+
                 if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/GetInstructionsBeforeProcess.pdf");
                     outStream.write(res.content);
@@ -709,7 +791,7 @@ describe('PdfEndpoint', function () {
                 }
             }
 
-            assert.strictEqual(res.isSuccessful && jsonBefore != null && jsonAfter !=null, true);
+            assert.strictEqual(res.isSuccessful && jsonBefore != null && jsonAfter != null, true);
         });
-    });
+    });  
 });

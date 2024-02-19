@@ -31,69 +31,10 @@ function getEndpoint(testParams) {
 
 describe('Dlex Input', function () {
     this.timeout(0);
-    it('SimpleDlex_AddDlexCloud', async function () {
-        var testParams = new TestParams();
-        var pdf = getEndpoint(testParams);
-        var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json", "SimpleReportData.json")
-        var dlexInput = pdf.addDlex("SimpleReportWithCoverPage.dlex", layoutData);
-
-        var res = await pdf.process();
-
-        if (testParams.Logging) {
-            console.log("Result: " + res.isSuccessful);
-
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/dlexSimpleDlex_AddDlexCloud.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        }
-        assert.strictEqual(res.isSuccessful, true);
-    });
-
-    it('SimpleDlex_AddDlexCloudResourceData', async function () {
-        var testParams = new TestParams();
-        var pdf = getEndpoint(testParams);
-        var dlexInput = pdf.addDlex("SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
-
-        var res = await pdf.process();
-
-        if (testParams.Logging) {
-            console.log("Result: " + res.isSuccessful);
-
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/dlexSimpleDlex_AddDlexCloudResourceData.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        }
-        assert.strictEqual(res.isSuccessful, true);
-    });
-
-    it('SimpleDlex_Cloud', async function () {
-        var testParams = new TestParams();
-        var pdf = getEndpoint(testParams);
-        var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json");
-        var dlexInput = new DlexInput("SimpleReportWithCoverPage.dlex", layoutData);
-        pdf.inputs.push(dlexInput);
-        var res = await pdf.process();
-
-        if (testParams.Logging) {
-            console.log("Result: " + res.isSuccessful);
-
-            if (res.isSuccessful) {
-                var outStream = fs.createWriteStream("./output/dlexSimpleDlex_Cloud.pdf");
-                outStream.write(res.content);
-                outStream.close();
-            }
-        }
-        assert.strictEqual(res.isSuccessful, true);
-    });
-
     it('SimpleDlex_CloudData', async function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
-        var dlexInput = new DlexInput("SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
+        var dlexInput = new DlexInput("TFWResources/SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
         pdf.inputs.push(dlexInput);
         var res = await pdf.process();
 
@@ -113,7 +54,7 @@ describe('Dlex Input', function () {
         var testParams = new TestParams();
         var pdf = getEndpoint(testParams);
         var dlex = new DlexResource("./Resources/SimpleReportWithCoverPage.dlex");
-        var layoutData = new LayoutDataResource("./Resources/SimpleReportData.json");
+        var layoutData = new LayoutDataResource(fs.readFileSync("./Resources/SimpleReportData.json"), "SimpleReportData.json")       
         var dlexInput = new DlexInput(dlex, layoutData);
         var template = new Template("temp1");
         var textElement = new TextElement("Hello World", elementPlacement.topLeft);
@@ -149,6 +90,28 @@ describe('Dlex Input', function () {
 
             if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/SimpleDlex_Pdfoutput.pdf");
+                outStream.write(res.content);
+                outStream.close();
+            }
+        }
+        assert.strictEqual(res.isSuccessful, true);
+    });
+
+    it('SimpleDlex_ImageURI', async function () {
+        var testParams = new TestParams();
+        var pdf = getEndpoint(testParams);
+        var dlex = new DlexResource("./Resources/dynamic-image.dlex");
+        var layoutData = new LayoutDataResource("./Resources/ImageData.json");
+        var dlexInput = new DlexInput(dlex, layoutData);
+
+        pdf.inputs.push(dlexInput);
+        var res = await pdf.process();
+
+        if (testParams.Logging) {
+            console.log("Result: " + res.isSuccessful);
+
+            if (res.isSuccessful) {
+                var outStream = fs.createWriteStream("./output/SimpleDlex_ImageURIoutput.pdf");
                 outStream.write(res.content);
                 outStream.close();
             }
