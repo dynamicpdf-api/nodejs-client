@@ -1,6 +1,6 @@
 # DynamicPDF API - Node.js Client
 
-The DynamicPDF API consists of the following endpoints.
+The DynamicPDF API Node.js Client library consists of code for working with the following endpoints.
 
 * `dlex-layout`
 * `image-info`
@@ -11,7 +11,7 @@ The DynamicPDF API consists of the following endpoints.
 
 ## NPM
 
-* The DynamicPDF.API library is available using the Node Package Manager (NPM).
+* The DynamicPDF API library is available using the Node Package Manager (NPM).
 
 ```bash
 npm i @dynamicpdf/api
