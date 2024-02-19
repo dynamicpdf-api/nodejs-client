@@ -1,4 +1,4 @@
-# DynamicPDF Cloud API - Node.js Client
+# DynamicPDF API - Node.js Client
 
 A NodeJS Client API that uses the DynamicPDF Cloud API to create, merge, split, form fill, stamp, secure/encrypt PDF documents.
 
