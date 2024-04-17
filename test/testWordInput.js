@@ -63,7 +63,7 @@ describe('Word Input', function () {
         var word =new WordInput(resource);
         word.LeftMargin=10;
         word.PageSize=PageSize.A4;
-        word.TextReplace.push(new TextReplace("Nulla","xyz",true));
+        word.TextReplace.push(new TextReplace("ve","Data",true));
         pdf.inputs.push(word);
         var res = await pdf.process();
 

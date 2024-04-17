@@ -1,7 +1,7 @@
 {
   "name": "@dynamicpdf/api",
-  "version": "1.5.0",
-  "description": "Node.js client library for the DynamicPDF Cloud API.",
+  "version": "1.6.0",
+  "description": "Node.js client library for the DynamicPDF API.",
   "main": "lib/index.js",
   "type": "module",
   "directories": {
@@ -37,7 +37,7 @@
   "bugs": {
     "url": "https://github.com/dynamicpdf-api/nodejs-client/issues"
   },
-  "homepage": "https://cloud.dynamicpdf.com/",
+  "homepage": "https://dpdf.io/",
   "devDependencies": {
     "mocha": "^9.1.2"
   }

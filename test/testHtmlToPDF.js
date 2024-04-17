@@ -3,7 +3,7 @@ import assert from 'assert';
 import { TestParams } from './init.js';
 import { HtmlInput } from '../lib/HtmlInput.js';
 import { PageSize } from '../lib/PageSize.js';
-import { Orientation } from '../lib/orientation.js';
+import { Orientation } from '../lib/Orientation.js';
 import { HtmlResource } from '../lib/HtmlResource.js';
 import { Pdf } from './imports.js';
 
