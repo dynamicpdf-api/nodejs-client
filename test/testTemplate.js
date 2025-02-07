@@ -156,11 +156,11 @@ describe('PdfEndpoint', function () {
             var input1 = new PdfInput(resource);
             pdfEndpoint.inputs.push(input1);
 
-            var fontResource = "./Resources/DejaVuSans.ttf";    
+            var fontResource = Font.fromFile("./Resources/DejaVuSans.ttf");
 
             var templateA = new Template("TemplateA");
             var pageNumberingElement = new PageNumberingElement("%%CP%% of %%TP%%", elementPlacement.topLeft);
-            pageNumberingElement.font = new Font(fontResource);
+            pageNumberingElement.font = fontResource;
             pageNumberingElement.fontSize = 14;
             pageNumberingElement.color = RgbColor.red;
             templateA.elements.push(pageNumberingElement);

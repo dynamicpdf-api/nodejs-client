@@ -550,6 +550,26 @@ describe('PdfEndpoint', function () {
             }
             assert.strictEqual(res.isSuccessful, true);
         });
+        it('Font from CloudResource', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+            var input1 = new PageInput();
+            var cloudResourceName = "samples/users-guide-resources/Calibri.otf";
+            var element = new TextElement("Hello World", elementPlacement.topCenter);
+            element.font = new Font(cloudResourceName);
+            input1.elements.push(element);
+            pdfEndpoint.instructions.inputs.push(input1);
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/fontFromCloud.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+            assert.strictEqual(res.isSuccessful, true);
+        });
         it('Font ttf ', async function () {
             var pdfEndpoint = getEndpoint(testParams);
             var input1 = new PageInput();
