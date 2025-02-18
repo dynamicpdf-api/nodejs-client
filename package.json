@@ -39,6 +39,6 @@
   },
   "homepage": "https://dpdf.io/",
   "devDependencies": {
-    "mocha": "^9.1.2"
+    "mocha": "^11.1.0"
   }
 }
