@@ -36,7 +36,7 @@ describe('PdfInfo Endpoint', function () {
             console.log("Result: " + res.isSuccessful);
             if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/pdfInfoAllFormFields.json");
-                outStream.write(res.content);
+                outStream.write(res.jsonContent);
                 outStream.close();
             }
         }

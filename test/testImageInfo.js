@@ -39,7 +39,7 @@ describe('ImageInfo Endpoint', function () {
                 console.log("Result: " + res.isSuccessful);
                 if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/ImageInfo"+i+".json");
-                    outStream.write(res.content);
+                    outStream.write(res.jsonContent);
                     outStream.close();
                 }
             }
