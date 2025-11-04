@@ -4,8 +4,10 @@ import { TestParams } from './init.js';
 import {
     LayoutDataResource,
     DlexLayout,
-    DlexResource
+    DlexResource,
+    Pdf
 } from "./imports.js";
+import { InvoiceData } from './invoiceData.js';
 
 function getEndpoint(endpoint, testParams) {
     if (testParams.AuthTLS == false) {
@@ -101,6 +103,27 @@ describe('Dlex Endpoint', function () {
 
             if (res.isSuccessful) {
                 var outStream = fs.createWriteStream("./output/dlexInvoice.pdf");
+                outStream.write(res.content);
+                outStream.close();
+            }
+        }
+        assert.strictEqual(res.isSuccessful, true);
+    });
+    
+    it('InvoiceData',async function() {
+        var testParams = new TestParams();
+        var invoiceLinqData=InvoiceData.Order11077
+        var layoutData = new LayoutDataResource(invoiceLinqData, "data.jsin")
+        var dlexEndPoint = new DlexLayout("TFWResources/InvoiceOrderId.dlex", layoutData);
+        dlexEndPoint = getEndpoint(dlexEndPoint, testParams);
+        var res = await dlexEndPoint.process();
+       
+        if (testParams.Logging) {
+            console.log("Result: " + res.isSuccessful);
+
+            if (res.isSuccessful) {
+                var outStream = fs.createWriteStream("./output/DlexInvoiceData.pdf");
+            
                 outStream.write(res.content);
                 outStream.close();
             }

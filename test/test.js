@@ -192,8 +192,13 @@ describe('PdfEndpoint', function () {
             pageInput.elements.push(textElement);
             pdfEndpoint.inputs.push(pageInput);
 
-            var resource = new ImageResource("./Resources/Northwind Logo.gif", "Northwind Logo.gif");
-            pdfEndpoint.resources.push(resource);
+            var pageInput = new PageInput();
+            var resource = new ImageResource("./Resources/DocumentA.jpeg", "DocumentA.jpeg");
+            var imageElement=new ImageElement(resource,elementPlacement.topCenter)
+            imageElement.xOffset=50;
+            imageElement.yOffset=50;
+            pageInput.elements.push(imageElement)
+            pdfEndpoint.inputs.push(pageInput);
 
             var dlexInput = new DlexInput("TFWResources/SimpleReportWithCoverPage.dlex", "SimpleReportData.json");
             pdfEndpoint.inputs.push(dlexInput);
@@ -210,7 +215,7 @@ describe('PdfEndpoint', function () {
                 console.log("Result: " + res.isSuccessful);
 
                 if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/DifferentInputs.pdf");
+                    var outStream = fs.createWriteStream("./output/MultipleInputs_PdfOutput.pdf");
                     outStream.write(res.content);
                     outStream.close();
                 }
@@ -661,6 +666,40 @@ describe('PdfEndpoint', function () {
                 console.log("Result: " + res.isSuccessful);
                 if (res.isSuccessful) {
                     var outStream = fs.createWriteStream("./output/globalFont.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+        it('System Font', async function () {
+
+            var testParams = new TestParams();
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = new PageInput();
+            var font = Font.fromSystem("Dubai Bold");
+            var textElement = new TextElement("مرحبا بالعالم", elementPlacement.topCenter, 0, 0);
+            textElement.fontSize = 40;
+            font.embed=true;
+            font.subset=true;
+            textElement.font= font;
+            var font =  Font.fromSystem("Monotype Corsiva");
+            var textElement2=new TextElement("You are the creator of your success & failure\nThere is no part for god", elementPlacement.bottomCenter, 0, -100);
+            textElement2.fontSize = 20;
+            font.embed=false;
+            font.subset=false;
+            textElement2.font=font;
+            pageInput.elements.push(textElement);
+            pageInput.elements.push(textElement2);
+            pdfEndpoint.inputs.push(pageInput);
+
+            var res = await pdfEndpoint.process();
+
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/SystemFont.pdf");
                     outStream.write(res.content);
                     outStream.close();
                 }
