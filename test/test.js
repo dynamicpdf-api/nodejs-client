@@ -21,7 +21,9 @@ import {
     MergeOptions,
     DlexInput,
     DlexResource,
-    LayoutDataResource
+    LayoutDataResource,
+    PageSize,
+    Orientation
 } from "./imports.js"
 
 function getEndpoint(testParams) {
@@ -111,6 +113,11 @@ describe('PdfEndpoint', function () {
                     outStream.write(res.content);
                     outStream.close();
                 }
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/Dim2BarcodeElement.json");
+                    outStream.write(pdfEndpoint.getInstructionsJson());
+                    outStream.close();
+                }
             }
 
             assert.strictEqual(res.isSuccessful, true);
@@ -147,19 +154,36 @@ describe('PdfEndpoint', function () {
 
             assert.strictEqual(res.isSuccessful, true);
         });
+
+        it('Page Dimensions', async function () {
+            var pdfEndpoint = getEndpoint(testParams);
+            var pageInput = pdfEndpoint.addPage(PageSize.Postcard, Orientation.landscape, 25);
+            var element = new TextElement("Hello World", elementPlacement.topCenter);
+            pageInput.elements.push(element);
+
+            var res = await pdfEndpoint.process();
+            if (testParams.Logging) {
+                console.log("Result: " + res.isSuccessful);
+
+                if (res.isSuccessful) {
+                    var outStream = fs.createWriteStream("./output/PageDimensions_Pdfoutput.pdf");
+                    outStream.write(res.content);
+                    outStream.close();
+                }
+            }
+
+            assert.strictEqual(res.isSuccessful, true);
+        });
+
         it('TextElementAddedToPageAndTemplate', async function () {
             var pdfEndpoint = getEndpoint(testParams);
-            
-            var pageInput = pdfEndpoint.addPage(500,500);
+            var pageInput = pdfEndpoint.addPage();
 
             var template = new Template("Temp1");
             var element = new TextElement("Hello World", elementPlacement.topCenter);
             template.elements.push(element);
 
             pageInput.template = template;
-
-            pdfEndpoint.inputs.push(pageInput);
-
             var res = await pdfEndpoint.process();
             if (testParams.Logging) {
                 console.log("Result: " + res.isSuccessful);

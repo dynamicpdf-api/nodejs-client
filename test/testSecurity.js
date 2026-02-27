@@ -36,6 +36,10 @@ describe('PDF Security', function () {
         var input1 = new PdfInput(resource1);
 
         var security = new Aes128Security("user", "owner");
+        security.allowCopy= false;
+        security.allowFormFilling = false;
+        security.allowDocumentAssembly = false;
+        security.allowEdit = true;
         pdfEndpoint.security = security;
         pdfEndpoint.inputs.push(input1);
 
@@ -60,6 +64,9 @@ describe('PDF Security', function () {
 
         var security = new Aes256Security("user", "owner");
         security.documentComponents = encryptDocumentComponents.allExceptMetadata;
+        security.allowFormFilling =true;
+        security.allowEdit = true;
+        security.allowUpdateAnnotationsAndFields = false;
         pdfEndpoint.security = security;
 
         pdfEndpoint.inputs.push(input1);
@@ -85,6 +92,9 @@ describe('PDF Security', function () {
         var security = new RC4128Security("user", "owner");
         pdfEndpoint.security = security;
         security.encryptMetadata = true;
+        security.allowHighResolutionPrinting = true;
+        security.allowPrint = true;
+        security.allowUpdateAnnotationsAndFields = true;
         pdfEndpoint.inputs.push(input1);
 
         var res = await pdfEndpoint.process();

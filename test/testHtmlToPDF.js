@@ -30,7 +30,7 @@ describe('HTML to PDF', function () {
     it('Using string', async function () {
         var resource = new HtmlResource("<html><body>hello</body></html>");
         var pdfEndpoint = getEndpoint(testParams);
-        var input = new HtmlInput(resource, PageSize.DoublePostcard);
+        var input = new HtmlInput(resource,null, PageSize.DoublePostcard);
         pdfEndpoint.inputs.push(input);
         var res = await pdfEndpoint.process();
         if (testParams.Logging) {
@@ -47,7 +47,7 @@ describe('HTML to PDF', function () {
     it('Using string and parameters', async function () {
         var resource = new HtmlResource("<html><body><h1> HELLO</h1> <img src='googlelogo_color_272x92dp.png' /></body></html>");
         var pdfEndpoint = getEndpoint(testParams);
-        var input = new HtmlInput(resource, PageSize.DoublePostcard, Orientation.landscape);
+        var input = new HtmlInput(resource,null, PageSize.DoublePostcard, Orientation.landscape);
         input.BasePath = "https://www.google.com/images/branding/googlelogo/1x/";
         input.PageWidth = 300;
         input.PageHeight = 200;
@@ -71,7 +71,7 @@ describe('HTML to PDF', function () {
     it('Using Resource', async function () {
         var resource = new HtmlResource("./Resources/html.html");
         var pdfEndpoint = getEndpoint(testParams);
-        var input = new HtmlInput(resource, PageSize.DoublePostcard);
+        var input = new HtmlInput(resource, null,PageSize.DoublePostcard);
         pdfEndpoint.inputs.push(input);
         var res = await pdfEndpoint.process();
         if (testParams.Logging) {

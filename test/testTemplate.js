@@ -34,7 +34,9 @@ import {
     Font,
     RgbColor,
     LineStyle,
-    stackedGs1DataBarType
+    stackedGs1DataBarType,
+    errorCorrection,
+    msiBarcodeCheckDigitMode
 } from "./imports.js";
 
 
@@ -144,35 +146,9 @@ describe('PdfEndpoint', function () {
                     outStream.write(res.content);
                     outStream.close();
                 }
-            }
-
-
-            assert.strictEqual(res.isSuccessful, true);
-        });
-
-        it('Page number with Fonts', async function () {
-            var pdfEndpoint = getEndpoint(testParams);
-            var resource = new PdfResource("./Resources/DocumentA100.pdf", "DocumentA100.pdf");
-            var input1 = new PdfInput(resource);
-            pdfEndpoint.inputs.push(input1);
-
-            var fontResource = Font.fromFile("./Resources/DejaVuSans.ttf");
-
-            var templateA = new Template("TemplateA");
-            var pageNumberingElement = new PageNumberingElement("%%CP%% of %%TP%%", elementPlacement.topLeft);
-            pageNumberingElement.font = fontResource;
-            pageNumberingElement.fontSize = 14;
-            pageNumberingElement.color = RgbColor.red;
-            templateA.elements.push(pageNumberingElement);
-            input1.template = templateA;
-
-            var res = await pdfEndpoint.process();
-            if (testParams.Logging) {
-                console.log("Result: " + res.isSuccessful);
-
                 if (res.isSuccessful) {
-                    var outStream = fs.createWriteStream("./output/pageNumberingElementWithFonts.pdf");
-                    outStream.write(res.content);
+                    var outStream = fs.createWriteStream("./output/pageNumberingElement.json");
+                    outStream.write(pdfEndpoint.getInstructionsJson(true));
                     outStream.close();
                 }
             }
@@ -249,16 +225,16 @@ describe('PdfEndpoint', function () {
             var input1 = new PageInput();
 
             var templateA = new Template("TemplateA");
+            var bytes = Buffer.from("Hello World", "utf8");
 
-            var barcodeElement = new AztecBarcodeElement("Hello World", elementPlacement.topCenter, 50);
+            var barcodeElement = new AztecBarcodeElement(bytes, elementPlacement.topCenter, 50);
             barcodeElement.symbolSize = aztecSymbolSize.r105xC105;
             barcodeElement.xDimension = 3;
             barcodeElement.color = new RgbColor(0, 1, 0);
-            barcodeElement.errorCorrection = 30;
+            barcodeElement.aztecErrorCorrection = 30;
             barcodeElement.processTilde = true;
             barcodeElement.readerInitializationSymbol = true;
-            barcodeElement.value = "test123";
-            barcodeElement.xOffset = 200;
+            barcodeElement.xOffset = 100;
             barcodeElement.yOffset = 100;
             templateA.elements.push(barcodeElement);
             input1.template = templateA;
@@ -407,6 +383,9 @@ describe('PdfEndpoint', function () {
             barcodeElement.yDimension = 5;
             barcodeElement.xOffset = -50;
             barcodeElement.yOffset = 50;
+            barcodeElement.errorCorrection=errorCorrection.level6;
+            barcodeElement.columns=5;
+            barcodeElement.oddPages=false;
             templateA.elements.push(barcodeElement);
             input1.template = templateA;
             pdfEndpoint.inputs.push(input1);
@@ -425,9 +404,21 @@ describe('PdfEndpoint', function () {
 
         it('MsiBarcodeElement', async function () {
             var pdfEndpoint = getEndpoint(testParams);
-            var input1 = new PageInput();
+            var resource1 = new PdfResource("./Resources/DocumentA100.pdf")
+            var input1 = new PdfInput(resource1);
             var templateA = new Template("TemplateA");
             var barcodeElement = new MsiBarcodeElement("1234567890", elementPlacement.topCenter, 150);
+            barcodeElement.xOffset=50;
+            barcodeElement.yOffset=50;
+            barcodeElement.color=RgbColor.mediumSpringGreen;
+            barcodeElement.font=Font.timesBoldItalic;
+            barcodeElement.textColor=RgbColor.forestGreen;
+            barcodeElement.fontSize=20;
+            barcodeElement.showText=true;
+            barcodeElement.xDimension=1.5;
+            barcodeElement.evenPages=true;
+            barcodeElement.oddPages=false;
+            barcodeElement.appendCheckDigit=msiBarcodeCheckDigitMode.mod1010;
             templateA.elements.push(barcodeElement);
             input1.template = templateA;
             pdfEndpoint.inputs.push(input1);
@@ -503,7 +494,10 @@ describe('PdfEndpoint', function () {
             barcodeElement.color = RgbColor.yellow;
             barcodeElement.xDimension = 3;
             barcodeElement.textColor = RgbColor.pink;
-            //barcodeElement.includeCheckDigit = true;
+            barcodeElement.includeCheckDigit = true;
+            barcodeElement.font = Font.helveticaBold;
+            barcodeElement.fontSize= 30;
+            barcodeElement.showText = true;
             templateA.elements.push(barcodeElement);
 
             input1.template = templateA;
